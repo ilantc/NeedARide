@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
     
     <RelativeLayout 
 	    android:layout_width="wrap_content"
@@ -46,18 +46,38 @@
   		    android:ems="10"
   		    android:hint="Destination"
   		    android:inputType="text" />
+        
+        <TextView
+  		    android:id="@+id/commentTV"
+  		    android:layout_width="wrap_content"
+  		    android:layout_height="wrap_content"
+  		    android:layout_below="@+id/toTV"
+  		    android:paddingRight="@dimen/activity_horizontal_margin"
+  		    android:paddingTop="@dimen/activity_vertical_margin"
+  		    android:text="Comment:" />
+        <EditText
+  		    android:id="@+id/commentET"
+  		    android:layout_width="wrap_content"
+  		    android:layout_height="wrap_content"
+  		    android:layout_below="@+id/toET"
+  		    android:layout_toRightOf="@+id/commentTV"
+  		    android:ems="10"
+  		    android:hint="Destination"
+  		    android:inputType="text" />
+        
   		<ImageButton
   		    android:id="@+id/chooseDateImgBT"
   		    android:layout_width="wrap_content"
   		    android:layout_height="wrap_content"
-  		    android:layout_below="@+id/toTV"
+  		    android:layout_below="@+id/commentTV"
+  		    android:paddingTop="@dimen/activity_vertical_margin"
   		    android:src="@drawable/calendar_frog_cartoon_with_title" />
         
   		<ImageButton
   		    android:id="@+id/chooseTimeImgBT"
   		    android:layout_width="wrap_content"
   		    android:layout_height="wrap_content"
-  		    android:layout_below="@+id/toET"
+  		    android:layout_below="@+id/commentET"
   		    android:layout_toRightOf="@+id/chooseDateImgBT"
   		    android:src="@drawable/wall_clock_frog" />
         
