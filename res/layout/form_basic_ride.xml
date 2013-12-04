@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:paddingBottom="@dimen/activity_vertical_margin"
+	    android:paddingLeft="@dimen/activity_horizontal_margin"
+	    android:paddingRight="@dimen/activity_horizontal_margin"
+	    android:paddingTop="@dimen/activity_vertical_margin"
+	    android:orientation="vertical" >
+
+       <RelativeLayout 
+	        android:layout_width="fill_parent"
+		    android:layout_height="0dp"
+		    android:paddingBottom="@dimen/activity_vertical_margin"
+		    android:paddingLeft="@dimen/activity_horizontal_margin"
+		    android:paddingRight="@dimen/activity_horizontal_margin"
+		    android:paddingTop="@dimen/activity_vertical_margin"
+		    android:layout_weight="10"
+		    android:id="@+id/fromRL">
+	      
+	        <TextView
+	            android:id="@+id/fromTV"
+	            android:layout_alignParentLeft="true"
+	            android:paddingRight="@dimen/activity_horizontal_margin"
+		    	android:paddingTop="@dimen/activity_vertical_margin"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="From:" />
+
+	     	<EditText
+	     	    android:id="@+id/fromET"
+	     	    android:layout_width="wrap_content"
+	     	    android:layout_height="wrap_content"
+	     	    android:layout_alignBottom="@+id/fromTV"
+	     	    android:layout_alignTop="@+id/fromTV"
+	     	    android:layout_toRightOf="@+id/fromTV"
+	     	    android:ems="10"
+	     	    android:inputType="text"
+	     	    android:hint="Starting Point" />
+	        
+       </RelativeLayout>
+        
+       
+       <RelativeLayout 
+	        android:layout_width="fill_parent"
+		    android:layout_height="0dp"
+		    android:paddingBottom="@dimen/activity_vertical_margin"
+		    android:paddingLeft="@dimen/activity_horizontal_margin"
+		    android:paddingRight="@dimen/activity_horizontal_margin"
+		    android:paddingTop="@dimen/activity_vertical_margin"
+		    android:layout_weight="10"
+		    android:id="@+id/toRL">
+	      
+	        <TextView
+	            android:id="@+id/toTV"
+	            android:layout_alignParentLeft="true"
+	            android:paddingRight="@dimen/activity_horizontal_margin"
+		    	android:paddingTop="@dimen/activity_vertical_margin"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="To:" />
+
+	     	<EditText
+	     	    android:id="@+id/toET"
+	     	    android:layout_width="wrap_content"
+	     	    android:layout_height="wrap_content"
+	     	    android:layout_alignBottom="@+id/toTV"
+	     	    android:layout_alignTop="@+id/toTV"
+	     	    android:layout_toRightOf="@+id/toTV"
+	     	    android:ems="10"
+	     	    android:inputType="text"
+	     	    android:hint="Destination" />
+	        
+        </RelativeLayout>
+       
+		<RelativeLayout 
+	        android:layout_width="fill_parent"
+		    android:layout_height="0dp"
+		    android:paddingBottom="@dimen/activity_vertical_margin"
+		    android:paddingLeft="@dimen/activity_horizontal_margin"
+		    android:paddingRight="@dimen/activity_horizontal_margin"
+		    android:paddingTop="@dimen/activity_vertical_margin"
+		    android:layout_weight="10"
+		    android:id="@+id/dateRL">	      	   
+
+	     	<ImageButton android:id="@+id/chooseDateImgBT"
+        		android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:src="@drawable/calendar_frog_cartoon_with_title" />
+	        
+        </RelativeLayout>    
+
+
+		<RelativeLayout 
+	        android:layout_width="fill_parent"
+		    android:layout_height="0dp"
+		    android:paddingBottom="@dimen/activity_vertical_margin"
+		    android:paddingLeft="@dimen/activity_horizontal_margin"
+		    android:paddingRight="@dimen/activity_horizontal_margin"
+		    android:paddingTop="@dimen/activity_vertical_margin"
+		    android:layout_weight="10"
+		    android:id="@+id/timeRL">
+	      
+	      
+
+	        <Button
+	     	    android:id="@+id/chooseTimeBT"
+	     	    android:layout_width="wrap_content"
+	     	    android:layout_height="wrap_content"
+	     	    android:layout_alignLeft="@+id/datePicker"
+	     	    android:layout_alignParentBottom="true"
+	     	    android:layout_marginLeft="25dp"
+	     	    android:text="Choose Time" />
+	        
+        </RelativeLayout>    
+
+
+
+	</LinearLayout>
+	
+    
+
+    
+    
+</FrameLayout>
