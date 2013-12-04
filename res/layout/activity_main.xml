@@ -21,7 +21,7 @@
 	    android:id="@+id/topLayout" >
 	        
 	    <Button
-	        android:id="@+id/profileButton"
+	        android:id="@+id/profileBT"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:background="@drawable/profile_pic_default"
@@ -40,8 +40,8 @@
 	    android:layout_weight="40"
 	    android:id="@+id/offerOrTakeARide" >
 	        
-		<Button
-	        android:id="@+id/offerRide"
+		<ImageButton
+	        android:id="@+id/offerRideIMGBT"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:background="@drawable/wheel_round"
@@ -49,14 +49,20 @@
 	        android:layout_centerInParent="true"
 	        android:text="" />
 
-	    <Button
-	        android:id="@+id/takeARide"
+	    <ImageButton
+	        android:id="@+id/takeARideIMGBT"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentRight="true"
 	        android:layout_centerInParent="true"
 	        android:background="@drawable/take_a_ride_round"
 	        android:text="" />
+	    <TextView 
+	        android:id="@+id/offerRideTV"
+	        android:layout_below="@id/offerRideBT"
+	        android:layout_alignBaseline="@id/offerRideBT"
+	        android:text=""/>
+	    
 	        
 	</RelativeLayout>
     
@@ -72,7 +78,7 @@
 	    android:id="@+id/favouritesView" >
 
          <Button
-            android:id="@+id/favouritesButton"
+            android:id="@+id/favouritesBT"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_centerHorizontal="true"
@@ -97,7 +103,7 @@
 	    android:id="@+id/mapView" >
 
          <Button
-            android:id="@+id/mapButton"
+            android:id="@+id/mapBT"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_centerHorizontal="true"
