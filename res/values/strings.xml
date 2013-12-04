@@ -1,4 +1,4 @@
-offerRideTVofferRideTVofferRideTVofferRideTVofferRideTV<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">NeedARide</string>
@@ -6,5 +6,8 @@ offerRideTVofferRideTVofferRideTVofferRideTVofferRideTV<?xml version="1.0" encod
     <string name="hello_world">Hello world!</string>
     <string name="TaxiOrPrivateDialogHeader">Driver Or Hiker?</string>
     <string name="offerRideTVText">offer a ride</string>
-
+    <string name="offerRideIMGBTdesc">offer a ride button</string>
+    <string name="takeARideIMGBTdesc">take a ride button</string>
+    <string name="Favourites">Favourites</string>
+    <string name="Map">map</string>
 </resources>

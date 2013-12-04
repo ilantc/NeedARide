@@ -41,28 +41,25 @@
 	    android:id="@+id/offerOrTakeARide" >
 	        
 		<ImageButton
+		    android:contentDescription="@string/offerRideIMGBTdesc"
 	        android:id="@+id/offerRideIMGBT"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:background="@drawable/wheel_round"
+	        android:background="@drawable/wheel_round_title"
 	        android:layout_alignParentLeft="true"
 	        android:layout_centerInParent="true"
 	        android:text="" />
 
 	    <ImageButton
+	        android:contentDescription="@string/takeARideIMGBTdesc"
 	        android:id="@+id/takeARideIMGBT"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentRight="true"
 	        android:layout_centerInParent="true"
-	        android:background="@drawable/take_a_ride_round"
+	        android:background="@drawable/take_a_ride_round_title"
 	        android:text="" />
-	    <TextView 
-	        android:id="@+id/offerRideTV"
-	        android:layout_below="@id/offerRideBT"
-	        android:layout_alignBaseline="@id/offerRideBT"
-	        android:text=""/>
-	    
+	  
 	        
 	</RelativeLayout>
     
@@ -87,7 +84,7 @@
 		    android:paddingLeft="@dimen/activity_horizontal_margin"
 	    	android:paddingRight="@dimen/activity_horizontal_margin"
 	   	 	android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="Favourites" />
+            android:text="@string/Favourites" />
          
 	</RelativeLayout>
 	
@@ -112,7 +109,7 @@
 		    android:paddingLeft="@dimen/activity_horizontal_margin"
 	    	android:paddingRight="@dimen/activity_horizontal_margin"
 	   	 	android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="Map" />
+            android:text="@string/Map" />
          
 	</RelativeLayout>
     

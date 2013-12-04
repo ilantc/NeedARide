@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		ImageButton offerRideBT = (ImageButton) findViewById(R.id.offerRideBT);
+		ImageButton offerRideBT = (ImageButton) findViewById(R.id.offerRideIMGBT);
 		offerRideBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
@@ -24,11 +24,11 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		ImageButton offerOrTakeARideBT = (ImageButton) findViewById(R.id.offerOrTakeARideBT);
-		offerRideBT.setOnClickListener(new OnClickListener() {
+		ImageButton takeARideBT = (ImageButton) findViewById(R.id.takeARideIMGBT);
+		takeARideBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
-				(new TaxiOrPrivateDialogGetter(v.getContext())).showDialog();
+				Toast.makeText(getApplicationContext(), "take a ride  button clicked", Toast.LENGTH_SHORT).show();
 			}
 		});
 		
@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
 				Toast.makeText(getApplicationContext(), "favourites button clicked", Toast.LENGTH_SHORT).show();
 			}
 		});
-		Button mapBT = (Button) findViewById(R.id.mapButtonBT);
+		Button mapBT = (Button) findViewById(R.id.mapBT);
 		mapBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
