@@ -19,7 +19,9 @@ public class TaxiOrPrivateDialogGetter  {
 		// custom dialog
 		final Dialog dialog = new Dialog(context);
 		dialog.setContentView(R.layout.dialog_private_or_taxi);
-	 
+		
+		dialog.setTitle(R.string.TaxiOrPrivateDialogHeader);
+		
 		// set the custom dialog buttons
 		Button taxiB 	= (Button) dialog.findViewById(R.id.taxiButtonDialog);
 		Button privateB = (Button) dialog.findViewById(R.id.privateButtonDialog);		
@@ -38,7 +40,7 @@ public class TaxiOrPrivateDialogGetter  {
 			@Override
 			public void onClick(View v) {
 				// TODO - launch relevant activity
-				Toast.makeText(v.getContext(), "pressed taxi button", Toast.LENGTH_LONG).show();
+				Toast.makeText(v.getContext(), "pressed private car button", Toast.LENGTH_LONG).show();
 				dialog.dismiss();
 			}
 		});
