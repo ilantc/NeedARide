@@ -3,6 +3,7 @@ package com.example.needaride;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 import android.app.Dialog;
 import android.content.Context;
 
@@ -28,6 +29,7 @@ public class TaxiOrPrivateDialogGetter  {
 			@Override
 			public void onClick(View v) {
 				// TODO - launch relevant activity
+				Toast.makeText(v.getContext(), "pressed taxi button", Toast.LENGTH_LONG).show();
 				dialog.dismiss();
 			}
 		});
@@ -36,6 +38,7 @@ public class TaxiOrPrivateDialogGetter  {
 			@Override
 			public void onClick(View v) {
 				// TODO - launch relevant activity
+				Toast.makeText(v.getContext(), "pressed taxi button", Toast.LENGTH_LONG).show();
 				dialog.dismiss();
 			}
 		});
