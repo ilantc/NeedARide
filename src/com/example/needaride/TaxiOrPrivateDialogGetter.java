@@ -38,7 +38,7 @@ public class TaxiOrPrivateDialogGetter  {
 			@Override
 			public void onClick(View v) {
 				// TODO - launch relevant activity
-				Toast.makeText(v.getContext(), "pressed taxi button", Toast.LENGTH_LONG).show();
+				Toast.makeText(v.getContext(), "pressed private car button", Toast.LENGTH_LONG).show();
 				dialog.dismiss();
 			}
 		});
