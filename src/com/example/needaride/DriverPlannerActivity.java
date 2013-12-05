@@ -1,5 +1,7 @@
 package com.example.needaride;
 
+import com.example.needaride.util.WrapInt;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
@@ -13,7 +15,7 @@ import android.widget.Toast;
 public class DriverPlannerActivity extends Activity {
 
 	Button mNumOfSitsDialogBT;
-	Integer mnumberPicked = 0;
+	WrapInt mnumberPicked = new WrapInt(0);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
