@@ -6,7 +6,6 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        
         android:targetSdkVersion="16" />
 
     <application
@@ -20,17 +19,25 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-				<category android:name="android.intent.category.LAUNCHER" />                
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="com.example.needaride.ridePlanHitchhiker"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.needaride.HitchhikerPlannerActivity"
+            android:label="@string/title_activity_hitchhiker_planner" >
+        </activity>
+        <activity
+            android:name="com.example.needaride.FullscreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_fullscreen"
+            android:theme="@style/FullscreenTheme" >
         </activity>
     </application>
 

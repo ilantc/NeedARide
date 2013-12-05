@@ -62,7 +62,7 @@
   		    android:layout_below="@+id/toET"
   		    android:layout_toRightOf="@+id/commentTV"
   		    android:ems="10"
-  		    android:hint="Destination"
+  		    android:hint="Add whatever you want"
   		    android:inputType="text" />
         
   		<ImageButton

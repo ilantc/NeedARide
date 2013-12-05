@@ -2,6 +2,7 @@ package com.example.needaride;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +30,9 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {				
 				Toast.makeText(getApplicationContext(), "take a ride  button clicked", Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent();
+				intent.setClassName(getPackageName(), "com.example.needaride.HitchhikerPlannerActivity");
+				startActivity(intent);
 			}
 		});
 		
