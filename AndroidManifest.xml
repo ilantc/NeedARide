@@ -46,6 +46,10 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.needaride.NoSimilarRidesActivity"
+            android:label="@string/title_activity_no_similar_rides" >
+        </activity>
     </application>
 
 </manifest>
