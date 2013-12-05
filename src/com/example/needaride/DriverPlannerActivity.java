@@ -1,21 +1,15 @@
 package com.example.needaride;
 
-import com.example.needaride.util.WrapInt;
-
 import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.NumberPicker;
-import android.widget.Toast;
 
 public class DriverPlannerActivity extends Activity {
 
 	Button mNumOfSitsDialogBT;
-	WrapInt mnumberPicked = new WrapInt(0);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +20,25 @@ public class DriverPlannerActivity extends Activity {
 		mNumOfSitsDialogBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				(new NumberPickerDialogGetter(v.getContext(), mnumberPicked)).showDialog();
+				(new NumberPickerDialogGetter(v.getContext(), mNumOfSitsDialogBT)).showDialog();
+				
+				
+				
+//				Toast.makeText(getApplicationContext(), "button val is " +  mNumOfSitsDialogBT.getText() + "got focus is " + gotF, Toast.LENGTH_SHORT).show();
+				
+//				runOnUiThread(new Runnable() {
+//
+//				    @Override
+//				    public void run() {
+//				    	mNumOfSitsDialogBT.setText(Integer.toString(mnumberPicked.getV()));
+//				    }
+//				});	
+				
 			}
 		});
 		
 	}
 
-	public void setNumOfSits(int numOfSits) {
-		mNumOfSitsDialogBT.setText(Integer.toString(numOfSits));
-	}
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

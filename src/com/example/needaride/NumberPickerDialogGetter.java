@@ -1,26 +1,23 @@
 package com.example.needaride;
 
-import com.example.needaride.util.WrapInt;
 
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.NumberPicker;
-import android.widget.Toast;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 
 public class NumberPickerDialogGetter  {
 
 	Context context;
 	NumberPicker np;
-	WrapInt retVal;
+	Button mnumOfSitsButton;
 	
-	public NumberPickerDialogGetter(Context c, WrapInt ret) {
+	public NumberPickerDialogGetter(Context c, Button numOfSitsButton) {
 		context = c;
-		retVal  = ret;
+		mnumOfSitsButton = numOfSitsButton;
 	}
 	
 	public void showDialog() {
@@ -56,8 +53,10 @@ public class NumberPickerDialogGetter  {
 		OKBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+
 				// TODO - launch relevant activity
-				retVal.setV(np.getValue());
+		    	mnumOfSitsButton.setText(Integer.toString(np.getValue()));
+		    	mnumOfSitsButton.requestFocus();
 				dialog.dismiss();
 			}
 		});
