@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <include
-        android:id="@+id/include_driver-planner"
+        android:id="@+id/include_driver_planner"
         android:layout_height="wrap_content"
         layout="@layout/form_basic_ride" />
 
@@ -14,12 +13,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/include_driver-planner"
+        android:layout_below="@+id/include_driver_planner"
         android:layout_marginTop="20dp"
         android:text="Suggest similar rides" />
-    
-    
 
+  	<NumberPicker
+  	    android:id="@+id/sitsNumPick"
+  	    android:layout_width="wrap_content"
+  	    android:layout_height="wrap_content"
+  	    android:layout_above="@+id/submitHitchhikerFormBT"
+  	    android:layout_below="@+id/suggestSimilarCB" />
+    
 	 <Button
         android:id="@+id/submitHitchhikerFormBT"
         style="?buttonBarStyle"

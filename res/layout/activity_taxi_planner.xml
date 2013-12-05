@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <include
-        android:id="@+id/include_driver-planner"
+        android:id="@+id/include_taxi_planner"
         android:layout_height="wrap_content"
         layout="@layout/form_basic_ride" />
 
@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/include_driver-planner"
+        android:layout_below="@+id/include_taxi_planner"
         android:layout_marginTop="20dp"
         android:text="Suggest similar rides" />
 
