@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    tools:context=".NoSimilarRidesActivity" >
+
+    <ImageView
+        android:id="@+id/sadFrog"
+        android:src="@drawable/sad_frog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin"
+        android:layout_centerHorizontal="true"
+         />
+	<TextView
+        android:id="@+id/sorryTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_below="@+id/sadFrog"
+        android:text="Sorry..."
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+	<TextView
+        android:id="@+id/sorryMassageTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_below="@+id/sorryTV"
+        android:text="There are no similar ride avaliable" />
+
+	<ImageButton
+	    android:id="@+id/goToOfferARideBT"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/sorryMassageTV"
+	    android:paddingRight="@dimen/activity_vertical_margin"
+	    android:paddingTop="@dimen/activity_vertical_margin"
+	    android:layout_alignLeft="@+id/sadFrog"
+	    android:src="@drawable/wheel_round_title" />
+
+	<ImageButton
+	    android:id="@+id/goHomeBT"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignRight="@+id/sadFrog"
+	    android:layout_alignTop="@+id/goToOfferARideBT"
+	    android:src="@drawable/take_a_ride_round_title" />
+
+</RelativeLayout>

@@ -36,14 +36,14 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		Button favouritesBT = (Button) findViewById(R.id.favouritesBT);
+		ImageButton favouritesBT = (ImageButton) findViewById(R.id.favouritesIMGBT);
 		favouritesBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
 				Toast.makeText(getApplicationContext(), "favourites button clicked", Toast.LENGTH_SHORT).show();
 			}
 		});
-		Button mapBT = (Button) findViewById(R.id.mapBT);
+		ImageButton mapBT = (ImageButton) findViewById(R.id.mapIMGBT);
 		mapBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
