@@ -4,9 +4,7 @@
     android:layout_height="match_parent"
     
     tools:context=".MainActivity"
-    android:orientation="vertical" 
-    android:background="@drawable/galaxy_backround">
-
+    android:orientation="vertical">
     	
     <RelativeLayout 
         android:layout_width="fill_parent"

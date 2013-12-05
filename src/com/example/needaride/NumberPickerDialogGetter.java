@@ -1,5 +1,7 @@
 package com.example.needaride;
 
+import com.example.needaride.util.WrapInt;
+
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,9 +16,9 @@ public class NumberPickerDialogGetter  {
 
 	Context context;
 	NumberPicker np;
-	Integer retVal;
+	WrapInt retVal;
 	
-	public NumberPickerDialogGetter(Context c, Integer ret) {
+	public NumberPickerDialogGetter(Context c, WrapInt ret) {
 		context = c;
 		retVal  = ret;
 	}
@@ -55,7 +57,7 @@ public class NumberPickerDialogGetter  {
 			@Override
 			public void onClick(View v) {
 				// TODO - launch relevant activity
-				retVal = np.getValue();
+				retVal.setV(np.getValue());
 				dialog.dismiss();
 			}
 		});
