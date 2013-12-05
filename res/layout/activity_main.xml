@@ -2,10 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    
+    android:background="@drawable/galaxy_background"
     tools:context=".MainActivity"
     android:orientation="vertical">
-    	
+    
+    
+	    
+        
+        	
     <RelativeLayout 
         android:layout_width="fill_parent"
 	    android:layout_height="0dp"
@@ -26,7 +30,11 @@
 	        
 	</RelativeLayout>
      
+    
+    
+    
     <RelativeLayout 
+        android:id="@+id/offerOrTakeARide" 
         android:layout_width="fill_parent"
 	    android:layout_height="0dp"
 	    android:paddingBottom="@dimen/activity_vertical_margin"
@@ -34,9 +42,18 @@
 	    android:paddingRight="@dimen/activity_horizontal_margin"
 	    android:paddingTop="@dimen/activity_vertical_margin"
 	    tools:context=".MainActivity"
-	    android:layout_weight="40"
-	    android:id="@+id/offerOrTakeARide" >
+	    
+	    android:layout_weight="80"
+	    >
 	        
+		<ImageButton 
+	        android:id="@+id/favouritesIMGBT"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+			android:layout_alignParentTop="true"
+	        android:layout_centerInParent="true"
+	        android:background="@drawable/favorite_icon" />
+		
 		<ImageButton
 		    android:contentDescription="@string/offerRideIMGBTdesc"
 	        android:id="@+id/offerRideIMGBT"
@@ -52,15 +69,24 @@
 	        android:id="@+id/takeARideIMGBT"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_alignParentRight="true"
+			android:layout_alignParentRight="true"
 	        android:layout_centerInParent="true"
 	        android:background="@drawable/take_a_ride_round_title"
 	        android:text="" />
-	  
+		
+		<ImageButton     
+	        android:id="@+id/mapIMGBT"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+	        android:layout_centerInParent="true"
+	        android:background="@drawable/take_a_ride_round_title" />
+		
+	    
 	        
 	</RelativeLayout>
     
-    <RelativeLayout 
+ <!--     <RelativeLayout 
         android:layout_width="fill_parent"
 	    android:layout_height="0dp"
 	    android:paddingBottom="@dimen/activity_vertical_margin"
@@ -109,5 +135,5 @@
             android:text="@string/Map" />
          
 	</RelativeLayout>
-    
+    -->
 </LinearLayout>
