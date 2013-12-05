@@ -17,17 +17,9 @@
         android:layout_below="@+id/include_driver-planner"
         android:layout_marginTop="20dp"
         android:text="Suggest similar rides" />
+    
+    
 
-	 <com.example.NeedARide.xml_additions.myNumberPicker
-	    android:id="@+id/numberPicker1"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_gravity="center"
-	    android:orientation="vertical"
-	    android:layout_below="@+id/suggestSimilarCB"
-	    max="10"
-	    min="1" />
-	 
 	 <Button
         android:id="@+id/submitHitchhikerFormBT"
         style="?buttonBarStyle"
@@ -40,6 +32,6 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:text="Submit" />
 
-    
+
 
 </RelativeLayout>
