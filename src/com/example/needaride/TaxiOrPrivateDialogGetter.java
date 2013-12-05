@@ -1,11 +1,13 @@
 package com.example.needaride;
 
+import android.sax.StartElementListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 
 public class TaxiOrPrivateDialogGetter  {
 
@@ -35,11 +37,17 @@ public class TaxiOrPrivateDialogGetter  {
 				dialog.dismiss();
 			}
 		});
-	 
+		
+		
 		privateB.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO - launch relevant activity
+				
+				Intent intent = new Intent();
+
+				intent.setClassName( context.getPackageName()  , context.getPackageName() + ".DriverPlannerActivity");
+				context.startActivity(intent);
+				
 				Toast.makeText(v.getContext(), "pressed private car button", Toast.LENGTH_LONG).show();
 				dialog.dismiss();
 			}

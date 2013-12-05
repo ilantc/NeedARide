@@ -22,6 +22,7 @@
    
         <EditText
   		    android:id="@+id/fromET"
+  		    android:layout_alignLeft="@+id/commentET"
   		    android:layout_width="wrap_content"
   		    android:layout_height="wrap_content"
   		    android:layout_toRightOf="@+id/fromTV"
@@ -42,6 +43,7 @@
   		    android:layout_width="wrap_content"
   		    android:layout_height="wrap_content"
   		    android:layout_below="@+id/fromET"
+  		    android:layout_alignLeft="@+id/commentET"
   		    android:layout_toRightOf="@+id/toTV"
   		    android:ems="10"
   		    android:hint="Destination"
@@ -70,6 +72,7 @@
   		    android:layout_width="wrap_content"
   		    android:layout_height="wrap_content"
   		    android:layout_below="@+id/commentTV"
+  		    android:layout_alignTop="@+id/chooseTimeImgBT"
   		    android:paddingTop="@dimen/activity_vertical_margin"
   		    android:src="@drawable/calendar_frog_cartoon_with_title" />
         
