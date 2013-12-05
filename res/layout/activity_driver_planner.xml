@@ -17,24 +17,17 @@
         android:layout_marginTop="20dp"
         android:text="Suggest similar rides" />
 
-  	<NumberPicker
-  	    android:id="@+id/sitsNumPick"
-  	    android:layout_width="wrap_content"
-  	    android:layout_height="wrap_content"
-  	    android:layout_above="@+id/submitHitchhikerFormBT"
-  	    android:layout_below="@+id/suggestSimilarCB" />
     
 	 <Button
-        android:id="@+id/submitHitchhikerFormBT"
+        android:id="@+id/NumOfSitsDialogBT"
         style="?buttonBarStyle"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
+        android:layout_below="@+id/suggestSimilarCB"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:text="Submit" />
+        android:text="0" />
 
 
 
