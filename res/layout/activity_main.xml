@@ -58,8 +58,8 @@
 	        android:layout_centerInParent="true"
 	        android:text="" />
 		<ImageButton
-		    android:contentDescription="@string/offerRideIMGBTdesc"
-	        android:id="@+id/offerRideIMGBT"
+		    android:contentDescription="@string/takeARideIMGBTdesc"
+	        android:id="@+id/getARideIMGBT"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:background="@drawable/get_a_ride_icon"
@@ -68,13 +68,13 @@
 	        android:text="" />
 
 	    <ImageButton
-	        android:contentDescription="@string/takeARideIMGBTdesc"
-	        android:id="@+id/takeARideIMGBT"
+	        android:contentDescription="@string/offerRideIMGBTdesc"
+	        android:id="@+id/offerRideIMGBT"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 			android:layout_alignParentRight="true"
 	        android:layout_centerInParent="true"
-	        android:background="@drawable/open_a_ride_icon"
+	        android:background="@drawable/offer_a_ride_icon"
 	        android:text="" />
 		
 		<ImageButton     
