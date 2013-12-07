@@ -9,12 +9,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-public class HitchhikerPlannerActivity extends Activity {
+public class HitchhikerPlannerActivity extends basePlannerActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_hitchhiker_planner);
+		setContentViewWithDate(R.layout.activity_hitchhiker_planner);
 		
 		Button submitBT = (Button) findViewById(R.id.submitHitchhikerFormBT);
 		submitBT.setOnClickListener(new OnClickListener() {
@@ -26,7 +26,6 @@ public class HitchhikerPlannerActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		
 	}
 
 	@Override

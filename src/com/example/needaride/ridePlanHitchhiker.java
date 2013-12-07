@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class ridePlanHitchhiker extends Activity {
+public class ridePlanHitchhiker extends basePlannerActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.form_basic_ride);
+		setContentViewWithDate(R.layout.form_basic_ride);
 	}
 
 	@Override

@@ -7,14 +7,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class DriverPlannerActivity extends Activity {
+public class DriverPlannerActivity extends basePlannerActivity {
 
 	Button mNumOfSitsDialogBT;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_driver_planner);	    
+		setContentViewWithDate(R.layout.activity_driver_planner);	    
 	    
 		mNumOfSitsDialogBT = (Button) findViewById(R.id.NumOfSitsDialogBT);
 		mNumOfSitsDialogBT.setOnClickListener(new OnClickListener() {
