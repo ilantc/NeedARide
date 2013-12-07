@@ -30,12 +30,15 @@ public class TaxiOrPrivateDialogGetter  {
 		taxiB.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO - launch relevant activity
+				                   // TODO - launch relevant activity
+				Intent intent = new Intent();
+
+				intent.setClassName( context.getPackageName()  , context.getPackageName() + ".TaxiPlannerActivity");
+				context.startActivity(intent);
 				Toast.makeText(v.getContext(), "pressed taxi button", Toast.LENGTH_LONG).show();
 				dialog.dismiss();
 			}
-		});
-		
+		});	
 		
 		privateB.setOnClickListener(new OnClickListener() {
 			@Override
