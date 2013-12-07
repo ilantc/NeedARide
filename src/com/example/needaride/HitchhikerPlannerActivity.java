@@ -20,7 +20,6 @@ public class HitchhikerPlannerActivity extends basePlannerActivity {
 		submitBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
-			
 				Intent intent = new Intent();
 				intent.setClassName(getPackageName(), getPackageName() + ".NoSimilarRidesActivity");
 				startActivity(intent);

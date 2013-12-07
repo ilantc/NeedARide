@@ -2,10 +2,14 @@ package com.example.needaride;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class DriverPlannerActivity extends basePlannerActivity {
 
@@ -21,21 +25,24 @@ public class DriverPlannerActivity extends basePlannerActivity {
 			@Override
 			public void onClick(View v) {
 				(new NumberPickerDialogGetter(v.getContext(), mNumOfSitsDialogBT)).showDialog();
-				
-				
-				
-//				Toast.makeText(getApplicationContext(), "button val is " +  mNumOfSitsDialogBT.getText() + "got focus is " + gotF, Toast.LENGTH_SHORT).show();
-				
-//				runOnUiThread(new Runnable() {
-//
-//				    @Override
-//				    public void run() {
-//				    	mNumOfSitsDialogBT.setText(Integer.toString(mnumberPicked.getV()));
-//				    }
-//				});	
-				
 			}
 		});
+		
+		Button submitDriverPlanFormBT = (Button) findViewById(R.id.submitDriverPlanFormBT);
+		final ImageView thankYouFadeInIV = (ImageView) findViewById(R.id.thankYouFadeInIV);
+		final Animation animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
+		
+		submitDriverPlanFormBT.setOnClickListener(new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			thankYouFadeInIV.startAnimation(animationFadeIn);
+			
+//			Intent intent = new Intent();
+//			intent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
+//			startActivity(intent);
+		}
+	});
+		
 		
 	}
 

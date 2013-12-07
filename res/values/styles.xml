@@ -15,6 +15,7 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:windowBackground">@drawable/background_grass</item>
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
@@ -46,4 +47,9 @@
     
     <style name="ButtonBarButton" />
 
+    <style name="Background" parent="@android:style/Theme.NoTitleBar">
+	    <item name="android:windowBackground">@android:color/black</item>
+	    <item name="android:windowNoTitle">true</item>
+	</style>
+    
 </resources>
