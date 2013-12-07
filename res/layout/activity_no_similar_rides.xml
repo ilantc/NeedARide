@@ -5,11 +5,12 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context=".NoSimilarRidesActivity" >
+    tools:context=".NoSimilarRidesActivity" 
+    android:background="@drawable/galaxy_background">
 
     <ImageView
         android:id="@+id/sadFrog"
-        android:src="@drawable/sad_frog"
+        android:src="@drawable/sad_frog_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -34,21 +35,24 @@
         android:text="There are no similar ride avaliable" />
 
 	<ImageButton
-	    android:id="@+id/goToOfferARideBT"
+	    android:id="@+id/goToOpenARideBT"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_below="@+id/sorryMassageTV"
 	    android:paddingRight="@dimen/activity_vertical_margin"
 	    android:paddingTop="@dimen/activity_vertical_margin"
 	    android:layout_alignLeft="@+id/sadFrog"
-	    android:src="@drawable/open_a_ride_icon" />
+	    android:src="@drawable/open_a_ride_icon_left" 
+	    android:layout_centerVertical="true"/>
 
 	<ImageButton
-	    android:id="@+id/goHomeBT"
+	    android:id="@+id/goHomeIMGBT"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_alignRight="@+id/sadFrog"
-	    android:layout_alignTop="@+id/goToOfferARideBT"
-	    android:src="@drawable/frog_ride_icon" />
+	    android:paddingLeft="@dimen/activity_vertical_margin"
+	    android:layout_alignBottom="@+id/goToOpenARideBT"
+	    android:layout_toRightOf="@+id/goToOpenARideBT"
+	    android:layout_centerVertical="true"
+	    android:src="@drawable/home_icon" />
 
 </RelativeLayout>
