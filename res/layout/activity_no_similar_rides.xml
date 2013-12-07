@@ -6,11 +6,12 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context=".NoSimilarRidesActivity" 
-    android:background="@drawable/galaxy_background">
+    android:background="@drawable/background_new_png">
 
+    
     <ImageView
-        android:id="@+id/sadFrog"
-        android:src="@drawable/sad_frog_icon"
+        android:id="@+id/noSimilarRidesIV"
+        android:src="@drawable/no_similar_rides_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -18,33 +19,32 @@
         android:paddingRight="@dimen/activity_vertical_margin"
         android:layout_centerHorizontal="true"
          />
-	<TextView
-        android:id="@+id/sorryTV"
+	
+	<ImageView
+        android:id="@+id/sadFrogIV"
+        android:src="@drawable/sad_frog_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/noSimilarRidesIV"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:layout_below="@+id/sadFrog"
-        android:text="Sorry..."
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-	<TextView
-        android:id="@+id/sorryMassageTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:layout_below="@+id/sorryTV"
-        android:text="There are no similar ride avaliable" />
-
+        android:paddingRight="@dimen/activity_vertical_margin"
+        android:layout_centerHorizontal="true"
+         />
+	
+	
 	<ImageButton
 	    android:id="@+id/goToOpenARideBT"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_below="@+id/sorryMassageTV"
+	    android:layout_below="@+id/sadFrogIV"
 	    android:paddingRight="@dimen/activity_vertical_margin"
 	    android:paddingTop="@dimen/activity_vertical_margin"
-	    android:layout_alignLeft="@+id/sadFrog"
+	    android:layout_alignLeft="@+id/noSimilarRidesIV"
 	    android:src="@drawable/open_a_ride_icon_left" 
 	    android:layout_centerVertical="true"/>
 
+
+	
 	<ImageButton
 	    android:id="@+id/goHomeIMGBT"
 	    android:layout_width="wrap_content"
