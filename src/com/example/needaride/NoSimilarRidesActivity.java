@@ -27,6 +27,13 @@ public class NoSimilarRidesActivity extends Activity {
 					startActivity(intent);
 				}
 			});
+		ImageButton goToOpenARideIMGBT = (ImageButton) findViewById(R.id.goToOpenARideBT);
+		goToOpenARideIMGBT.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {				
+				(new TaxiOrPrivateDialogGetter(v.getContext())).showDialog();
+			}
+		});
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
