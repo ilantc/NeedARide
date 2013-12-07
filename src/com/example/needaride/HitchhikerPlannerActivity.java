@@ -20,10 +20,9 @@ public class HitchhikerPlannerActivity extends Activity {
 		submitBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
-				(new TaxiOrPrivateDialogGetter(v.getContext())).showDialog();
 			
 				Intent intent = new Intent();
-				intent.setClassName(getPackageName(), getPackageName() + ".NoSimilarPlannerActivity");
+				intent.setClassName(getPackageName(), getPackageName() + ".NoSimilarRidesActivity");
 				startActivity(intent);
 			}
 		});
