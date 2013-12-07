@@ -21,20 +21,20 @@
 		    android:background="@layout/basic_form_rl_bg">
 	        
 
-	        <TextView
-		        android:id="@+id/fromTV"
-	            android:paddingRight="@dimen/activity_horizontal_margin"
-		    	android:paddingTop="@dimen/activity_vertical_margin"
+	        <ImageView 
+	            android:id="@+id/fromIV"
 		        android:layout_height="wrap_content"
 		        android:layout_width="wrap_content"
-		        android:text="@string/from"
-		        />
+		        android:layout_alignBottom="@+id/fromET"
+		        android:background="@drawable/from_no_fill"
+	            />
+	        
 		   
 		     <EditText
 		  	    android:id="@+id/fromET"
 		  	    android:layout_width="wrap_content"
 		  	    android:layout_height="wrap_content"
-		  	    android:layout_toRightOf="@+id/fromTV"
+		  	    android:layout_toRightOf="@+id/fromIV"
 		  	    android:ems="10"
 		  	    android:hint="Starting Point"
 		  	    android:textColorHint="@color/hint_color"
