@@ -82,7 +82,7 @@
   		    android:layout_height="wrap_content"
   		    android:layout_below="@+id/commentET"
   		    android:layout_toRightOf="@+id/chooseDateImgBT"
-  		    android:src="@drawable/wall_clock_frog" />
+  		    android:src="@drawable/frog_ride_icon" />
         
 	</RelativeLayout>
 
