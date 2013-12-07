@@ -31,6 +31,11 @@ public class TaxiOrPrivateDialogGetter  {
 			@Override
 			public void onClick(View v) {
 				// TODO - launch relevant activity
+				Intent intent = new Intent();
+
+				intent.setClassName( context.getPackageName()  , context.getPackageName() + ".TaxiPlannerActivity");
+				context.startActivity(intent);
+				
 				Toast.makeText(v.getContext(), "pressed taxi button", Toast.LENGTH_LONG).show();
 				dialog.dismiss();
 			}
