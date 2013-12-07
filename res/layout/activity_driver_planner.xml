@@ -9,32 +9,41 @@
         layout="@layout/form_basic_ride" />
 
 	
-	<EditText
-	     android:id="@+id/PriceET"
-	     android:layout_width="wrap_content"
-	     android:layout_height="wrap_content"
-	     android:layout_below="@+id/include_driver_planner"
-	     android:layout_toRightOf="@+id/PriceTV"
-	     android:ems="10"
-	     android:hint="Price per hiker"
-	     android:layout_alignBottom="@+id/PriceTV"
-	     android:inputType="text"/>
-	 
+     <RelativeLayout 
+        android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+		android:paddingLeft="@dimen/activity_horizontal_margin"
+		android:paddingRight="@dimen/activity_horizontal_margin"
+		android:layout_below="@+id/include_driver_planner"
+		android:id="@+id/PriceRL"
+		android:background="@layout/basic_form_rl_bg" >
+    
+
 	 <TextView
 	     android:id="@+id/PriceTV"
 	     android:layout_width="wrap_content"
 	     android:layout_height="wrap_content"
-	     android:layout_below="@+id/include_driver_planner"
-	     android:paddingTop="@dimen/activity_vertical_margin"
-	     android:paddingLeft="@dimen/activity_horizontal_margin"
 	     android:text="Price:" />
+	
+	 <EditText
+	     android:id="@+id/PriceET"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:ems="10"
+	     android:layout_alignBottom="@+id/PriceET"
+	     android:textColorHint="@color/hint_color"
+	     android:hint="Price per hiker"
+	     android:layout_toRightOf="@+id/PriceTV"
+	     android:inputType="number"/>
+	 	
+	</RelativeLayout>
 	 
     <CheckBox
         android:id="@+id/suggestSimilarCB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/include_driver_planner"
-        android:layout_below="@+id/PriceTV"
+        android:layout_below="@+id/PriceRL"
         android:text="Suggest similar rides" />
 
     <TextView
@@ -70,6 +79,12 @@
         style="?buttonBarStyle"
         android:text="Submit" />
 
-	 
+	 <ImageView
+	     android:id="@+id/thankYouFadeInIV"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_alignTop="@+id/submitDriverPlanFormBT"
+	     android:layout_toRightOf="@+id/suggestSimilarCB"
+	     android:src="@drawable/frog_ride_icon" />
 
 </RelativeLayout>
