@@ -46,20 +46,23 @@
 	    android:layout_weight="80"
 	    >
 	        
-		<ImageButton 
+
+		<ImageButton
+		    android:contentDescription="@+id/favouritesIMGBT"
 	        android:id="@+id/favouritesIMGBT"
+	        android:background="@drawable/favorite_icon"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-			android:layout_alignParentTop="true"
+	        
+	        android:layout_alignParentTop="true"
 	        android:layout_centerInParent="true"
-	        android:background="@drawable/favorite_icon" />
-		
+	        android:text="" />
 		<ImageButton
 		    android:contentDescription="@string/offerRideIMGBTdesc"
 	        android:id="@+id/offerRideIMGBT"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:background="@drawable/wheel_round_title"
+	        android:background="@drawable/get_a_ride_icon"
 	        android:layout_alignParentLeft="true"
 	        android:layout_centerInParent="true"
 	        android:text="" />
@@ -71,7 +74,7 @@
 	        android:layout_height="wrap_content"
 			android:layout_alignParentRight="true"
 	        android:layout_centerInParent="true"
-	        android:background="@drawable/take_a_ride_round_title"
+	        android:background="@drawable/open_a_ride_icon"
 	        android:text="" />
 		
 		<ImageButton     
@@ -80,7 +83,7 @@
 	        android:layout_height="wrap_content"
 			android:layout_alignParentBottom="true"
 	        android:layout_centerInParent="true"
-	        android:background="@drawable/take_a_ride_round_title" />
+	        android:background="@drawable/map_icon" />
 		
 	    
 	        
