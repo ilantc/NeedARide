@@ -2,14 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/galaxy_background"
+    android:background="@drawable/frog_wallpaper_by_pianomonkey"
     tools:context=".MainActivity"
     android:orientation="vertical">
     
-    
-	    
-        
-        	
     <RelativeLayout 
         android:layout_width="fill_parent"
 	    android:layout_height="0dp"
@@ -31,8 +27,6 @@
 	</RelativeLayout>
      
     
-    
-    
     <RelativeLayout 
         android:id="@+id/offerOrTakeARide" 
         android:layout_width="fill_parent"
@@ -42,10 +36,7 @@
 	    android:paddingRight="@dimen/activity_horizontal_margin"
 	    android:paddingTop="@dimen/activity_vertical_margin"
 	    tools:context=".MainActivity"
-	    
-	    android:layout_weight="80"
-	    >
-	        
+	    android:layout_weight="80" >
 
 		<ImageButton
 		    android:contentDescription="@+id/favouritesIMGBT"
@@ -53,19 +44,16 @@
 	        android:background="@drawable/favorite_icon"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        
 	        android:layout_alignParentTop="true"
 	        android:layout_centerInParent="true"
 	        android:text="" />
 		<ImageButton
-		    android:contentDescription="@string/takeARideIMGBTdesc"
 	        android:id="@+id/getARideIMGBT"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:background="@drawable/get_a_ride_icon"
+	        android:background="@drawable/need_a_ride_icon"
 	        android:layout_alignParentLeft="true"
-	        android:layout_centerInParent="true"
-	        android:text="" />
+	        android:layout_centerInParent="true" />
 
 	    <ImageButton
 	        android:contentDescription="@string/offerRideIMGBTdesc"
@@ -74,7 +62,7 @@
 	        android:layout_height="wrap_content"
 			android:layout_alignParentRight="true"
 	        android:layout_centerInParent="true"
-	        android:background="@drawable/offer_a_ride_icon"
+	        android:background="@drawable/open_a_ride_icon"
 	        android:text="" />
 		
 		<ImageButton     

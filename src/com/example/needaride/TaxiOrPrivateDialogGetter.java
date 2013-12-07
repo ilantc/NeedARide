@@ -19,9 +19,8 @@ public class TaxiOrPrivateDialogGetter  {
 	
 	public void showDialog() {
 		// custom dialog
-		final Dialog dialog = new Dialog(context);
+		final Dialog dialog = new Dialog(context,R.style.Theme_Dialog);
 		dialog.setContentView(R.layout.dialog_private_or_taxi);
-		
 		dialog.setTitle(R.string.TaxiOrPrivateDialogHeader);
 		
 		// set the custom dialog buttons

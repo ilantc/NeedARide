@@ -41,7 +41,7 @@
 	    android:paddingRight="@dimen/activity_vertical_margin"
 	    android:paddingTop="@dimen/activity_vertical_margin"
 	    android:layout_alignLeft="@+id/sadFrog"
-	    android:src="@drawable/wheel_round_title" />
+	    android:src="@drawable/open_a_ride_icon" />
 
 	<ImageButton
 	    android:id="@+id/goHomeBT"
@@ -49,6 +49,6 @@
 	    android:layout_height="wrap_content"
 	    android:layout_alignRight="@+id/sadFrog"
 	    android:layout_alignTop="@+id/goToOfferARideBT"
-	    android:src="@drawable/take_a_ride_round_title" />
+	    android:src="@drawable/frog_ride_icon" />
 
 </RelativeLayout>
