@@ -1,5 +1,7 @@
 <resources>
 
     <color name="black_overlay">#66000000</color>
+    <color name="basic_ride_color">#2D9C48</color>
+    <color name="hint_color">#FFFFFF</color>
 
 </resources>

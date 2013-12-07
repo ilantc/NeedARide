@@ -16,6 +16,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="numberPickerDialogHeader">choose a number</string>
     <item name="maxNumOfSits" type="integer">9</item>
+    <string name="from">From:</string>
 
     <string name="title_activity_no_similar_rides">NoSimilarRidesActivity</string>
 

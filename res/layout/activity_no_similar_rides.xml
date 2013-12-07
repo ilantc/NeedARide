@@ -41,7 +41,8 @@
 	    android:paddingTop="@dimen/activity_vertical_margin"
 	    android:layout_alignLeft="@+id/noSimilarRidesIV"
 	    android:src="@drawable/open_a_ride_icon_left" 
-	    android:layout_centerVertical="true"/>
+	    android:layout_centerVertical="true"
+	    android:background="@null"/>
 
 
 	
@@ -53,6 +54,7 @@
 	    android:layout_alignBottom="@+id/goToOpenARideBT"
 	    android:layout_toRightOf="@+id/goToOpenARideBT"
 	    android:layout_centerVertical="true"
-	    android:src="@drawable/home_icon" />
+	    android:src="@drawable/home_icon"
+	    android:background="@null" />
 
 </RelativeLayout>

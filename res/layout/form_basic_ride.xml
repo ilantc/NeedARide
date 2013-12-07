@@ -10,68 +10,101 @@
 	    android:paddingLeft="@dimen/activity_horizontal_margin"
 	    android:paddingRight="@dimen/activity_horizontal_margin"
 	    android:paddingTop="@dimen/activity_vertical_margin"
-	    android:id="@+id/fromRL">
-     
-        <TextView
-            android:id="@+id/fromTV"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-	    	android:paddingTop="@dimen/activity_vertical_margin"
+	    android:id="@+id/basicFormRL">
+     	
+        <RelativeLayout 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="From:" />
-   
-        <EditText
-  		    android:id="@+id/fromET"
-  		    android:layout_alignLeft="@+id/commentET"
-  		    android:layout_width="wrap_content"
-  		    android:layout_height="wrap_content"
-  		    android:layout_toRightOf="@+id/fromTV"
-  		    android:ems="10"
-  		    android:hint="Starting Point"
-  		    android:inputType="text" />
-  		
-        <TextView
-  		    android:id="@+id/toTV"
-  		    android:layout_width="wrap_content"
-  		    android:layout_height="wrap_content"
-  		    android:layout_below="@+id/fromTV"
-  		    android:paddingRight="@dimen/activity_horizontal_margin"
-  		    android:paddingTop="@dimen/activity_vertical_margin"
-  		    android:text="To:" />
-        <EditText
-  		    android:id="@+id/toET"
-  		    android:layout_width="wrap_content"
-  		    android:layout_height="wrap_content"
-  		    android:layout_below="@+id/fromET"
-  		    android:layout_alignLeft="@+id/commentET"
-  		    android:layout_toRightOf="@+id/toTV"
-  		    android:ems="10"
-  		    android:hint="Destination"
-  		    android:inputType="text" />
+		    android:layout_height="wrap_content"
+		    android:paddingLeft="@dimen/activity_horizontal_margin"
+		    android:paddingRight="@dimen/activity_horizontal_margin"
+		    android:id="@+id/fromRL"
+		    android:background="@layout/basic_form_rl_bg">
+	        
+
+	        <TextView
+		        android:id="@+id/fromTV"
+	            android:paddingRight="@dimen/activity_horizontal_margin"
+		    	android:paddingTop="@dimen/activity_vertical_margin"
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:text="@string/from"
+		        />
+		   
+		     <EditText
+		  	    android:id="@+id/fromET"
+		  	    android:layout_width="wrap_content"
+		  	    android:layout_height="wrap_content"
+		  	    android:layout_toRightOf="@+id/fromTV"
+		  	    android:ems="10"
+		  	    android:hint="Starting Point"
+		  	    android:textColorHint="@color/hint_color"
+		  	    android:inputType="text"/>
+	  	</RelativeLayout>	
+	  	
+        <RelativeLayout 
+            android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:paddingLeft="@dimen/activity_horizontal_margin"
+		    android:paddingRight="@dimen/activity_horizontal_margin"
+		    android:layout_marginTop="@dimen/activity_vertical_margin"
+		    android:layout_below="@+id/fromRL"
+		    android:id="@+id/toRL"
+		    android:background="@layout/basic_form_rl_bg">
+	        
+	        <TextView
+	  		    android:id="@+id/toTV"
+	  		    android:layout_width="wrap_content"
+	  		    android:layout_height="wrap_content"
+	  		    android:paddingRight="@dimen/activity_horizontal_margin"
+	  		    android:paddingTop="@dimen/activity_vertical_margin"
+	  		    android:text="To  :" />
+	        <EditText
+	  		    android:id="@+id/toET"
+	  		    android:layout_width="wrap_content"
+	  		    android:layout_height="wrap_content"
+	  		    android:layout_toRightOf="@+id/toTV"
+	  		    android:ems="10"
+	  		    android:hint="Destination"
+	  		    android:textColorHint="@color/hint_color"
+	  		    android:inputType="text" />
+        </RelativeLayout>
         
-        <TextView
-  		    android:id="@+id/commentTV"
-  		    android:layout_width="wrap_content"
-  		    android:layout_height="wrap_content"
-  		    android:layout_below="@+id/toTV"
-  		    android:paddingRight="@dimen/activity_horizontal_margin"
-  		    android:paddingTop="@dimen/activity_vertical_margin"
-  		    android:text="Comment:" />
-        <EditText
-  		    android:id="@+id/commentET"
-  		    android:layout_width="wrap_content"
-  		    android:layout_height="wrap_content"
-  		    android:layout_below="@+id/toET"
-  		    android:layout_toRightOf="@+id/commentTV"
-  		    android:ems="10"
-  		    android:hint="Add whatever you want"
-  		    android:inputType="text" />
-        
+        <RelativeLayout 
+            android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:paddingLeft="@dimen/activity_horizontal_margin"
+		    android:paddingRight="@dimen/activity_horizontal_margin"
+		    android:layout_marginTop="@dimen/activity_vertical_margin"
+		    android:layout_below="@+id/toRL"
+		    android:id="@+id/commentRL"
+		    android:background="@layout/basic_form_rl_bg">
+	        
+	        <TextView
+	  		    android:id="@+id/commentTV"
+	  		    android:layout_width="wrap_content"
+	  		    android:layout_height="wrap_content"
+	  		    android:paddingRight="@dimen/activity_horizontal_margin"
+	  		    android:paddingTop="@dimen/activity_vertical_margin"
+	  		    android:text="Comment:" />
+	        
+	        <EditText
+	  		    android:id="@+id/commentET"
+	  		    android:layout_width="wrap_content"
+	  		    android:layout_height="wrap_content"
+	  		    android:layout_toRightOf="@+id/commentTV"
+	  		    android:ems="10"
+	  		    android:hint="Add whatever you want"
+	  		    android:textColorHint="@color/hint_color"
+	  		    
+	  		    android:inputType="text" />
+        </RelativeLayout> 
+       
   		<ImageButton
   		    android:id="@+id/chooseDateImgBT"
   		    android:layout_width="wrap_content"
   		    android:layout_height="wrap_content"
-  		    android:layout_below="@+id/commentTV"
+  		    android:layout_below="@+id/commentRL"
+  		    
   		    android:layout_alignTop="@+id/chooseTimeImgBT"
   		    android:paddingTop="@dimen/activity_vertical_margin"
   		    android:src="@drawable/calendar_frog_cartoon_with_title" />
@@ -80,10 +113,10 @@
   		    android:id="@+id/chooseTimeImgBT"
   		    android:layout_width="wrap_content"
   		    android:layout_height="wrap_content"
-  		    android:layout_below="@+id/commentET"
+  		    android:layout_below="@+id/commentRL"
+  		    android:layout_marginTop="@dimen/activity_vertical_margin"
   		    android:layout_toRightOf="@+id/chooseDateImgBT"
-  		    android:src="@drawable/frog_ride_icon" />
-        
+  		    android:src="@drawable/frog_ride_icon" />   
 	</RelativeLayout>
 
 </FrameLayout>
