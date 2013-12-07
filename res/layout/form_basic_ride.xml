@@ -108,21 +108,19 @@
 		    android:layout_below="@+id/commentRL"
 		    android:id="@+id/timeRL"
             >
-	        <ImageButton 
-	            android:id="@+id/chooseDateImgBT"
+	        <Button 
+	            android:id="@+id/chooseDatepicBT"
 	  		    android:layout_width="wrap_content"
 	  		    android:layout_height="wrap_content"
 	  		    android:paddingTop="@dimen/activity_vertical_margin"
-	  		    android:src="@drawable/calndar_clock_icon"
-	  		    android:background="@null" />
-	            />
+	  		    android:background="@drawable/calndar_clock_icon" />
+
 	        <Button 
 	            android:id="@+id/chooseDateBT"
 	  		    android:layout_width="wrap_content"
 	  		    android:layout_height="wrap_content"
 	  		    android:paddingTop="@dimen/activity_vertical_margin"
-	  		    android:src="@drawable/calndar_clock_icon"
-	  		    android:layout_toRightOf="@+id/chooseDateImgBT"
+	  		    android:layout_toRightOf="@+id/chooseDatepicBT"
 	  		    android:background="@null" />
 	            />
         </RelativeLayout>
