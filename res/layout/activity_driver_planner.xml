@@ -79,6 +79,12 @@
         style="?buttonBarStyle"
         android:text="Submit" />
 
-	 
+	 <ImageView
+	     android:id="@+id/thankYouFadeInIV"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_alignTop="@+id/submitDriverPlanFormBT"
+	     android:layout_toRightOf="@+id/suggestSimilarCB"
+	     android:src="@drawable/frog_ride_icon" />
 
 </RelativeLayout>
