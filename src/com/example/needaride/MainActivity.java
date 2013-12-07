@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		ImageButton takeARideBT = (ImageButton) findViewById(R.id.takeARideIMGBT);
+		ImageButton takeARideBT = (ImageButton) findViewById(R.id.getARideIMGBT);
 		takeARideBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
