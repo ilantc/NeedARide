@@ -20,5 +20,11 @@
         style="?buttonBarStyle"
         android:text="Submit" />
 
-    
+    	<ImageView
+	     android:id="@+id/checkingForSimilarRidesFadeInIV"
+	     android:src="@drawable/checking_for_similar_ride"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_centerInParent="true"
+	     android:visibility="invisible"/>
 </RelativeLayout>

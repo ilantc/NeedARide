@@ -25,10 +25,9 @@ public class SplashScreenActivity extends Activity {
         		Intent intent = new Intent();
         		intent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
         		startActivity(intent);
+        		finish();
             }
-
         }, 5000);
-
 	}
 
 	@Override

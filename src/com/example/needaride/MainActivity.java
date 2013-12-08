@@ -22,6 +22,17 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		ImageButton profileIMGBT = (ImageButton) findViewById(R.id.profileIMGBT);
+		profileIMGBT.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {				
+				Intent intent = new Intent();
+				intent.setClassName(getPackageName(), getPackageName() + ".ProfileDetailsActivity");
+				startActivity(intent);
+			}
+		});
+		
 		ImageButton offerRideBT = (ImageButton) findViewById(R.id.offerRideIMGBT);
 		offerRideBT.setOnClickListener(new OnClickListener() {
 			@Override
@@ -34,7 +45,7 @@ public class MainActivity extends Activity {
 		takeARideBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
-				Toast.makeText(getApplicationContext(), "take a ride  button clicked", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(getApplicationContext(), "take a ride  button clicked", Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent();
 				intent.setClassName(getPackageName(), getPackageName() + ".HitchhikerPlannerActivity");
 				startActivity(intent);
@@ -59,6 +70,12 @@ public class MainActivity extends Activity {
 					buildAlertMessageNoGps();
 			    }
 				else{
+//					Intent intent = new Intent();
+//					intent.setClassName(getPackageName(), getPackageName() + ".MapActivity");
+//					startActivity(intent);
+					
+					
+					//open map in browser
 					String lat="41.9040";
 					String lng="12.4530";
 					Uri uri = Uri.parse("http://maps.google.com/maps?q=loc:"+lat+","+lng);

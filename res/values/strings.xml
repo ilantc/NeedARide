@@ -20,6 +20,11 @@
 
     <string name="from">From:</string>
     <string name="title_activity_no_similar_rides">NoSimilarRidesActivity</string>
-    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="title_activity_splash_screen">NeedARide</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="google_maps_api_key">AIzaSyBGhY6bE2dVVLSk4T4fVV49QMXwllKvSCc</string>
+    <string name="title_activity_profile_details">ProfileDetailsActivity</string>
+    <string name="title_activity_favorites">FavoritesActivity</string>
+    <string name="title_activity_hitchhiker_ride_result">HitchhikerRideResultActivity</string>
 
 </resources>
