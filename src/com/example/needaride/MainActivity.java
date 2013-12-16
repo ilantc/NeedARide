@@ -1,7 +1,6 @@
 package com.example.needaride;
 
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,7 +10,6 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -52,7 +50,7 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		ImageButton favouritesBT = (ImageButton) findViewById(R.id.favouritesIMGBT);
+		ImageButton favouritesBT = (ImageButton) findViewById(R.id.favoritesIMGBT);
 		favouritesBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
@@ -70,18 +68,19 @@ public class MainActivity extends Activity {
 					buildAlertMessageNoGps();
 			    }
 				else{
-//					Intent intent = new Intent();
-//					intent.setClassName(getPackageName(), getPackageName() + ".MapActivity");
-//					startActivity(intent);
+					Toast.makeText(getApplicationContext(), "else", Toast.LENGTH_SHORT).show();
+					Intent intent = new Intent();
+					intent.setClassName(getPackageName(), getPackageName() + ".MapActivity");
+					startActivity(intent);
 					
 					
 					//open map in browser
-					String lat="41.9040";
+/*					String lat="41.9040";
 					String lng="12.4530";
 					Uri uri = Uri.parse("http://maps.google.com/maps?q=loc:"+lat+","+lng);
 					Intent intent = new Intent(Intent.ACTION_VIEW,uri); 
 					startActivity(intent);
-				}
+*/				}
 			}
 		});
 	}

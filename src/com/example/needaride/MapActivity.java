@@ -17,11 +17,10 @@ public class MapActivity extends FragmentActivity  {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
 		
-		int isMapAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
-		Toast.makeText(getApplicationContext(), isMapAvailable + "maps are avaliable", Toast.LENGTH_LONG).show();
-		
-		GoogleMap map = ((SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map))
-	               .getMap();
+//		int isMapAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
+//		Toast.makeText(getApplicationContext(), isMapAvailable + "maps are avaliable", Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), "maps are avaliable", Toast.LENGTH_LONG).show();
+		GoogleMap map = ((SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 	}
 
 	@Override

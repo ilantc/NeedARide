@@ -4,7 +4,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class HitchhikerPlannerActivity extends basePlannerActivity {
@@ -27,14 +25,11 @@ public class HitchhikerPlannerActivity extends basePlannerActivity {
 		
 		final EditText fromET = (EditText) findViewById(R.id.fromET);
 		
-		
-		
 		Button submitBT = (Button) findViewById(R.id.submitHitchhikerFormBT);
 		submitBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {	
 				checkingForSimilarRidesFadeInIV.startAnimation(animationFadeIn);
-				
 				//set timer to 5 seconds and launches the noSimilarRideActivity
 				Timer timer=new Timer();
 				timer.cancel();
@@ -43,14 +38,18 @@ public class HitchhikerPlannerActivity extends basePlannerActivity {
 		            @Override
 		            public void run() {
 		            	//checks is 
-		            	if (null == fromET.getText()){
-		        			Intent intent = new Intent();
+	        			
+		            	//it doesnt work... goes every time to else !!!!!!!!!!!
+		            	if (fromET.getText().equals(null)){
+		            		Intent intent = new Intent();
 			        		intent.setClassName(getPackageName(), getPackageName() + ".NoSimilarRidesActivity");
 			        		startActivity(intent);
 		        		}
 		        		else{
 		        			Intent intent = new Intent();
-			        		intent.setClassName(getPackageName(), getPackageName() + ".HitchhikerRideResultActivity");
+			        		//intent.setClassName(getPackageName(), getPackageName() + ".HitchhikerRideResultActivity");
+			        		intent.setClassName(getPackageName(), getPackageName() + ".NoSimilarRidesActivity");
+			        		
 			        		startActivity(intent);
 		        		}
 		            }

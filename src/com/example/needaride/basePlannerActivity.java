@@ -2,20 +2,13 @@ package com.example.needaride;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
-
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
 import android.text.format.Time;
-import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public abstract class basePlannerActivity extends Activity {

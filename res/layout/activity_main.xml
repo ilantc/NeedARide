@@ -46,8 +46,8 @@
 		    android:paddingTop="@dimen/activity_vertical_margin_small"/>
 		
 		<ImageButton
-		    android:contentDescription="@+id/favouritesIMGBT"
-	        android:id="@+id/favouritesIMGBT"
+		    android:contentDescription="@+id/favoritesIMGBT"
+	        android:id="@+id/favoritesIMGBT"
 	        android:background="@drawable/favorite_icon"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"

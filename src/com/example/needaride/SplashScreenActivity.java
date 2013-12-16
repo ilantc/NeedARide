@@ -27,7 +27,7 @@ public class SplashScreenActivity extends Activity {
         		startActivity(intent);
         		finish();
             }
-        }, 5000);
+        }, 1000);
 	}
 
 	@Override
