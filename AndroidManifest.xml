@@ -10,7 +10,7 @@
 <!-- needed to get my current location -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+<!-- needed to get google maps -->
     <uses-permission android:name="com.example.needaride.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -116,7 +116,7 @@
         <!-- insert the api key for using google maps -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyC2RqrLPmiOV7kVW6XoBH0bHkaYnTo1JHA" />
+            android:value="iDmmU8SKQrCT2c4LcMkAVh8uiurKL0" />
         <meta-data
         android:name="com.google.android.gms.version"
         android:value="@integer/google_play_services_version"/>
