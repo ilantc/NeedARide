@@ -1,11 +1,11 @@
 package com.example.needaride;
 
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.widget.Toast;
@@ -17,10 +17,10 @@ public class MapActivity extends FragmentActivity  {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
 		
-//		int isMapAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
-//		Toast.makeText(getApplicationContext(), isMapAvailable + "maps are avaliable", Toast.LENGTH_LONG).show();
-		Toast.makeText(getApplicationContext(), "maps are avaliable", Toast.LENGTH_LONG).show();
-		GoogleMap map = ((SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+		if (ConnectionResult.SUCCESS == GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext()) ){
+			Toast.makeText(getApplicationContext(), "maps are avaliable", Toast.LENGTH_LONG).show();
+			GoogleMap map = ((SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+		}
 	}
 
 	@Override

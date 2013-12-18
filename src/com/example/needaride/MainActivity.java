@@ -72,15 +72,7 @@ public class MainActivity extends Activity {
 					Intent intent = new Intent();
 					intent.setClassName(getPackageName(), getPackageName() + ".MapActivity");
 					startActivity(intent);
-					
-					
-					//open map in browser
-/*					String lat="41.9040";
-					String lng="12.4530";
-					Uri uri = Uri.parse("http://maps.google.com/maps?q=loc:"+lat+","+lng);
-					Intent intent = new Intent(Intent.ACTION_VIEW,uri); 
-					startActivity(intent);
-*/				}
+				}
 			}
 		});
 	}
