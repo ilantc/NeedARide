@@ -7,8 +7,13 @@ import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.MarkerOptionsCreator;
 
 import android.location.Location;
 import android.os.Bundle;
@@ -23,6 +28,9 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 	
 	LocationClient mLocationClient;
 	GoogleMap mMap;
+	LatLng mFromLat;
+	LatLng mToLat;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,7 +43,45 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 			Toast.makeText(getApplicationContext(), "maps are avaliable", Toast.LENGTH_LONG).show();
 			mMap = ((SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 			mMap.setMyLocationEnabled(true);
-			
+			mMap.setOnMapClickListener(new OnMapClickListener() {
+				
+				@Override
+				public void onMapClick(LatLng point) {
+					if (null == mFromLat) {
+						mFromLat = point;
+						mMap.addMarker(new MarkerOptions()
+								.position(point)
+								.title("From"));
+						mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+							
+							@Override
+							public boolean onMarkerClick(Marker marker) {
+								// TODO Auto-generated method stub
+								marker.remove();
+								mFromLat = null;
+								return true;
+							}
+						});
+						
+					}
+					else if (null == mToLat) {
+						mToLat = point;
+						mMap.addMarker(new MarkerOptions()
+							.position(point)
+							.title("To"));
+						mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+					
+					@Override
+					public boolean onMarkerClick(Marker marker) {
+						// TODO Auto-generated method stub
+						marker.remove();
+						mToLat = null;
+						return true;
+					}
+				});
+					}					
+				}
+			});
 		}
 	}
 
