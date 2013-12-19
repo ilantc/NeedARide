@@ -51,14 +51,18 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 
 	@Override
 	public void onConnected(Bundle arg0) {
-		Log.e("BUG", "111111111111111111111");
 		Location myLoc = mLocationClient.getLastLocation();
-		Log.e("BUG", "222222222222222222222");
-		LatLng latLng = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
-		Log.e("BUG", "333333333333333333333");
-		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 12);
-		Log.e("BUG", "boooooooooooooooooooooooooooooooo");
-		mMap.animateCamera(cameraUpdate);   
+		Log.e("BUG", "111111111111111111111");	
+		try{
+			LatLng latLng = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
+			Log.e("BUG", "222222222222222222");
+			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 12);
+			Log.e("BUG", "boooooooooooooooooooooooooooooooo");
+			mMap.animateCamera(cameraUpdate);
+		}
+		catch(Exception e){
+			Log.e("BUG",e.toString());
+		}
 		
 	}
 
