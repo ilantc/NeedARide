@@ -1,5 +1,6 @@
 package com.example.needaride;
 
+import com.example.needaride.R.drawable;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -10,6 +11,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -46,14 +49,13 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 			mMap.setOnMapClickListener(new OnMapClickListener() {
 				
 				@Override
-				public void onMapClick(LatLng point) {
+				public void onMapClick(final LatLng point) {
 					if (null == mFromLat) {
 						mFromLat = point;
-						mMap.addMarker(new MarkerOptions()
-								.position(point)
-								.title("From"));
+						mMap.addMarker(new MarkerOptions().position(point).title("From").icon(BitmapDescriptorFactory.fromResource(R.drawable.jumping_frog)));
+						Toast.makeText(getApplicationContext(), "lat is: "+ mFromLat.latitude + "long is:"+mFromLat.longitude, Toast.LENGTH_SHORT).show();
+						
 						mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
-							
 							@Override
 							public boolean onMarkerClick(Marker marker) {
 								// TODO Auto-generated method stub
@@ -62,13 +64,11 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 								return true;
 							}
 						});
-						
 					}
 					else if (null == mToLat) {
 						mToLat = point;
-						mMap.addMarker(new MarkerOptions()
-							.position(point)
-							.title("To"));
+						mMap.addMarker(new MarkerOptions().position(point).title("To").icon(BitmapDescriptorFactory.fromResource(R.drawable.landing_frog)));
+						Toast.makeText(getApplicationContext(), "lat is: "+ mToLat.latitude + "long is:"+mToLat.longitude, Toast.LENGTH_SHORT).show();
 						mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 					
 					@Override
