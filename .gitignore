@@ -7,3 +7,4 @@ bin/resources.ap_
 /bin/classes.dex
 /bin/jarlist.cache
 /bin/AndroidManifest.xml
+/bin/R.txt
