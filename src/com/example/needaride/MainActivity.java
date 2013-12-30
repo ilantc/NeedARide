@@ -68,7 +68,7 @@ public class MainActivity extends Activity {
 					buildAlertMessageNoGps();
 			    }
 				else{
-					Toast.makeText(getApplicationContext(), "else", Toast.LENGTH_SHORT).show();
+//					Toast.makeText(getApplicationContext(), "else", Toast.LENGTH_SHORT).show();
 					Intent intent = new Intent();
 					intent.setClassName(getPackageName(), getPackageName() + ".MapActivity");
 					startActivity(intent);

@@ -1,6 +1,5 @@
 package com.example.needaride;
 
-import com.example.needaride.R.drawable;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -11,13 +10,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.MarkerOptionsCreator;
-
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -98,18 +94,14 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 	@Override
 	public void onConnected(Bundle arg0) {
 		Location myLoc = mLocationClient.getLastLocation();
-		Log.e("BUG", "111111111111111111111");	
 		try{
 			LatLng latLng = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
-			Log.e("BUG", "222222222222222222");
 			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 12);
-			Log.e("BUG", "boooooooooooooooooooooooooooooooo");
 			mMap.animateCamera(cameraUpdate);
 		}
 		catch(Exception e){
 			Log.e("BUG",e.toString());
 		}
-		
 	}
 
 	@Override
@@ -134,6 +126,4 @@ GooglePlayServicesClient.OnConnectionFailedListener {
         mLocationClient.disconnect();
         super.onStop();
     }
-	
-
 }
