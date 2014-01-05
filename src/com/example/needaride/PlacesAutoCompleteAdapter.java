@@ -33,7 +33,7 @@ public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements F
                 FilterResults filterResults = new FilterResults();
                 if (constraint != null) {
                     // Retrieve the autocomplete results.
-                    resultList = LocationAutoCompleteManager.autocomplete(constraint.toString());
+                    resultList = (new LocationAutoCompleteManager(getContext())).autocomplete(constraint.toString());
 
                     // Assign the data to the FilterResults
                     filterResults.values = resultList;
@@ -44,7 +44,7 @@ public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements F
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                Log.e("autoComp","inside publish results");
+                Log.e("autoComp","inside publish results, res count is " + results.count);
             	if (results != null && results.count > 0) {
                     notifyDataSetChanged();
                 }

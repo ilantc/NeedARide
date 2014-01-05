@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
+import android.widget.Filter;
 import android.widget.Toast;
 
 public class RideDetailsFragment extends Fragment {
@@ -28,8 +30,9 @@ public class RideDetailsFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // Listview name of the class
-            	((PlacesAutoCompleteAdapter) autoCompView.getAdapter()).getFilter().filter(s);
-            	
+            	Filter f = ((PlacesAutoCompleteAdapter) autoCompView.getAdapter()).getFilter();
+            	Log.e("autoComp","sending req, s is: " + s);
+            	f.filter(s);
             }
 
             @Override
