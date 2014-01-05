@@ -10,9 +10,11 @@ import android.widget.Filterable;
 
 public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements Filterable {
     private ArrayList<String> resultList;
+    private LocationAutoCompleteManager mLACM;
 
     public PlacesAutoCompleteAdapter(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
+        mLACM = new LocationAutoCompleteManager(context);
     }
 
     @Override
@@ -33,7 +35,7 @@ public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements F
                 FilterResults filterResults = new FilterResults();
                 if (constraint != null) {
                     // Retrieve the autocomplete results.
-                    resultList = (new LocationAutoCompleteManager(getContext())).autocomplete(constraint.toString());
+                    resultList = mLACM.autocomplete(constraint.toString());
 
                     // Assign the data to the FilterResults
                     filterResults.values = resultList;
