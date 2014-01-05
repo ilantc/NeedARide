@@ -68,70 +68,31 @@
 	  		    android:textColorHint="@color/hint_color"
 	  		    android:inputType="text" />
         </RelativeLayout>
-        
-        <RelativeLayout 
-            android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:paddingLeft="@dimen/activity_horizontal_margin"
-		    android:paddingRight="@dimen/activity_horizontal_margin"
-		    android:layout_marginTop="@dimen/activity_vertical_margin"
-		    android:layout_below="@+id/toRL"
-		    android:id="@+id/commentRL"
-		    android:background="@layout/basic_form_rl_bg">
-	        
-	        <TextView
-	  		    android:id="@+id/commentTV"
-	  		    android:layout_width="wrap_content"
-	  		    android:layout_height="wrap_content"
-	  		    android:paddingRight="@dimen/activity_horizontal_margin"
-	  		    android:paddingTop="@dimen/activity_vertical_margin"
-	  		    android:text="Comment:" />
-	        
-	        <EditText
-	  		    android:id="@+id/commentET"
-	  		    android:layout_width="wrap_content"
-	  		    android:layout_height="wrap_content"
-	  		    android:layout_toRightOf="@+id/commentTV"
-	  		    android:ems="10"
-	  		    android:hint="Add whatever you want"
-	  		    android:textColorHint="@color/hint_color"
-	  		    
-	  		    android:inputType="text" />
-        </RelativeLayout> 
-       	
-        <RelativeLayout 
-            android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:paddingLeft="@dimen/activity_horizontal_margin"
-		    android:paddingRight="@dimen/activity_horizontal_margin"
-		    android:layout_marginTop="@dimen/activity_vertical_margin"
-		    android:layout_below="@+id/commentRL"
-		    android:id="@+id/timeRL"
-            >
-	        <Button 
-	            android:id="@+id/chooseDatepicBT"
-	  		    android:layout_width="wrap_content"
-	  		    android:layout_height="wrap_content"
-	  		    android:paddingTop="@dimen/activity_vertical_margin"
-	  		    android:background="@drawable/calndar_clock_icon" />
 
-	        <Button 
-	            android:id="@+id/chooseDateBT"
-	  		    android:layout_width="wrap_content"
-	  		    android:layout_height="wrap_content"
-	  		    android:paddingTop="@dimen/activity_vertical_margin"
-	  		    android:layout_toRightOf="@+id/chooseDatepicBT"
-	  		    android:background="@null" />
-	            />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/textView1"
+        <RelativeLayout
+            android:id="@+id/timeRL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/timeRL"
-            android:layout_alignParentBottom="true"
-            android:text="TextView" />
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/toRL"
+            android:layout_alignLeft="@+id/toRL" 
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <Button
+                android:id="@+id/chooseDatepicBT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/calndar_clock_icon"
+                android:paddingTop="@dimen/activity_vertical_margin" />
+
+            <Button
+                android:id="@+id/chooseDateBT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/chooseDatepicBT"
+                android:background="@null"
+                 />
+        </RelativeLayout>
 
 	</RelativeLayout>
 

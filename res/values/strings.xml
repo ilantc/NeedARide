@@ -29,5 +29,13 @@
     <string name="title_activity_hitchhiker_ride_result">Hitchhiker Ride Results</string>
     <string name="title_activity_map_fragment">MapFragment</string>
     <string name="title_activity_ride_details_fragment">RideDetailsFragment</string>
+    <string name="title_activity_ride_chooser_fragment">RideChooserFragment</string>
 
+    <string name="taxi_toggle_turn_on">Taxi</string>
+    <string name="taxi_toggle_turn_off">Taxi</string>
+    <string name="look_for_ride_toggle_turn_on">Look for ride</string>
+    <string name="look_for_ride_toggle_turn_off">Look for ride</string>
+    <string name="add_new_ride_toggle_turn_on">Add new ride</string>
+    <string name="add_new_ride_toggle_turn_off">Add new ride</string>
+    
 </resources>
