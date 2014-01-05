@@ -27,6 +27,7 @@ public class LocationAutoCompleteManager {
 	private String API_KEY;
 	private long mActionTimer;
 	private int mTimeout;
+	private boolean autoCompletePending; 
 //	private String API_KEY =  getResources().getString(R.string.google_maps_api_key);
 	
 	LocationAutoCompleteManager(Context c) {
@@ -36,8 +37,8 @@ public class LocationAutoCompleteManager {
 	}
 	
 	public ArrayList<String> autocomplete(String input) {
-		
-		System.currentTimeMillis();
+		// log current time
+		mActionTimer = System.currentTimeMillis();
 	    
 	}
 	
