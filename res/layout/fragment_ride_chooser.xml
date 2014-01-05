@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    
+    android:orientation="horizontal"
+    android:weightSum="9"
+    tools:context=".RideChooserFragment" >
+
+    <ToggleButton
+        android:id="@+id/TaxitoggleButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:textOn="@string/taxi_toggle_turn_on"
+        android:textOff="@string/taxi_toggle_turn_off" />
+
+    <ToggleButton
+        android:id="@+id/LookForARidetoggleButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/TaxitoggleButton"
+        android:layout_weight="3"
+        android:textOn="@string/look_for_ride_toggle_turn_on"
+        android:textOff="@string/look_for_ride_toggle_turn_off" />
+
+    <ToggleButton
+        android:id="@+id/AddNewRidetoggleButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/LookForARidetoggleButton"
+        android:layout_weight="3"
+        android:textOn="@string/add_new_ride_toggle_turn_on"
+        android:textOff="@string/add_new_ride_toggle_turn_off" />
+
+</LinearLayout>
+
+
+
+
+<!-- android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" -->
