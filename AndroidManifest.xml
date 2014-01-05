@@ -41,60 +41,54 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.needaride.MainActivity"
+            android:name="com.needaride.old.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.needaride.ridePlanHitchhiker"
+            android:name="com.needaride.old.ridePlanHitchhiker"
             android:label="@string/title_activity_hitchhiker_planner" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.needaride.HitchhikerPlannerActivity"
+            android:name="com.needaride.old.HitchhikerPlannerActivity"
             android:label="@string/title_activity_hitchhiker_planner" >
         </activity>
         <activity
-            android:name="com.example.needaride.FullscreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_fullscreen"
-            android:theme="@style/FullscreenTheme" >
-        </activity>
-        <activity
-            android:name="com.example.needaride.DriverPlannerActivity"
+            android:name="com.needaride.old.DriverPlannerActivity"
             android:label="@string/title_activity_driver_planner" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.needaride.TaxiPlannerActivity"
+            android:name="com.needaride.old.TaxiPlannerActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.needaride.NoSimilarRidesActivity"
+            android:name="com.needaride.old.NoSimilarRidesActivity"
             android:label="@string/title_activity_no_similar_rides" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.needaride.ProfileDetailsActivity"
+            android:name="com.needaride.old.ProfileDetailsActivity"
             android:label="@string/title_activity_profile_details" >
         </activity>
         <activity
-            android:name="com.example.needaride.FavoritesActivity"
+            android:name="com.needaride.old.FavoritesActivity"
             android:label="@string/title_activity_favorites" >
         </activity>
         <activity
-            android:name="com.example.needaride.HitchhikerRideResultActivity"
+            android:name="com.needaride.old.HitchhikerRideResultActivity"
             android:label="@string/title_activity_hitchhiker_ride_result" >
         </activity>
         <activity

@@ -1,7 +1,14 @@
-package com.example.needaride;
+package com.needaride.old;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import com.example.needaride.R;
+import com.example.needaride.basePlannerActivity;
+import com.example.needaride.R.anim;
+import com.example.needaride.R.id;
+import com.example.needaride.R.layout;
+import com.example.needaride.R.menu;
 
 import android.os.Bundle;
 import android.content.Intent;
