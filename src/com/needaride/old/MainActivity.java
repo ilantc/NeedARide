@@ -1,4 +1,9 @@
-package com.example.needaride;
+package com.needaride.old;
+
+import com.example.needaride.R;
+import com.example.needaride.R.id;
+import com.example.needaride.R.layout;
+import com.example.needaride.R.menu;
 
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -26,7 +31,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {				
 				Intent intent = new Intent();
-				intent.setClassName(getPackageName(), getPackageName() + ".ProfileDetailsActivity");
+				intent.setClassName(getApplicationContext(),"com.needaride.old.ProfileDetailsActivity");
 				startActivity(intent);
 			}
 		});
@@ -45,7 +50,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {				
 //				Toast.makeText(getApplicationContext(), "take a ride  button clicked", Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent();
-				intent.setClassName(getPackageName(), getPackageName() + ".HitchhikerPlannerActivity");
+				intent.setClassName(getApplicationContext(), "com.needaride.old.HitchhikerPlannerActivity");
 				startActivity(intent);
 			}
 		});
@@ -54,7 +59,7 @@ public class MainActivity extends Activity {
 		favouritesBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
-				Toast.makeText(getApplicationContext(), "favourites button clicked", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "favorites button clicked", Toast.LENGTH_SHORT).show();
 			}
 		});
 		ImageButton mapBT = (ImageButton) findViewById(R.id.mapIMGBT);

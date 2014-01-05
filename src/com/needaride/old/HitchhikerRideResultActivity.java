@@ -1,21 +1,25 @@
-package com.example.needaride;
+package com.needaride.old;
+
+import com.example.needaride.R;
+import com.example.needaride.R.layout;
+import com.example.needaride.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class ProfileDetailsActivity extends Activity {
+public class HitchhikerRideResultActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_profile_details);
+		setContentView(R.layout.activity_hitchhiker_ride_result);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.profile_details, menu);
+		getMenuInflater().inflate(R.menu.hitchhiker_ride_result, menu);
 		return true;
 	}
 

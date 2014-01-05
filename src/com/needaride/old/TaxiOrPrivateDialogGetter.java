@@ -1,4 +1,10 @@
-package com.example.needaride;
+package com.needaride.old;
+
+import com.example.needaride.R;
+import com.example.needaride.R.id;
+import com.example.needaride.R.layout;
+import com.example.needaride.R.string;
+import com.example.needaride.R.style;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,7 +39,7 @@ public class TaxiOrPrivateDialogGetter  {
 				                   // TODO - launch relevant activity
 				Intent intent = new Intent();
 
-				intent.setClassName( context.getPackageName()  , context.getPackageName() + ".TaxiPlannerActivity");
+				intent.setClassName( context.getPackageName()  , "com.needaride.old.TaxiPlannerActivity");
 				context.startActivity(intent);
 				Toast.makeText(v.getContext(), "pressed taxi button", Toast.LENGTH_LONG).show();
 				dialog.dismiss();
@@ -46,7 +52,7 @@ public class TaxiOrPrivateDialogGetter  {
 				
 				Intent intent = new Intent();
 
-				intent.setClassName( context.getPackageName()  , context.getPackageName() + ".DriverPlannerActivity");
+				intent.setClassName( context.getPackageName()  , "com.needaride.old.DriverPlannerActivity");
 				context.startActivity(intent);
 				
 				Toast.makeText(v.getContext(), "pressed private car button", Toast.LENGTH_LONG).show();

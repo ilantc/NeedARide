@@ -1,4 +1,9 @@
-package com.example.needaride;
+package com.needaride.old;
+
+import com.example.needaride.R;
+import com.example.needaride.basePlannerActivity;
+import com.example.needaride.R.layout;
+import com.example.needaride.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;

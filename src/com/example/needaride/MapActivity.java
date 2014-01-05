@@ -39,7 +39,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 		
 		
 		if (ConnectionResult.SUCCESS == GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext()) ){
-			Toast.makeText(getApplicationContext(), "maps are avaliable", Toast.LENGTH_LONG).show();
+//			Toast.makeText(getApplicationContext(), "maps are avaliable", Toast.LENGTH_LONG).show();
 			mMap = ((SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 			mMap.setMyLocationEnabled(true);
 			mMap.setOnMapClickListener(new OnMapClickListener() {

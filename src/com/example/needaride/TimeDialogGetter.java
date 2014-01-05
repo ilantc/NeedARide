@@ -23,7 +23,7 @@ import android.content.Intent;
 public class TimeDialogGetter  {
 
 	Context context;
-	Button dateBT;
+	TextView dateBT;
 	TimePicker tp;
 	DatePicker dp;
 	
@@ -33,10 +33,10 @@ public class TimeDialogGetter  {
 	}
 	
 	
-	public void showDialog(Button dateB) {
+	public void showDialog(TextView dateTV) {
 		
 		//Toast.makeText(context, "showing dialog", Toast.LENGTH_LONG).show();
-		dateBT = dateB;
+		dateBT = dateTV;
 		// custom dialog
 		final Dialog dialog = new Dialog(context,R.style.Theme_Dialog);
 		dialog.setContentView(R.layout.dialog_choose_time_and_date);
@@ -57,7 +57,7 @@ public class TimeDialogGetter  {
 				int   month= dp.getMonth();
 				int   year = dp.getYear();
 				c.set(year, month, day);
-				Toast.makeText(v.getContext(), "year is " + year, Toast.LENGTH_LONG).show();
+//				Toast.makeText(v.getContext(), "year is " + year, Toast.LENGTH_LONG).show();
 				SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
 				
 				String FormatedDate = df.format(c.getTime());
