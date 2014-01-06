@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -46,24 +47,7 @@ public class RideDetailsFragment extends Fragment {
 		autoCompView = (AutoCompleteTextView) v.findViewById(R.id.fromET);
         autoCompView.setAdapter(new PlacesAutoCompleteAdapter(v.getContext(), R.layout.list_item));
         
-        autoCompView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // Listview name of the class
-            	Filter f = ((PlacesAutoCompleteAdapter) autoCompView.getAdapter()).getFilter();
-            	Log.e("autoComp","sending req, s is: " + s);
-            	f.filter(s);
-            }
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                    int after) {
-                // TODO Auto-generated method stub
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-            }
-        });
+        autoCompView.addTextChangedListener(new autoCompManager());
         
         autoCompView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -115,7 +99,56 @@ public class RideDetailsFragment extends Fragment {
 //		Toast.makeText(getActivity(), "This button does not work yet", Toast.LENGTH_LONG).show();
 //	}
 	
-	
+	private class autoCompManager implements TextWatcher {
+		
+		private CountDownTimer CDT;
+		private CharSequence text;
+		private long lastUpdateTime;
+		private long timeForUpdateTextWhileTyping;
+		
+		public autoCompManager() {
+			int timeout = getResources().getInteger(R.integer.secsTillAutoComplete);
+			lastUpdateTime = System.currentTimeMillis();
+			timeForUpdateTextWhileTyping = (long) 1000 * getResources().getInteger(R.integer.secsForUpdateTextWhileTyping);
+			CDT = new CountDownTimer((long) timeout * 1000, (long) timeout * 1000) {
+
+				@Override
+				public void onTick(long millisUntilFinished) {}
+
+				@Override
+				public void onFinish() {
+					// TODO Auto-generated method stub
+					Filter f = ((PlacesAutoCompleteAdapter) autoCompView.getAdapter()).getFilter();
+		        	Log.e("autoComp","sending req, s is: " + text);
+		        	f.filter(text);
+		        	lastUpdateTime = System.currentTimeMillis(); // remember last update
+		        	
+				}
+				
+			};
+		}
+		@Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+			
+			text = s;
+			
+			// cancel pending request if last update was done recently 
+			if (System.currentTimeMillis() - lastUpdateTime < timeForUpdateTextWhileTyping) {
+				CDT.cancel();
+			}
+			// start new timer
+			CDT.start();
+        }
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count,
+                int after) {
+            // TODO Auto-generated method stub
+        }
+        @Override
+        public void afterTextChanged(Editable s) {
+            // TODO Auto-generated method stub
+        }
+	}
 	
 	
 	
