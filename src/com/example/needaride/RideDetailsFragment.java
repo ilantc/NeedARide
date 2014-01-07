@@ -30,7 +30,8 @@ import android.widget.Toast;
 
 public class RideDetailsFragment extends Fragment {
 	
-	AutoCompleteTextView autoCompView;
+	AutoCompleteTextView fromAutoCompView;
+	AutoCompleteTextView toAutoCompView;
 	ImageButton chooseDateIMGBT;
 	TextView choosenDateTV;
 	@Override
@@ -44,12 +45,10 @@ public class RideDetailsFragment extends Fragment {
 		final ImageView checkingForSimilarRidesFadeInIV = (ImageView) v.findViewById(R.id.checkingForSimilarRidesFadeInIV);
 		final Animation animationFadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fadein);
 		
-		autoCompView = (AutoCompleteTextView) v.findViewById(R.id.fromET);
-        autoCompView.setAdapter(new PlacesAutoCompleteAdapter(v.getContext(), R.layout.list_item));
-        
-        autoCompView.addTextChangedListener(new autoCompManager());
-        
-        autoCompView.setOnItemClickListener(new OnItemClickListener() {
+		fromAutoCompView = (AutoCompleteTextView) v.findViewById(R.id.fromET);
+        fromAutoCompView.setAdapter(new PlacesAutoCompleteAdapter(v.getContext(), R.layout.list_item));
+        fromAutoCompView.addTextChangedListener(new autoCompManager(fromAutoCompView));
+        fromAutoCompView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 		        String str = (String) adapterView.getItemAtPosition(position);
@@ -57,6 +56,17 @@ public class RideDetailsFragment extends Fragment {
 		    }
 		});
  
+        toAutoCompView = (AutoCompleteTextView) v.findViewById(R.id.toET);
+        toAutoCompView.setAdapter(new PlacesAutoCompleteAdapter(v.getContext(), R.layout.list_item));
+        toAutoCompView.addTextChangedListener(new autoCompManager(toAutoCompView));
+        toAutoCompView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+		        String str = (String) adapterView.getItemAtPosition(position);
+		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+		    }
+		});
+        
         chooseDateIMGBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -95,9 +105,6 @@ public class RideDetailsFragment extends Fragment {
 	 		choosenDateTV.setText(formattedDate + "\n" + formattedTime);
 	}
 	
-//	public void onSubmitBTNclick (View v){
-//		Toast.makeText(getActivity(), "This button does not work yet", Toast.LENGTH_LONG).show();
-//	}
 	
 	private class autoCompManager implements TextWatcher {
 		
@@ -106,7 +113,7 @@ public class RideDetailsFragment extends Fragment {
 		private long lastUpdateTime;
 		private long timeForUpdateTextWhileTyping;
 		
-		public autoCompManager() {
+		public autoCompManager(final AutoCompleteTextView autoCompView) {
 			int timeout = getResources().getInteger(R.integer.secsTillAutoComplete);
 			lastUpdateTime = System.currentTimeMillis();
 			timeForUpdateTextWhileTyping = (long) 1000 * getResources().getInteger(R.integer.secsForUpdateTextWhileTyping);
