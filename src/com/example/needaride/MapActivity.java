@@ -3,6 +3,7 @@ package com.example.needaride;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -17,6 +18,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -58,7 +63,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 						
 						//set the address that was pointed to the TV
 						setTextOnTV(point.latitude,point.longitude,"from");
-
+						
 						mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 							@Override
 							public boolean onMarkerClick(Marker marker) {
@@ -102,6 +107,9 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 
 	@Override
 	public void onConnected(Bundle arg0) {
+		//set the last address that was inserted in the last use of this app to ToTV
+		SetToAddressFromSharedPreferences();
+		//set the current location in the FromTV
 		Location myLoc = mLocationClient.getLastLocation();
 		try{
 			LatLng latLng = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
@@ -121,14 +129,15 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 	@Override
 	public void onDisconnected() {
 		// TODO Auto-generated method stub
-		
+		saveDestToSharedPreference(RideDetailsFragment.getAddressFromToTV());
 	}
 	
 	@Override
     protected void onStart() {
         super.onStart();
         // Connect the client.
-        mLocationClient.connect();        
+        mLocationClient.connect();
+        SetToAddressFromSharedPreferences();
     }
 
     /*
@@ -137,7 +146,8 @@ GooglePlayServicesClient.OnConnectionFailedListener {
     @Override
     protected void onStop() {
         // Disconnecting the client invalidates it.
-        mLocationClient.disconnect();
+    	saveDestToSharedPreference(RideDetailsFragment.getAddressFromToTV());
+    	mLocationClient.disconnect();
         super.onStop();
     }
     
@@ -173,5 +183,32 @@ GooglePlayServicesClient.OnConnectionFailedListener {
   			Log.e("MapActivity",e.toString());
   		}
   	}
+  	
     
+  	public Boolean saveDestToSharedPreference(String address){
+		try{
+			SharedPreferences addressDetails = this.getSharedPreferences("addressDetails", MODE_PRIVATE);
+			Editor edit = addressDetails.edit();
+			edit.clear();
+			//edit.putString("username", txtUname.getText().toString().trim());
+			//edit.putString("password", txtPass.getText().toString().trim());
+			edit.putString("destAddress", address);
+			edit.commit();
+			Log.e("MapActivity", "address was saved to shared pref "+address);
+			return true;
+			//Toast.makeText(this, "Login details are saved..", 3000).show();
+		}
+		catch(Exception ex){
+			System.err.println("Error during trying to save to SharedPreference:"+ex);
+//			Toast.makeText(this, "Error during trying to save to SharedPreference", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+	}
+
+  	public void SetToAddressFromSharedPreferences(){
+		SharedPreferences addressDetails = this.getSharedPreferences("addressDetails", MODE_PRIVATE);
+		String destAddress = addressDetails.getString("destAddress", null);
+		RideDetailsFragment.setTextInToAutoCompView(destAddress);
+		Log.e("MapActivity", "retrived from sheredPref: "+ destAddress);
+	}
 }

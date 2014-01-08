@@ -33,7 +33,6 @@ public class RideDetailsFragment extends Fragment {
 	
 	static AutoCompleteTextView fromAutoCompView;
 	static AutoCompleteTextView toAutoCompView;
-	ImageButton chooseDateIMGBT;
 	DecelerateInterpolator sDecelerator = new DecelerateInterpolator();
 	DecelerateInterpolator sOvershooter = new DecelerateInterpolator(10f);
 	TextView choosenDateTV;
@@ -41,10 +40,9 @@ public class RideDetailsFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_ride_details_form,null);
 		
-		chooseDateIMGBT = (ImageButton)v.findViewById(R.id.chooseDateIMGBT);
 		choosenDateTV = (TextView)v.findViewById(R.id.choosenDateTV);
 		setDate(choosenDateTV);
-		final ImageButton submitIMGBT = (ImageButton)v.findViewById(R.id.submitIMGBT);
+		
 		final ImageView checkingForSimilarRidesFadeInIV = (ImageView) v.findViewById(R.id.checkingForSimilarRidesFadeInIV);
 		final Animation animationFadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fadein);
 		
@@ -70,6 +68,7 @@ public class RideDetailsFragment extends Fragment {
 		    }
 		});
         
+        final ImageButton chooseDateIMGBT = (ImageButton)v.findViewById(R.id.chooseDateIMGBT);
         chooseDateIMGBT.animate().setDuration(200);
         chooseDateIMGBT.setOnTouchListener(new View.OnTouchListener() {
 			@Override
@@ -89,6 +88,7 @@ public class RideDetailsFragment extends Fragment {
 			}
 		});
         
+        final ImageButton submitIMGBT = (ImageButton)v.findViewById(R.id.submitIMGBT);
         submitIMGBT.animate().setDuration(200);
         submitIMGBT.setOnTouchListener(new View.OnTouchListener() {
 			@Override
@@ -105,7 +105,29 @@ public class RideDetailsFragment extends Fragment {
 				return false;
 			}
 		});
-		return v;
+		
+        final ImageButton switchIMGBT = (ImageButton)v.findViewById(R.id.switchIMGBT);
+        switchIMGBT.animate().setDuration(200);
+        switchIMGBT.setOnTouchListener(new View.OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN){
+					switchIMGBT.animate().setInterpolator(sDecelerator).scaleX(.7f).scaleY(.7f);
+				}
+				else if (event.getAction() == MotionEvent.ACTION_UP){
+					switchIMGBT.animate().setInterpolator(sOvershooter).scaleX(1f).scaleY(1f);
+//					Log.e("RideDetailsFragment", "submit button was clicked");
+					//swap fromTV and ToTv
+					String temp = getAddressFromFromTV();
+					setTextInFromAutoCompView(getAddressFromToTV());
+					setTextInToAutoCompView(temp);
+				}
+				return false;
+			}
+		});
+        
+        return v;
 	}
 	
 	private void setDate(TextView choosenDateTV){
@@ -186,5 +208,11 @@ public class RideDetailsFragment extends Fragment {
 	}
 	public static void setTextInToAutoCompView(String address){
 		toAutoCompView.setText(address);
+	}
+	public static String getAddressFromToTV(){
+		return toAutoCompView.getText().toString();
+	}
+	public static String getAddressFromFromTV(){
+		return fromAutoCompView.getText().toString();
 	}
 }
