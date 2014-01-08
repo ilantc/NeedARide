@@ -3,12 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-	android:weightSum="1">
+	android:weightSum="1"
+	android:background="@drawable/background_map">
 	<fragment
 	    android:id="@+id/map"
 	    android:layout_width="fill_parent"
 	    android:layout_height="match_parent"
-	    android:layout_weight="0.5"
+	    android:layout_weight="0.45"
 	    class="com.google.android.gms.maps.SupportMapFragment" />
 		
 	<fragment android:name="com.example.needaride.RideChooserFragment"

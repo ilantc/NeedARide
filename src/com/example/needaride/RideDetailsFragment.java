@@ -12,12 +12,13 @@ import android.text.TextWatcher;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
@@ -30,9 +31,11 @@ import android.widget.Toast;
 
 public class RideDetailsFragment extends Fragment {
 	
-	AutoCompleteTextView fromAutoCompView;
-	AutoCompleteTextView toAutoCompView;
+	static AutoCompleteTextView fromAutoCompView;
+	static AutoCompleteTextView toAutoCompView;
 	ImageButton chooseDateIMGBT;
+	DecelerateInterpolator sDecelerator = new DecelerateInterpolator();
+	DecelerateInterpolator sOvershooter = new DecelerateInterpolator(10f);
 	TextView choosenDateTV;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -41,7 +44,7 @@ public class RideDetailsFragment extends Fragment {
 		chooseDateIMGBT = (ImageButton)v.findViewById(R.id.chooseDateIMGBT);
 		choosenDateTV = (TextView)v.findViewById(R.id.choosenDateTV);
 		setDate(choosenDateTV);
-		Button submitBTN = (Button)v.findViewById(R.id.submitBTN);
+		final ImageButton submitIMGBT = (ImageButton)v.findViewById(R.id.submitIMGBT);
 		final ImageView checkingForSimilarRidesFadeInIV = (ImageView) v.findViewById(R.id.checkingForSimilarRidesFadeInIV);
 		final Animation animationFadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fadein);
 		
@@ -52,7 +55,7 @@ public class RideDetailsFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 		        String str = (String) adapterView.getItemAtPosition(position);
-		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+//		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
 		    }
 		});
  
@@ -63,25 +66,45 @@ public class RideDetailsFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 		        String str = (String) adapterView.getItemAtPosition(position);
-		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+//		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
 		    }
 		});
         
-        chooseDateIMGBT.setOnClickListener(new OnClickListener() {
+        chooseDateIMGBT.animate().setDuration(200);
+        chooseDateIMGBT.setOnTouchListener(new View.OnTouchListener() {
 			@Override
-			public void onClick(View v) {
-				(new TimeDialogGetter(v.getContext())).showDialog(choosenDateTV);
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN){
+					chooseDateIMGBT.animate().setInterpolator(sDecelerator).scaleX(.7f).scaleY(.7f);
+				}
+				else if (event.getAction() == MotionEvent.ACTION_UP){
+					chooseDateIMGBT.animate().setInterpolator(sOvershooter).scaleX(1.5f).scaleY(1.5f);
+					chooseDateIMGBT.animate().setInterpolator(sOvershooter).scaleX(1f).scaleY(1f);
+//					Log.e("RideDetailsFragment", "chooseDateIMGBT button was clicked");
+					(new TimeDialogGetter(v.getContext())).showDialog(choosenDateTV);
+				}
+				return false;
+				
+			
 			}
 		});
         
-        submitBTN.setOnClickListener(new OnClickListener() {
+        submitIMGBT.animate().setDuration(200);
+        submitIMGBT.setOnTouchListener(new View.OnTouchListener() {
 			@Override
-			public void onClick(View v) {
-				Log.e("RideDetailsFragment", "submit button was clicked");
-				checkingForSimilarRidesFadeInIV.startAnimation(animationFadeIn);
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				if (event.getAction() == MotionEvent.ACTION_DOWN){
+					submitIMGBT.animate().setInterpolator(sDecelerator).scaleX(.7f).scaleY(.7f);
+				}
+				else if (event.getAction() == MotionEvent.ACTION_UP){
+					submitIMGBT.animate().setInterpolator(sOvershooter).scaleX(1f).scaleY(1f);
+//					Log.e("RideDetailsFragment", "submit button was clicked");
+					checkingForSimilarRidesFadeInIV.startAnimation(animationFadeIn);
+				}
+				return false;
 			}
 		});
-        
 		return v;
 	}
 	
@@ -102,7 +125,7 @@ public class RideDetailsFragment extends Fragment {
 	 			//Ilan need to correct the date  to tomorrow instade of today
 	 		}
 	 		formattedTime = currHour + ":" + today.minute;
-	 		choosenDateTV.setText(formattedDate + "\n" + formattedTime);
+	 		choosenDateTV.setText(formattedDate + " " + formattedTime);
 	}
 	
 	
@@ -157,6 +180,11 @@ public class RideDetailsFragment extends Fragment {
         }
 	}
 	
-	
-	
+	//set text in the TV
+	public static void setTextInFromAutoCompView(String address){
+		fromAutoCompView.setText(address);
+	}
+	public static void setTextInToAutoCompView(String address){
+		toAutoCompView.setText(address);
+	}
 }

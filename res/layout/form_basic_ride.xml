@@ -82,7 +82,7 @@
                 android:id="@+id/chooseDatepicBT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/calndar_clock_icon"
+                android:background="@drawable/clock_icon"
                 android:paddingTop="@dimen/activity_vertical_margin" />
 
             <Button

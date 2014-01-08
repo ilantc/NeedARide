@@ -7,20 +7,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Log;
 
 public class LocationAutoCompleteManager {
 
 	
-	private static final String LOG_TAG = "ExampleApp";
+	private static final String LOG_TAG = "LocationAutoCompleteManager";
 
 	private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
 	private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
@@ -64,7 +60,7 @@ public class LocationAutoCompleteManager {
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
-				Log.e(LOG_TAG, "exception when trying to parse a single json obj, \n" + jsonResults.toString());
+//				Log.e(LOG_TAG, "exception when trying to parse a single json obj, \n" + jsonResults.toString());
 			}
 	    } catch (MalformedURLException e) {
 	        Log.e(LOG_TAG, "Error processing Places API URL", e);

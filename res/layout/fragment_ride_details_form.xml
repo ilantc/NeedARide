@@ -59,43 +59,55 @@
 		    android:layout_alignBottom="@+id/toTV"
 		    android:layout_alignParentRight="true"
 		    android:layout_alignTop="@+id/checkingForSimilarRidesFadeInIV"
-		    android:src="@drawable/two_sides_arrow" />
-		
-		<ImageButton
+		    android:src="@drawable/switch_arrows" />
+
+		<TextView
+		    android:id="@+id/choosenDateTV"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignBottom="@+id/chooseDateIMGBT"
+		    android:layout_alignTop="@+id/chooseDateIMGBT"
+		    android:layout_toLeftOf="@+id/chooseDateIMGBT"
+		    android:layout_toRightOf="@+id/fromTV"
+		    android:text="aaaaaa"
+		    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/DateTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/toTV"
+            android:layout_below="@+id/toTV"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:text="Date  :" />
+        
+        <ImageView
+            android:id="@+id/checkingForSimilarRidesFadeInIV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/fromTV"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/checking_for_similar_ride"
+            android:visibility="invisible" />
+
+        <ImageButton
             android:id="@+id/chooseDateIMGBT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/toTV"
-            android:layout_alignLeft="@+id/toTV"
-            android:background="@drawable/calndar_clock_icon"
+            android:layout_alignRight="@+id/switchIMGBT"
+            android:layout_below="@+id/switchIMGBT"
+            android:background="@drawable/clock_icon"
+            android:paddingBottom="@dimen/activity_vertical_margin"
             android:paddingTop="@dimen/activity_vertical_margin" />
-		<TextView
-            android:id="@+id/choosenDateTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/chooseDateIMGBT"
-            android:layout_toRightOf="@+id/chooseDateIMGBT"
-            android:text=""
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-        
-        <Button
-            android:id="@+id/submitBTN"
+
+        <ImageButton
+            android:id="@+id/submitIMGBT"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/chooseDateIMGBT"
-			android:layout_below="@+id/chooseDateIMGBT"
-            android:text="Submit my ride" />
-        
-        <ImageView
-	     android:id="@+id/checkingForSimilarRidesFadeInIV"
-	     android:src="@drawable/checking_for_similar_ride"
-	     android:layout_width="wrap_content"
-	     android:layout_height="wrap_content"
-	     android:layout_alignParentTop="true"
-	     android:layout_centerHorizontal="true"
-	     android:visibility="invisible"/>
-
-        
+            android:layout_alignRight="@+id/chooseDateIMGBT"
+            android:layout_below="@+id/DateTV"
+            android:background="@drawable/submit_button"/>
 
     </RelativeLayout>
 
