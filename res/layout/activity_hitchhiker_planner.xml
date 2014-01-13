@@ -27,4 +27,15 @@
 	     android:layout_height="wrap_content"
 	     android:layout_centerInParent="true"
 	     android:visibility="invisible"/>
+
+    	<TextView
+    	    android:id="@+id/resultFromServerTV"
+    	    android:layout_width="match_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_alignBottom="@+id/checkingForSimilarRidesFadeInIV"
+    	    android:layout_centerHorizontal="true"
+    	    android:layout_marginBottom="32dp"
+    	    android:text="Large Text"
+    	    android:textAppearance="?android:attr/textAppearanceLarge" />
+
 </RelativeLayout>
