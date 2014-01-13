@@ -119,6 +119,14 @@
             android:name="com.example.needaride.RideChooserFragment"
             android:label="@string/title_activity_ride_chooser_fragment" >
         </activity>
+        <activity
+            android:name="com.example.needaride.TakeARideActivity"
+            android:label="@string/title_activity_take_aride" >
+        </activity>
+        <activity
+            android:name="com.example.needaride.ChooseRideResultActivity"
+            android:label="@string/title_activity_choose_ride_result" >
+        </activity>
     </application>
 
 </manifest>

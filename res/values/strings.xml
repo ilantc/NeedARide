@@ -19,8 +19,8 @@
 
     <item name="maxNumOfSits" type="integer">9</item>
     <item name="secsTillAutoComplete" type="integer">1</item>
-	<item name="secsForUpdateTextWhileTyping" type="integer">3</item>
-    
+    <item name="secsForUpdateTextWhileTyping" type="integer">3</item>
+
     <string name="from">From:</string>
     <string name="title_activity_no_similar_rides">No Similar Rides</string>
     <string name="title_activity_splash_screen">Need A Ride</string>
@@ -33,12 +33,13 @@
     <string name="title_activity_map_fragment">MapFragment</string>
     <string name="title_activity_ride_details_fragment">RideDetailsFragment</string>
     <string name="title_activity_ride_chooser_fragment">RideChooserFragment</string>
-
     <string name="taxi_toggle_turn_on">Taxi</string>
     <string name="taxi_toggle_turn_off">Taxi</string>
     <string name="look_for_ride_toggle_turn_on">Look for ride</string>
     <string name="look_for_ride_toggle_turn_off">Look for ride</string>
     <string name="add_new_ride_toggle_turn_on">Add new ride</string>
     <string name="add_new_ride_toggle_turn_off">Add new ride</string>
-    
+    <string name="title_activity_take_aride">TakeARideActivity</string>
+    <string name="title_activity_choose_ride_result">ChooseRideResultActivity</string>
+
 </resources>

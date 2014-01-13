@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
@@ -83,8 +84,6 @@ public class RideDetailsFragment extends Fragment {
 					(new TimeDialogGetter(v.getContext())).showDialog(choosenDateTV);
 				}
 				return false;
-				
-			
 			}
 		});
         
@@ -101,6 +100,9 @@ public class RideDetailsFragment extends Fragment {
 					submitIMGBT.animate().setInterpolator(sOvershooter).scaleX(1f).scaleY(1f);
 //					Log.e("RideDetailsFragment", "submit button was clicked");
 					checkingForSimilarRidesFadeInIV.startAnimation(animationFadeIn);
+					Intent intent = new Intent();
+					intent.setClassName(getActivity(),"com.example.needaride.TakeARideActivity");
+					startActivity(intent);
 				}
 				return false;
 			}
