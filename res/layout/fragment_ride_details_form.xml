@@ -74,7 +74,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_alignBottom="@+id/toRL"	
-            android:src="@drawable/switch_arrows" />
+            android:src="@drawable/switch_arrows" 
+            android:background="@null"/>
         
 		<RelativeLayout
 		    android:id="@+id/dateRL"
