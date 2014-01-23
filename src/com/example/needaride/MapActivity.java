@@ -18,13 +18,17 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -37,54 +41,65 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 	
 	LocationClient mLocationClient;
 	GoogleMap mMap;
+	static GoogleMap mToMap;
 	LatLng mFromLat;
 	LatLng mToLat;
+	
+	Boolean isFromPinOnTheMap = false;
+	Boolean isToPinOnTheMap = false;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
 		mLocationClient = new LocationClient(this, this, this);
-		
-		
-		
 		if (ConnectionResult.SUCCESS == GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext()) ){
-//			Toast.makeText(getApplicationContext(), "maps are avaliable", Toast.LENGTH_LONG).show();
+			mToMap = ((SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 			mMap = ((SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 			mMap.setMyLocationEnabled(true);
 			mMap.setOnMapClickListener(new OnMapClickListener() {
-				
 				@Override
 				public void onMapClick(final LatLng point) {
 					if (null == mFromLat) {
 						mFromLat = point;
 						mMap.addMarker(new MarkerOptions().position(point).title("From").icon(BitmapDescriptorFactory.fromResource(R.drawable.start_pin)));
-//						Toast.makeText(getApplicationContext(), "lat is: "+ mFromLat.latitude + "long is:"+mFromLat.longitude, Toast.LENGTH_SHORT).show();
-						
+//						Toast.makeText(getApplicationContext(), "lat is: "+ mFromLat.latitude + "long is:"+mFromLat.longitude, Toast.LENGTH_SHORT).show();					
 						//set the address that was pointed to the TV
 						setTextOnTV(point.latitude,point.longitude,"from");
-						
+						isFromPinOnTheMap = true;
+						//When click on the  From marker
 						mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 							@Override
 							public boolean onMarkerClick(Marker marker) {
-								// TODO Auto-generated method stub
 								marker.remove();
 								mFromLat = null;
+								isFromPinOnTheMap = false;
+								Toast.makeText(getApplicationContext(), "From="+isFromPinOnTheMap + " To="+isToPinOnTheMap, Toast.LENGTH_SHORT).show();					
 								return true;
 							}
 						});
 					}
 					else if (null == mToLat) {
 						mToLat = point;
-						mMap.addMarker(new MarkerOptions().position(point).title("To").icon(BitmapDescriptorFactory.fromResource(R.drawable.finish_pin)));
+						mToMap.addMarker(new MarkerOptions().position(point).title("To").icon(BitmapDescriptorFactory.fromResource(R.drawable.finish_pin)));
 //						Toast.makeText(getApplicationContext(), "lat is: "+ mToLat.latitude + "long is:"+mToLat.longitude, Toast.LENGTH_SHORT).show();
 						setTextOnTV(point.latitude,point.longitude,"to");
-						mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+						//draeing the roat
+						Polyline line = mMap.addPolyline(new PolylineOptions()
+		                .add(new LatLng(mFromLat.latitude, mFromLat.longitude), new LatLng(mToLat.latitude,   mToLat.longitude))
+		                .width(2)
+		                .color(Color.BLUE).geodesic(true));
+						//end of drowing
+						isToPinOnTheMap = true;
+						mToMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 							@Override
 							public boolean onMarkerClick(Marker marker) {
 								// TODO Auto-generated method stub
 								marker.remove();
 								mToLat = null;
+								isToPinOnTheMap = false;
+								Toast.makeText(getApplicationContext(), "From="+isFromPinOnTheMap + " To="+isToPinOnTheMap, Toast.LENGTH_SHORT).show();
 								return true;
 							}
 						});
@@ -184,7 +199,8 @@ GooglePlayServicesClient.OnConnectionFailedListener {
   		}
   	}
   	
-    
+    //save the destination address to the Shared Preferences
+  	//in use when : onStop, onDisconnect
   	public Boolean saveDestToSharedPreference(String address){
 		try{
 			SharedPreferences addressDetails = this.getSharedPreferences("addressDetails", MODE_PRIVATE);
@@ -205,10 +221,19 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 		}
 	}
 
+  //set the destination address from Shared Preferences
+  	//in use when the user connect to the map Activity
   	public void SetToAddressFromSharedPreferences(){
 		SharedPreferences addressDetails = this.getSharedPreferences("addressDetails", MODE_PRIVATE);
 		String destAddress = addressDetails.getString("destAddress", null);
 		RideDetailsFragment.setTextInToAutoCompView(destAddress);
 		Log.e("MapActivity", "retrived from sheredPref: "+ destAddress);
 	}
+
+
+  	public static void setToPinOnMap(LatLng point){
+  		mToMap.addMarker(new MarkerOptions().position(point).title("To").icon(BitmapDescriptorFactory.fromResource(R.drawable.finish_pin)));
+  	}
+
+
 }

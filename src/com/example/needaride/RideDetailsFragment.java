@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -66,6 +68,9 @@ public class RideDetailsFragment extends Fragment {
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 		        String str = (String) adapterView.getItemAtPosition(position);
 //		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+		        //LatLng point = new LatLng(latitude, longitude)
+		        //MapActivity.setToPinOnMap(point);
+		        
 		    }
 		});
         
