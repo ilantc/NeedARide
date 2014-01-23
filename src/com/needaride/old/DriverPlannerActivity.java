@@ -1,12 +1,12 @@
 package com.needaride.old;
 
-import com.example.needaride.NumberPickerDialogGetter;
 import com.example.needaride.R;
-import com.example.needaride.basePlannerActivity;
 import com.example.needaride.R.anim;
 import com.example.needaride.R.id;
 import com.example.needaride.R.layout;
 import com.example.needaride.R.menu;
+import com.needaride.NumberPickerDialogGetter;
+import com.needaride.basePlannerActivity;
 
 import android.os.Bundle;
 import android.view.Menu;

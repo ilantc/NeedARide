@@ -1,4 +1,4 @@
-package com.example.needaride;
+package com.needaride;
 
 import java.util.ArrayList;
 

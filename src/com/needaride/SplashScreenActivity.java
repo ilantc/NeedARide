@@ -1,4 +1,4 @@
-package com.example.needaride;
+package com.needaride;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -28,7 +28,7 @@ public class SplashScreenActivity extends Activity {
                 // TODO: do what you need here (refresh list)
                 // you will probably need to use runOnUiThread(Runnable action) for some specific actions
         		Intent intent = new Intent();
-        		intent.setClassName(getApplicationContext(),"com.needaride.old.MainActivity");
+        		intent.setClassName(getApplicationContext(),"com.needaride.MapActivity");
         		startActivity(intent);
         		finish();
             }

@@ -1,10 +1,12 @@
-package com.example.needaride;
+package com.needaride;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+
+import com.example.needaride.R;
 
 import android.view.View;
 import android.view.View.OnClickListener;

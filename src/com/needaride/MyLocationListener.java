@@ -1,4 +1,4 @@
-package com.example.needaride;
+package com.needaride;
 
 import android.location.Location;  
 import android.location.LocationListener;  

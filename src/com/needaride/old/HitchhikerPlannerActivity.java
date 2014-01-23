@@ -12,11 +12,11 @@ import java.util.TimerTask;
 import javax.net.ssl.HttpsURLConnection;
 
 import com.example.needaride.R;
-import com.example.needaride.basePlannerActivity;
 import com.example.needaride.R.anim;
 import com.example.needaride.R.id;
 import com.example.needaride.R.layout;
 import com.example.needaride.R.menu;
+import com.needaride.basePlannerActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;

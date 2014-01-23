@@ -41,5 +41,6 @@
     <string name="add_new_ride_toggle_turn_off">Add new ride</string>
     <string name="title_activity_take_aride">TakeARideActivity</string>
     <string name="title_activity_choose_ride_result">ChooseRideResultActivity</string>
+    <string name="title_activity_hitchhicker_results">HitchhickerResultsActivity</string>
 
 </resources>

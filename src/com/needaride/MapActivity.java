@@ -1,9 +1,10 @@
-package com.example.needaride;
+package com.needaride;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import com.example.needaride.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -41,7 +42,6 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 	
 	LocationClient mLocationClient;
 	GoogleMap mMap;
-	static GoogleMap mToMap;
 	LatLng mFromLat;
 	LatLng mToLat;
 	
@@ -54,8 +54,8 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
 		mLocationClient = new LocationClient(this, this, this);
+		mLocationClient.connect();
 		if (ConnectionResult.SUCCESS == GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext()) ){
-			mToMap = ((SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 			mMap = ((SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 			mMap.setMyLocationEnabled(true);
 			mMap.setOnMapClickListener(new OnMapClickListener() {
@@ -82,7 +82,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 					}
 					else if (null == mToLat) {
 						mToLat = point;
-						mToMap.addMarker(new MarkerOptions().position(point).title("To").icon(BitmapDescriptorFactory.fromResource(R.drawable.finish_pin)));
+						mMap.addMarker(new MarkerOptions().position(point).title("To").icon(BitmapDescriptorFactory.fromResource(R.drawable.finish_pin)));
 //						Toast.makeText(getApplicationContext(), "lat is: "+ mToLat.latitude + "long is:"+mToLat.longitude, Toast.LENGTH_SHORT).show();
 						setTextOnTV(point.latitude,point.longitude,"to");
 						//draeing the roat
@@ -92,7 +92,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 		                .color(Color.BLUE).geodesic(true));
 						//end of drowing
 						isToPinOnTheMap = true;
-						mToMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+						mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 							@Override
 							public boolean onMarkerClick(Marker marker) {
 								// TODO Auto-generated method stub
@@ -118,12 +118,12 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 	}
 
 	@Override
-	public void onConnectionFailed(ConnectionResult connectionResult) {}
-
+	public void onConnectionFailed(ConnectionResult connectionResult) {
+		Toast.makeText(getApplicationContext(), "onConnectionFailed", Toast.LENGTH_SHORT).show();
+	}
 	@Override
 	public void onConnected(Bundle arg0) {
-		//set the last address that was inserted in the last use of this app to ToTV
-		SetToAddressFromSharedPreferences();
+		Toast.makeText(getApplicationContext(), "onConnected", Toast.LENGTH_SHORT).show();
 		//set the current location in the FromTV
 		Location myLoc = mLocationClient.getLastLocation();
 		try{
@@ -138,18 +138,23 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 			Log.e("MapActivity","Cant operate the camera animation to the current location");
 			Log.e("MapActivity",e.toString());
 		}
-		
 	}
 
 	@Override
 	public void onDisconnected() {
+		Toast.makeText(getApplicationContext(), "onDisconnected", Toast.LENGTH_SHORT).show();
 		// TODO Auto-generated method stub
-		saveDestToSharedPreference(RideDetailsFragment.getAddressFromToTV());
 	}
 	
 	@Override
+	//When activity start
     protected void onStart() {
         super.onStart();
+		Toast.makeText(getApplicationContext(), "onStart", Toast.LENGTH_SHORT).show();
+		//Focusing on Israel
+		LatLng israelLatlng = new LatLng(32.06632, 34.77782);
+		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(israelLatlng, 6);
+		mMap.animateCamera(cameraUpdate);
         // Connect the client.
         mLocationClient.connect();
         SetToAddressFromSharedPreferences();
@@ -160,7 +165,9 @@ GooglePlayServicesClient.OnConnectionFailedListener {
      */
     @Override
     protected void onStop() {
-        // Disconnecting the client invalidates it.
+		Toast.makeText(getApplicationContext(), "onStop", Toast.LENGTH_SHORT).show();
+
+    	// Disconnecting the client invalidates it.
     	saveDestToSharedPreference(RideDetailsFragment.getAddressFromToTV());
     	mLocationClient.disconnect();
         super.onStop();
@@ -229,11 +236,4 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 		RideDetailsFragment.setTextInToAutoCompView(destAddress);
 		Log.e("MapActivity", "retrived from sheredPref: "+ destAddress);
 	}
-
-
-  	public static void setToPinOnMap(LatLng point){
-  		mToMap.addMarker(new MarkerOptions().position(point).title("To").icon(BitmapDescriptorFactory.fromResource(R.drawable.finish_pin)));
-  	}
-
-
 }

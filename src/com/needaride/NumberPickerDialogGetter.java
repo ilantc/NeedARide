@@ -1,5 +1,7 @@
-package com.example.needaride;
+package com.needaride;
 
+
+import com.example.needaride.R;
 
 import android.util.Log;
 import android.view.View;

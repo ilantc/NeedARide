@@ -12,14 +12,14 @@
 	    android:layout_weight="0.45"
 	    class="com.google.android.gms.maps.SupportMapFragment" />
 		
-	<fragment android:name="com.example.needaride.RideChooserFragment"
+	<fragment android:name="com.needaride.RideChooserFragment"
 	    android:id="@+id/rideChooserFragment"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content" />
 		
 	<fragment
 	    android:id="@+id/rideDetailsFrag"
-	    android:name="com.example.needaride.RideDetailsFragment"
+	    android:name="com.needaride.RideDetailsFragment"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent" />
 

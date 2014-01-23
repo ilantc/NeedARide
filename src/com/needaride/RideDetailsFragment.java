@@ -1,9 +1,10 @@
-package com.example.needaride;
+package com.needaride;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import com.example.needaride.R;
 import com.google.android.gms.maps.model.LatLng;
 
 import android.content.Intent;
@@ -106,7 +107,7 @@ public class RideDetailsFragment extends Fragment {
 //					Log.e("RideDetailsFragment", "submit button was clicked");
 					checkingForSimilarRidesFadeInIV.startAnimation(animationFadeIn);
 					Intent intent = new Intent();
-					intent.setClassName(getActivity(),"com.example.needaride.TakeARideActivity");
+					intent.setClassName(getActivity(),"com.needaride.TakeARideActivity");
 					startActivity(intent);
 				}
 				return false;

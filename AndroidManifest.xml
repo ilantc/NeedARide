@@ -32,7 +32,7 @@
         <uses-library android:name="com.google.android.maps" />
 
         <activity
-            android:name="com.example.needaride.SplashScreenActivity"
+            android:name="com.needaride.SplashScreenActivity"
             android:label="@string/title_activity_splash_screen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -92,7 +92,7 @@
             android:label="@string/title_activity_hitchhiker_ride_result" >
         </activity>
         <activity
-            android:name="com.example.needaride.MapActivity"
+            android:name="com.needaride.MapActivity"
             android:label="@string/title_activity_map" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -108,24 +108,28 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="com.example.needaride.MapFragment"
+            android:name="com.needaride.MapFragment"
             android:label="@string/title_activity_map_fragment" >
         </activity>
         <activity
-            android:name="com.example.needaride.RideDetailsFragment"
+            android:name="com.needaride.RideDetailsFragment"
             android:label="@string/title_activity_ride_details_fragment" >
         </activity>
         <activity
-            android:name="com.example.needaride.RideChooserFragment"
+            android:name="com.needaride.RideChooserFragment"
             android:label="@string/title_activity_ride_chooser_fragment" >
         </activity>
         <activity
-            android:name="com.example.needaride.TakeARideActivity"
+            android:name="com.needaride.TakeARideActivity"
             android:label="@string/title_activity_take_aride" >
         </activity>
         <activity
-            android:name="com.example.needaride.ChooseRideResultActivity"
+            android:name="com.needaride.ChooseRideResultActivity"
             android:label="@string/title_activity_choose_ride_result" >
+        </activity>
+        <activity
+            android:name="com.needaride.HitchhickerResultsActivity"
+            android:label="@string/title_activity_hitchhicker_results" >
         </activity>
     </application>
 

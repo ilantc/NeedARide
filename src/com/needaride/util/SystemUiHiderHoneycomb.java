@@ -1,4 +1,4 @@
-package com.example.needaride.util;
+package com.needaride.util;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
