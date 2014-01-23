@@ -12,8 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+
         android:textOn="@string/taxi_toggle_turn_on"
         android:textOff="@string/taxi_toggle_turn_off" />
 
@@ -21,7 +20,6 @@
         android:id="@+id/LookForARidetoggleButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/TaxitoggleButton"
         android:layout_weight="3"
         android:textOn="@string/look_for_ride_toggle_turn_on"
         android:textOff="@string/look_for_ride_toggle_turn_off" />

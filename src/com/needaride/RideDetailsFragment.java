@@ -71,7 +71,6 @@ public class RideDetailsFragment extends Fragment {
 //		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
 		        //LatLng point = new LatLng(latitude, longitude)
 		        //MapActivity.setToPinOnMap(point);
-		        
 		    }
 		});
         
@@ -149,10 +148,9 @@ public class RideDetailsFragment extends Fragment {
 	     // get time
 	 		Time today = new Time(Time.getCurrentTimezone());
 	 		today.setToNow();
-	 		int currHour = today.hour + 1 ;
+	 		int currHour = today.hour;
 	 		if (currHour == 24){
 	 			currHour = 0;
-	 			//Ilan need to correct the date  to tomorrow instade of today
 	 		}
 	 		formattedTime = currHour + ":" + today.minute;
 	 		choosenDateTV.setText(formattedDate + " " + formattedTime);
