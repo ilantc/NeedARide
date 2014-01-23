@@ -18,7 +18,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/example_find_ride_for_hitchhiker" />
+        android:src="@drawable/example_find_ride_for_hitchhiker" 
+        android:background="@null"/>
     
     
 </RelativeLayout>

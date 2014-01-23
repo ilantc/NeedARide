@@ -63,11 +63,10 @@ public class TimeDialogGetter  {
 				SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
 				
 				String FormatedDate = df.format(c.getTime());
-				dateBT.setText(FormatedDate + "\n" + time);
+				dateBT.setText(FormatedDate + "    " + time);
 				dialog.dismiss();
 			}
 		});
-		
 		dialog.show();
 	}
 }

@@ -34,11 +34,10 @@ public class MapActivity extends FragmentActivity implements
 GooglePlayServicesClient.ConnectionCallbacks,
 GooglePlayServicesClient.OnConnectionFailedListener {
 	
-	LocationClient mLocationClient;
-	GoogleMap mMap;
-	LatLng mFromLat;
-	LatLng mToLat;
-	
+LocationClient mLocationClient;
+GoogleMap mMap;
+LatLng mFromLat;
+LatLng mToLat;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +75,6 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 					marker.remove();
 					if (marker.getTitle().equals("From")) {
 						mFromLat = null;
-						
 					}
 					if (marker.getTitle().equals("To")) {
 						// we are in "to" case
@@ -96,14 +94,16 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 		return true;
 	}
 
+	//on map ConnectionFailed
 	@Override
 	public void onConnectionFailed(ConnectionResult connectionResult) {
-		Toast.makeText(getApplicationContext(), "onConnectionFailed", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), "onConnectionFailed", Toast.LENGTH_SHORT).show();
 	}
 	
+	//Launch when map is connected to the fragment
 	@Override
 	public void onConnected(Bundle arg0) {
-		Toast.makeText(getApplicationContext(), "onConnected", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), "onConnected", Toast.LENGTH_SHORT).show();
 		//set the current location in the FromTV
 		Location myLoc = mLocationClient.getLastLocation();
 		try{
@@ -120,17 +120,18 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 		}
 	}
 
+	//Launch when map is disconnected from the fragment
 	@Override
 	public void onDisconnected() {
-		Toast.makeText(getApplicationContext(), "onDisconnected", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), "onDisconnected", Toast.LENGTH_SHORT).show();
 		// TODO Auto-generated method stub
 	}
 	
-	@Override
 	//When activity start
+	@Override
     protected void onStart() {
         super.onStart();
-		Toast.makeText(getApplicationContext(), "onStart", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), "onStart", Toast.LENGTH_SHORT).show();
 		//Focusing on Israel
 		LatLng israelLatlng = new LatLng(32.06632, 34.77782);
 		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(israelLatlng, 6);
@@ -140,12 +141,10 @@ GooglePlayServicesClient.OnConnectionFailedListener {
         SetToAddressFromSharedPreferences();
     }
 
-    /*
-     * Called when the Activity is no longer visible.
-     */
+    //Called when the Activity is no longer visible.
     @Override
     protected void onStop() {
-		Toast.makeText(getApplicationContext(), "onStop", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), "onStop", Toast.LENGTH_SHORT).show();
 
     	// Disconnecting the client invalidates it.
     	saveDestToSharedPreference(RideDetailsFragment.getAddressFromToTV());
@@ -187,7 +186,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
   	}
   	
     //save the destination address to the Shared Preferences
-  	//in use when : onStop, onDisconnect
+  	//in use when : onStop
   	public Boolean saveDestToSharedPreference(String address){
 		try{
 			SharedPreferences addressDetails = this.getSharedPreferences("addressDetails", MODE_PRIVATE);
@@ -209,7 +208,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 	}
 
   //set the destination address from Shared Preferences
-  	//in use when the user connect to the map Activity
+  	//in use when the user connect to the map Activity - onStart
   	public void SetToAddressFromSharedPreferences(){
 		SharedPreferences addressDetails = this.getSharedPreferences("addressDetails", MODE_PRIVATE);
 		String destAddress = addressDetails.getString("destAddress", null);
