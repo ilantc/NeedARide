@@ -1,7 +1,6 @@
 package com.needaride;
 
 import com.example.needaride.R;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +8,6 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 public class TakeARideActivity extends Activity {
 
@@ -37,5 +35,5 @@ public class TakeARideActivity extends Activity {
 		getMenuInflater().inflate(R.menu.take_aride, menu);
 		return true;
 	}
-
+	
 }

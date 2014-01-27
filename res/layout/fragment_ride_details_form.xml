@@ -16,24 +16,25 @@
 		    android:layout_alignParentLeft="true"
 		    android:layout_alignParentRight="true"
 		    android:layout_alignParentTop="true"
-		    android:background="@layout/basic_form_rl_bg"
-		    android:paddingLeft="@dimen/activity_horizontal_margin"
-		    android:paddingRight="@dimen/activity_horizontal_margin" >
-
+			android:background="@drawable/black_mini_background">		    
+			<!--android:background="@layout/basic_form_rl_bg"-->
             <TextView
                 android:id="@+id/fromTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/from_icon"
+                android:layout_centerVertical="true"
                 android:text="From  :" />
 
             <AutoCompleteTextView
                 android:id="@+id/fromET"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/fromTV"
                 android:ems="10"
                 android:hint="Starting Point"
                 android:inputType="text"
+                android:textColor="@color/White"
                 android:textColorHint="@color/hint_color" />
         </RelativeLayout>
 		
@@ -46,19 +47,19 @@
 		    android:layout_below="@+id/fromRL"
 		    android:background="@layout/basic_form_rl_bg"
 		    android:layout_marginTop="@dimen/activity_vertical_margin"
-		    android:paddingLeft="@dimen/activity_horizontal_margin"
 		    android:paddingRight="@dimen/activity_horizontal_margin" >
 
             <TextView
                 android:id="@+id/toTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/to_icon"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:text="To  :" />
 
             <AutoCompleteTextView
                 android:id="@+id/toET"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/toTV"
                 android:hint="Destination"
@@ -85,7 +86,6 @@
 		    android:layout_below="@+id/toRL"
 		    android:layout_marginTop="@dimen/activity_vertical_margin"
 		    android:background="@layout/basic_form_rl_bg"
-		    android:paddingLeft="@dimen/activity_horizontal_margin"
 		    android:paddingRight="@dimen/activity_horizontal_margin" >
 
             <TextView
@@ -93,6 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:background="@drawable/date_icon"
                 android:text="Date  :" />
 
             <Button
@@ -101,9 +102,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/DateTV"
-                android:text="Set time and date"
+                android:hint="Set time and date"
                 android:background="@null"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textColorHint="@color/hint_color" />
             <ImageButton
 	            android:id="@+id/chooseDateIMGBT"
 	            android:layout_width="wrap_content"

@@ -12,6 +12,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="56dp"
+        android:background="@null"
         android:src="@drawable/trans_button_small" />
 
 </RelativeLayout>
