@@ -22,6 +22,8 @@
                 android:id="@+id/fromTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/fromET"
+                android:layout_alignBottom="@+id/fromET"
                 android:background="@drawable/from_icon"
                 android:layout_centerVertical="true"
                 android:text="From  :" />
@@ -55,6 +57,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/to_icon"
                 android:paddingRight="@dimen/activity_horizontal_margin"
+                android:layout_alignTop="@+id/toET"
+                android:layout_alignBottom="@+id/toET"
                 android:text="To  :" />
 
             <AutoCompleteTextView
