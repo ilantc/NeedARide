@@ -23,6 +23,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
@@ -32,8 +33,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class RideDetailsFragment extends Fragment {
+	
+	ToggleButton imHikerTB;
+	ToggleButton imDriverTB;
 	
 	static AutoCompleteTextView fromAutoCompView;
 	static AutoCompleteTextView toAutoCompView;
@@ -43,6 +48,41 @@ public class RideDetailsFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_ride_details_form,null);
+		
+		//Handling the kind of ride - Im the Driver or Hiker
+		//The user cannot set both toggles to off but can switch between them
+		final ToggleButton imHikerTB = (ToggleButton)v.findViewById(R.id.imHikerTB);
+		final ToggleButton imDriverTB = (ToggleButton)v.findViewById(R.id.imDriverTB);
+		//the default is that the user is a hiker
+		imHikerTB.setChecked(true);
+		imDriverTB.setChecked(false);
+		//When press on the imDriverTB set the imHikerTB to off
+		//cannot turn off the toggle (can only choose the imHikerTB) 
+		imDriverTB.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (imHikerTB.isChecked()){
+					imHikerTB.setChecked(false);			
+				}
+				else{
+					imDriverTB.setChecked(true);
+				}
+			}
+		});
+		//When press on the imHikerTB set the imDriver to off
+		//cannot turn off the toggle (can only choose the imDriverTB) 
+		imHikerTB.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (imDriverTB.isChecked()){
+					imDriverTB.setChecked(false);			
+				}
+				else{
+					imHikerTB.setChecked(true);
+				}
+			}
+		});
+		//Done handling with the choose ride toggles
 		
 		choosenDateTV = (TextView)v.findViewById(R.id.choosenDateTV);
 		setDate(choosenDateTV);
@@ -103,16 +143,28 @@ public class RideDetailsFragment extends Fragment {
 				}
 				else if (event.getAction() == MotionEvent.ACTION_UP){
 					submitIMGBT.animate().setInterpolator(sOvershooter).scaleX(1f).scaleY(1f);
-//					Log.e("RideDetailsFragment", "submit button was clicked");
-					checkingForSimilarRidesFadeInIV.startAnimation(animationFadeIn);
-					Intent intent = new Intent();
-					intent.setClassName(getActivity(),"com.needaride.TakeARideActivity");
-					startActivity(intent);
+					//If the user chose to be the hitchHiker - look for relevant rides
+					if (imHikerTB.isChecked()){
+						checkingForSimilarRidesFadeInIV.startAnimation(animationFadeIn);
+						Intent intent = new Intent();
+						intent.setClassName(getActivity(),"com.needaride.TakeARideActivity");
+						startActivity(intent);
+					}
+					//If the user chose to be the Driver - send to DriverAddRideDetailsActivity
+					else{
+						Intent intent = new Intent();
+						intent.setClassName(getActivity(),"com.needaride.DriverAddRideDetailsActivity");
+						intent.putExtra("From", fromAutoCompView.getText().toString());
+						intent.putExtra("To", toAutoCompView.getText().toString());
+						intent.putExtra("Date", choosenDateTV.getText().toString());
+						startActivity(intent);
+					}
 				}
 				return false;
 			}
 		});
-		
+        
+		//When pressing the switch button it swaps the From and To fields
         final ImageButton switchIMGBT = (ImageButton)v.findViewById(R.id.switchIMGBT);
         switchIMGBT.animate().setDuration(200);
         switchIMGBT.setOnTouchListener(new View.OnTouchListener() {
@@ -133,9 +185,9 @@ public class RideDetailsFragment extends Fragment {
 				return false;
 			}
 		});
-        
         return v;
 	}
+	//Done handling the swap button
 	
 	private void setDate(TextView choosenDateTV){
 		Log.e("RideDetailsFregment","set date");

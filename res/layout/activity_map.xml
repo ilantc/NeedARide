@@ -12,11 +12,6 @@
 	    android:layout_weight="0.45"
 	    class="com.google.android.gms.maps.SupportMapFragment" />
 		
-	<fragment android:name="com.needaride.RideChooserFragment"
-	    android:id="@+id/rideChooserFragment"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content" />
-		
 	<fragment
 	    android:id="@+id/rideDetailsFrag"
 	    android:name="com.needaride.RideDetailsFragment"
