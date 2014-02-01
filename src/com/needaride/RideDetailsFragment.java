@@ -23,11 +23,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -143,21 +141,33 @@ public class RideDetailsFragment extends Fragment {
 				}
 				else if (event.getAction() == MotionEvent.ACTION_UP){
 					submitIMGBT.animate().setInterpolator(sOvershooter).scaleX(1f).scaleY(1f);
-					//If the user chose to be the hitchHiker - look for relevant rides
-					if (imHikerTB.isChecked()){
-						checkingForSimilarRidesFadeInIV.startAnimation(animationFadeIn);
-						Intent intent = new Intent();
-						intent.setClassName(getActivity(),"com.needaride.TakeARideActivity");
-						startActivity(intent);
+					//Validate that the From To and Date fields were inserted
+					if (fromAutoCompView.getText().toString().equals("") ){
+						//Toast.makeText(getActivity(), "Where do you wonna go out from?", Toast.LENGTH_LONG).show();
+						Toast.makeText(getActivity(), "מאיפה יוצאים?", Toast.LENGTH_LONG).show();
 					}
-					//If the user chose to be the Driver - send to DriverAddRideDetailsActivity
-					else{
-						Intent intent = new Intent();
-						intent.setClassName(getActivity(),"com.needaride.DriverAddRideDetailsActivity");
-						intent.putExtra("From", fromAutoCompView.getText().toString());
-						intent.putExtra("To", toAutoCompView.getText().toString());
-						intent.putExtra("Date", choosenDateTV.getText().toString());
-						startActivity(intent);
+					else if (toAutoCompView.getText().toString().equals("")){
+						//Toast.makeText(getActivity(), "Where do you wonna go?", Toast.LENGTH_LONG).show();
+						Toast.makeText(getActivity(), "לאיפה נוסעים?", Toast.LENGTH_LONG).show();
+					}
+					//if the fromAutoCompView and toAutoCompView fields are not empty
+					else {
+						//If the user chose to be the hitchHiker - look for relevant rides
+						if (imHikerTB.isChecked()){
+							checkingForSimilarRidesFadeInIV.startAnimation(animationFadeIn);
+							Intent intent = new Intent();
+							intent.setClassName(getActivity(),"com.needaride.TakeARideActivity");
+							startActivity(intent);
+						}
+						//If the user chose to be the Driver - send to DriverAddRideDetailsActivity
+						else{
+							Intent intent = new Intent();
+							intent.setClassName(getActivity(),"com.needaride.DriverAddRideDetailsActivity");
+							intent.putExtra("From", fromAutoCompView.getText().toString());
+							intent.putExtra("To", toAutoCompView.getText().toString());
+							intent.putExtra("Date", choosenDateTV.getText().toString());
+							startActivity(intent);
+						}
 					}
 				}
 				return false;
