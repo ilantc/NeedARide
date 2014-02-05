@@ -5,8 +5,6 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import com.example.needaride.R;
-import com.google.android.gms.maps.model.LatLng;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -18,7 +16,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
@@ -26,7 +23,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -45,6 +41,7 @@ public class RideDetailsFragment extends Fragment {
 		View v = inflater.inflate(R.layout.fragment_ride_details_form,null);
 		
 		choosenDateTV = (TextView)v.findViewById(R.id.choosenDateTV);
+		choosenDateTV.requestFocus();
 		setDate(choosenDateTV);
 		
 		final ImageView checkingForSimilarRidesFadeInIV = (ImageView) v.findViewById(R.id.checkingForSimilarRidesFadeInIV);
@@ -57,10 +54,28 @@ public class RideDetailsFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 		        String str = (String) adapterView.getItemAtPosition(position);
-//		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+		        
+		        // remove old marker from map if it exists
+		        LocationManager.getinstance(view.getContext()).setFromLat(null);
+		        
+		        // set new string and marker
+		        LocationManager.getinstance(view.getContext()).setFromStr(str);
+		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
 		    }
 		});
- 
+        
+//        fromAutoCompView.setOnFocusChangeListener(new OnFocusChangeListener() {	
+//			@Override
+//			public void onFocusChange(View v, boolean hasFocus) {
+//				if (false == hasFocus) {
+//					LocationManager.getinstance(v.getContext()).setFromStr(((AutoCompleteTextView) v).getText().toString());
+//				}
+//			}
+//		});
+        
+//        fromAutoCompView.onk
+        
+        
         toAutoCompView = (AutoCompleteTextView) v.findViewById(R.id.toET);
         toAutoCompView.setAdapter(new PlacesAutoCompleteAdapter(v.getContext(), R.layout.list_item));
         toAutoCompView.addTextChangedListener(new autoCompManager(toAutoCompView));
@@ -68,11 +83,26 @@ public class RideDetailsFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 		        String str = (String) adapterView.getItemAtPosition(position);
-//		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+		        
+		        // remove old marker from map if it exists
+		        LocationManager.getinstance(view.getContext()).setToLat(null);
+		        
+		        // set new string and marker
+		        LocationManager.getinstance(view.getContext()).setToStr(str);
+		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
 		        //LatLng point = new LatLng(latitude, longitude)
 		        //MapActivity.setToPinOnMap(point);
 		    }
 		});
+//       toAutoCompView.setOnFocusChangeListener(new OnFocusChangeListener() {	
+//			@Override
+//			public void onFocusChange(View v, boolean hasFocus) {
+//				if (false == hasFocus) {
+//					LocationManager.getinstance(v.getContext()).setToStr(((AutoCompleteTextView) v).getText().toString());
+//				}
+//			}
+//		});
+//        
         
         final ImageButton chooseDateIMGBT = (ImageButton)v.findViewById(R.id.chooseDateIMGBT);
         chooseDateIMGBT.animate().setDuration(200);
@@ -159,16 +189,19 @@ public class RideDetailsFragment extends Fragment {
 	
 	private class autoCompManager implements TextWatcher {
 		
-		private CountDownTimer CDT;
+		private CountDownTimer autoCompCDT;
 		private CharSequence text;
 		private long lastUpdateTime;
 		private long timeForUpdateTextWhileTyping;
 		
 		public autoCompManager(final AutoCompleteTextView autoCompView) {
-			int timeout = getResources().getInteger(R.integer.secsTillAutoComplete);
+			int autoCompTimeout = getResources().getInteger(R.integer.secsTillAutoComplete);
 			lastUpdateTime = System.currentTimeMillis();
+			
+			// count for auto completes during a typing "session" (to help him while he is typing long inputs)
 			timeForUpdateTextWhileTyping = (long) 1000 * getResources().getInteger(R.integer.secsForUpdateTextWhileTyping);
-			CDT = new CountDownTimer((long) timeout * 1000, (long) timeout * 1000) {
+			
+			autoCompCDT = new CountDownTimer((long) autoCompTimeout * 1000, (long) autoCompTimeout * 1000) {
 
 				@Override
 				public void onTick(long millisUntilFinished) {}
@@ -180,11 +213,10 @@ public class RideDetailsFragment extends Fragment {
 		        	Log.e("autoComp","sending req, s is: " + text);
 		        	f.filter(text);
 		        	lastUpdateTime = System.currentTimeMillis(); // remember last update
-		        	
 				}
-				
-			};
+			};			
 		}
+		
 		@Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
 			
@@ -192,20 +224,15 @@ public class RideDetailsFragment extends Fragment {
 			
 			// cancel pending request if last update was done recently 
 			if (System.currentTimeMillis() - lastUpdateTime < timeForUpdateTextWhileTyping) {
-				CDT.cancel();
+				autoCompCDT.cancel();
 			}
 			// start new timer
-			CDT.start();
+			autoCompCDT.start();
         }
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count,
-                int after) {
-            // TODO Auto-generated method stub
-        }
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
         @Override
-        public void afterTextChanged(Editable s) {
-            // TODO Auto-generated method stub
-        }
+        public void afterTextChanged(Editable s) {}
 	}
 	
 	//set text in the TV

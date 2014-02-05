@@ -1,9 +1,5 @@
 package com.needaride;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
-
 import com.example.needaride.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -19,10 +15,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -35,53 +30,33 @@ GooglePlayServicesClient.ConnectionCallbacks,
 GooglePlayServicesClient.OnConnectionFailedListener {
 	
 LocationClient mLocationClient;
-GoogleMap mMap;
-LatLng mFromLat;
-LatLng mToLat;
+LocationManager mLocationManager;
+static Marker fromMarker;
+static Marker toMarker;
+static GoogleMap Map;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
 		mLocationClient = new LocationClient(this, this, this);
-		mLocationClient.connect();
+		mLocationManager = LocationManager.getinstance(this);
+		
 		if (ConnectionResult.SUCCESS == GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext()) ){
-			mMap = ((SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-			mMap.setMyLocationEnabled(true);
+			Map = ((SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+			Map.setMyLocationEnabled(true);
 			
-			mMap.setOnMapClickListener(new OnMapClickListener() {
+			Map.setOnMapClickListener(new OnMapClickListener() {
 				@Override
 				public void onMapClick(final LatLng point) {
-					if (null == mFromLat) {
-						mFromLat = point;
-						mMap.addMarker(new MarkerOptions().position(point).title("From").icon(BitmapDescriptorFactory.fromResource(R.drawable.start_pin)));
-//						Toast.makeText(getApplicationContext(), "lat is: "+ mFromLat.latitude + "long is:"+mFromLat.longitude, Toast.LENGTH_SHORT).show();					
-						//set the address that was pointed to the TV
-						setTextOnTV(point.latitude,point.longitude,"from");
-					}
-					else if (null == mToLat) {
-						mToLat = point;
-						MarkerOptions toMark = new MarkerOptions().position(point).title("To").icon(BitmapDescriptorFactory.fromResource(R.drawable.finish_pin));
-						mMap.addMarker(toMark);
-//						Toast.makeText(getApplicationContext(), "lat is: "+ mToLat.latitude + "long is:"+mToLat.longitude, Toast.LENGTH_SHORT).show();
-						setTextOnTV(point.latitude,point.longitude,"to");
-					}					
+					mLocationManager.onMapClick(point);				
 				}
 			});
 			
-			mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+			Map.setOnMarkerClickListener(new OnMarkerClickListener() {
 				@Override
-				public boolean onMarkerClick(Marker marker) {
-					marker.remove();
-					if (marker.getTitle().equals("From")) {
-						mFromLat = null;
-					}
-					if (marker.getTitle().equals("To")) {
-						// we are in "to" case
-						mToLat = null;
-					}
-//					Toast.makeText(getApplicationContext(), "title=" + marker.getTitle() + " From="+isFromPinOnTheMap + " To="+isToPinOnTheMap, Toast.LENGTH_SHORT).show();
-					return true;
+				public boolean onMarkerClick(Marker marker) {					
+					return mLocationManager.onMarkerClick(marker);	
 				}
 			});
 		}
@@ -109,9 +84,9 @@ LatLng mToLat;
 		try{
 			LatLng latLng = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
 			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 12);
-			mMap.animateCamera(cameraUpdate);
+			Map.animateCamera(cameraUpdate);
 			//Set the FromTV address to the current location
-			setTextOnTV(myLoc.getLatitude(), myLoc.getLongitude(),"from");
+			mLocationManager.setFromLat(latLng);
 		}
 		catch(Exception e){
 			Toast.makeText(getApplicationContext(), "Can't find your current location", Toast.LENGTH_LONG).show();
@@ -135,7 +110,7 @@ LatLng mToLat;
 		//Focusing on Israel
 		LatLng israelLatlng = new LatLng(32.06632, 34.77782);
 		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(israelLatlng, 6);
-		mMap.animateCamera(cameraUpdate);
+		Map.animateCamera(cameraUpdate);
         // Connect the client.
         mLocationClient.connect();
         SetToAddressFromSharedPreferences();
@@ -151,39 +126,6 @@ LatLng mToLat;
     	mLocationClient.disconnect();
         super.onStop();
     }
-    
-    
-    
-    
-    
-  //Set the FromTV address to the current location
-  	private void setTextOnTV(Double mLatitude, Double mLongitude,String textTV){
-  		
-  		Geocoder geocoder;
-  		List<Address> addresses = null;
-  		geocoder = new Geocoder(this, Locale.getDefault());
-  		try {
-  			addresses = geocoder.getFromLocation(mLatitude, mLongitude, 1);
-  			String address = addresses.get(0).getAddressLine(0);
-  			String city = addresses.get(0).getAddressLine(1);
-  			String country = addresses.get(0).getAddressLine(2);
-  			String fullAddress = address +" "+ city +" "+ country;
-  			Log.e("MapActivity","current address is:"+ address +" "+ city +" "+ country);
-  			if (textTV == "from"){
-  				RideDetailsFragment.setTextInFromAutoCompView(fullAddress);
-  			}
-  			else{ //in "to" field
-  				RideDetailsFragment.setTextInToAutoCompView(fullAddress);
-  			}
-  		} catch (IOException e) {
-  			// TODO Auto-generated catch block
-  			Toast.makeText(getApplicationContext(), "Can't find your current location make sure that you GPS is enable to optimize the App functionality", Toast.LENGTH_LONG).show();
-  			Toast.makeText(getApplicationContext(), "Can't find your current location make sure that you GPS is enable to optimize the App functionality", Toast.LENGTH_LONG).show();
-  			Toast.makeText(getApplicationContext(), "Can't find your current location make sure that you GPS is enable to optimize the App functionality", Toast.LENGTH_LONG).show();
-  			Log.e("MapActivity","Can't find your current location make sure that you GPS is enable to optimize the App functionality");
-  			Log.e("MapActivity",e.toString());
-  		}
-  	}
   	
     //save the destination address to the Shared Preferences
   	//in use when : onStop
@@ -214,5 +156,27 @@ LatLng mToLat;
 		String destAddress = addressDetails.getString("destAddress", null);
 		RideDetailsFragment.setTextInToAutoCompView(destAddress);
 		Log.e("MapActivity", "retrived from sheredPref: "+ destAddress);
+	}
+  	
+	public static void addMarker(LatLng point, String type){
+		if (null == point) {
+			if ("From" == type) {
+				// only remove the marker if it exists
+				if (null != fromMarker) {
+					fromMarker.remove();
+				}
+			}
+			else if ("To" == type) {
+				if (null != toMarker) {
+					toMarker.remove();
+				}
+			}
+		}
+		else if ("From" == type) {
+			fromMarker =  Map.addMarker(new MarkerOptions().position(point).title(type).icon(BitmapDescriptorFactory.fromResource(R.drawable.start_pin)));
+		}
+		else if ("To" == type) {
+			toMarker =  Map.addMarker(new MarkerOptions().position(point).title(type).icon(BitmapDescriptorFactory.fromResource(R.drawable.finish_pin)));
+		}
 	}
 }

@@ -20,6 +20,8 @@
     <item name="maxNumOfSits" type="integer">9</item>
     <item name="secsTillAutoComplete" type="integer">1</item>
     <item name="secsForUpdateTextWhileTyping" type="integer">3</item>
+    <item name="secsForUpdateMarkerOnMap" type="integer">3</item>
+    
 
     <string name="from">From:</string>
     <string name="title_activity_no_similar_rides">No Similar Rides</string>
