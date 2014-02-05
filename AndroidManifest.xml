@@ -131,6 +131,10 @@
             android:name="com.needaride.HitchhickerResultsActivity"
             android:label="@string/title_activity_hitchhicker_results" >
         </activity>
+        <activity
+            android:name="com.needaride.DriverAddRideDetailsActivity"
+            android:label="@string/title_activity_driver_add_ride_details" >
+        </activity>
     </application>
 
 </manifest>
