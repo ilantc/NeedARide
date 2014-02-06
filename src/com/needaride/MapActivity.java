@@ -108,8 +108,11 @@ static GoogleMap Map;
         super.onStart();
 		//Toast.makeText(getApplicationContext(), "onStart", Toast.LENGTH_SHORT).show();
 		//Focusing on Israel
-		LatLng israelLatlng = new LatLng(32.06632, 34.77782);
-		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(israelLatlng, 6);
+		//Focusing TelAviv
+        //LatLng initLatlng = new LatLng(32.06632, 34.77782);
+		//Focusing Technion
+        LatLng initLatlng = new LatLng(32.77677, 35.02312);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(initLatlng, 14);
 		Map.animateCamera(cameraUpdate);
         // Connect the client.
         mLocationClient.connect();

@@ -186,7 +186,7 @@ public class LocationManager {
 		    }
 		    Address loc_address = addresses.get(0);
 		    loc_latlng  		= new LatLng(loc_address.getLatitude(), loc_address.getLongitude());
-		    
+		    Toast.makeText(c, loc_latlng.toString(), Toast.LENGTH_LONG).show();
 	    } catch (IOException e) {
 	    	Log.e(dTag,e.getMessage());
 		}

@@ -7,7 +7,11 @@ import java.util.Locale;
 import com.example.needaride.R;
 
 import android.os.Bundle;
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
+import android.content.Context;
+import android.telephony.TelephonyManager;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
@@ -29,6 +33,8 @@ import android.widget.Toast;
 public class DriverAddRideDetailsActivity extends Activity {
 	DecelerateInterpolator sDecelerator = new DecelerateInterpolator();
 	DecelerateInterpolator sOvershooter = new DecelerateInterpolator(10f);
+	
+	private String debugTag = "DriverAddRideDetailsActivity";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -131,14 +137,16 @@ public class DriverAddRideDetailsActivity extends Activity {
 						//Insert the ride to the DB
 						Log.e("DriverAddRideDetailsActivity", "Inserting to DB");
 						try{
+							
 							ClientAsync ca = new ClientAsync();
-							String userID = "123";
+							String userID = getMyPhoneNumber();
+							Toast.makeText(getApplicationContext(), "My Phone number:"+getMyPhoneNumber(), Toast.LENGTH_SHORT).show();
 							String from = fromET.getText().toString();
 							String to = toET.getText().toString();
 							String date = dateTV.getText().toString();
 							ca.execute("addnewride", userID,from,to,date);
 							Toast.makeText(getApplicationContext(), "Ride inserted successfully", Toast.LENGTH_SHORT).show();
-						}
+							}
 						catch(Exception e){
 							Log.e("DriverAddRideDetailsActivity","Could not insert to DB");
 							Log.e("DriverAddRideDetailsActivity",e.toString());
@@ -174,5 +182,41 @@ public class DriverAddRideDetailsActivity extends Activity {
 	 		}
 	 		formattedTime = currHour + ":" + today.minute;
 	 		choosenDateTV.setText(formattedDate + " " + formattedTime);
+	}
+
+	private String getMyPhoneNumber(){
+		String phoneNumber = null;
+		phoneNumber = getMyPhoneNumberFromMyMobile();
+		if (phoneNumber.isEmpty()){
+			phoneNumber = getMyPhoneNumberFromWhatsApp();
+		}
+		return phoneNumber;
+	}
+	
+	private String getMyPhoneNumberFromMyMobile(){
+		TelephonyManager mTelephonyMgr;
+		getApplicationContext();
+		mTelephonyMgr = (TelephonyManager)
+				getSystemService(Context.TELEPHONY_SERVICE); 
+		Log.d(debugTag,"in getMyPhoneNumberFromMyMobile");
+		return mTelephonyMgr.getLine1Number();
+	}
+	private String getMyPhoneNumberFromWhatsApp(){
+		String phoneNumber = null;
+		AccountManager am = AccountManager.get(getApplicationContext());
+		Account[] accounts = am.getAccounts();
+		for (Account ac : accounts) {
+		    String acname = ac.name;
+		    String actype = ac.type;
+		    // Take your time to look at all available accounts
+		    //System.out.println("Accounts : " + acname + ", " + actype);
+		    
+		    if(actype.contains("com.whatsapp")){
+		        phoneNumber = ac.name;
+		        //Toast.makeText(getApplicationContext(), "My Phone number:"+phoneNumber, Toast.LENGTH_SHORT).show();
+		    }
+		}
+		Log.d(debugTag,"in getMyPhoneNumberFromWhatsApp");
+		return phoneNumber;
 	}
 }
