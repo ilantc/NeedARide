@@ -1,6 +1,7 @@
 package com.needaride;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -21,22 +22,17 @@ import com.google.android.gms.maps.model.Marker;
 public class LocationManager {
 	
 	private static LocationManager instance = null;
-	private LatLng FromLatLng;
-	private LatLng ToLatLng;
 	
-	private String FromStr;
-	private String ToStr;
-	
+	private RideLocation mfromRideLocation;
+	private RideLocation mtoRideLocation;
 	private String dTag = "locMngr";
 	
 	private Geocoder mGeocoder;
 	private Context c; // only used for toasts.. TODO consider removing
 	
 	private LocationManager(Context c) {
-		FromLatLng 	= null;
-		ToLatLng  	= null;
-		FromStr 	= "";
-		ToStr		= "";
+		mfromRideLocation 	= new RideLocation(null, "", "", "");
+		mtoRideLocation 	= new RideLocation(null, "", "", "");
 		this.c = c;
 		mGeocoder = new Geocoder(c, Locale.getDefault());
 	}
@@ -51,17 +47,11 @@ public class LocationManager {
 	
 	// capture all listeners from the map 
 	public void onMapClick(final LatLng point) {
-		if (null == getFromLat()) {
+		if (null == mfromRideLocation.getLatlng()) {
 			setFromLat(point);
-//			String toastText = "set from marker: latlng = " + getFromLat().latitude + 
-//					" " + getFromLat().longitude + "text = " + getFromStr();
-//			Toast.makeText(c, toastText, Toast.LENGTH_SHORT).show();
 		}
-		else if (null == getToLat()) {
+		else if (null == mtoRideLocation.getLatlng()) {
 			setToLat(point);
-//			String toastText = "set to marker: latlng = " + getToLat().latitude + 
-//					" " + getToLat().longitude + "text = " +getToStr();
-//			Toast.makeText(c, toastText, Toast.LENGTH_SHORT).show();
 		}	
 	}
 	
@@ -69,15 +59,15 @@ public class LocationManager {
 		
 		if (marker.getTitle().equals("From")) {
 			setFromLat(null);
-			FromStr = "";
-			RideDetailsFragment.setTextInFromAutoCompView(FromStr);
+			mfromRideLocation.unsetFullString();
+			
+			RideDetailsFragment.setTextInFromAutoCompView(mfromRideLocation.getFullString());
 		}
 		if (marker.getTitle().equals("To")) {
 			setToLat(null);
-			ToStr = "";
-			RideDetailsFragment.setTextInToAutoCompView(ToStr);
+			mtoRideLocation.unsetFullString();
+			RideDetailsFragment.setTextInToAutoCompView(mtoRideLocation.getFullString());
 		}
-//		Toast.makeText(getApplicationContext(), "title=" + marker.getTitle() + " From="+isFromPinOnTheMap + " To="+isToPinOnTheMap, Toast.LENGTH_SHORT).show();
 		return true;
 	}
 	
@@ -93,31 +83,32 @@ public class LocationManager {
 	}
 	
 	public void setToLat(LatLng toLatLng) {
-		this.ToLatLng = toLatLng;
-		if (null == ToLatLng) {
-			// remove the marker from hte map
+		mtoRideLocation.setLatlng(toLatLng);
+		if (null == mtoRideLocation.getLatlng()) {
+			// remove the marker from the map
 			MapActivity.addMarker(null, "To");
 		}
 		else {
 			// update the text in the TV
-			ToStr = getTextFromLatlng(ToLatLng);
-			RideDetailsFragment.setTextInToAutoCompView(ToStr);
-			MapActivity.addMarker(toLatLng,"To");
+			List<String> toArgs = getTextFromLatlng(mtoRideLocation.getLatlng());
+			mtoRideLocation.setAllString(toArgs);
+			RideDetailsFragment.setTextInToAutoCompView(mtoRideLocation.getFullString());
+			MapActivity.addMarker(mtoRideLocation.getLatlng(),"To");
 		}
 	}
 	
 	public void setFromLat(LatLng fromLatLng) {
-		FromLatLng = fromLatLng;
-		if (null == FromLatLng) {
+		mfromRideLocation.setLatlng(fromLatLng);
+		if (null == mfromRideLocation.getLatlng()) {
 			// remove the marker from the map
 			MapActivity.addMarker(null,"From");
 		}
 		else {
 			// update the text in the TV
-			FromStr = getTextFromLatlng(FromLatLng);
-			Log.d("locMngr","adding from string: " + FromStr);
-			RideDetailsFragment.setTextInFromAutoCompView(FromStr);
-			MapActivity.addMarker(FromLatLng,"From");
+			List<String> fromArgs = getTextFromLatlng(mfromRideLocation.getLatlng());
+			mfromRideLocation.setAllString(fromArgs);
+			RideDetailsFragment.setTextInFromAutoCompView(mfromRideLocation.getFullString());
+			MapActivity.addMarker(mfromRideLocation.getLatlng(),"From");
 		}
 	}
 	
@@ -126,57 +117,64 @@ public class LocationManager {
 			setFromStr(str);
 		}
 		else if ("To" == type) {
-			setToStr(type);
+			setToStr(str);
 		}
 	}
 	
-	public void setFromStr(String fromStr) {
-		FromStr = fromStr;
+	private void setFromStr(String fromStr) {
 		
-		FromLatLng = getLatLngFromAddress(fromStr);
-		MapActivity.addMarker(FromLatLng,"From");
+		List<String> addressArgs = new ArrayList<String>();
+		LatLng FromLatLng = getLatLngFromAddress(fromStr, addressArgs);
+		Log.d(dTag," after  getLatLngFromAddress: out = '" + addressArgs.get(0) + "' , '" + addressArgs.get(1) + "'");
+		// set the output of latlng and address args in the mfromrideLocation object 
+		mfromRideLocation.setLatlng(FromLatLng);
+		mfromRideLocation.setAllString(addressArgs);
+		Log.d(dTag," after  setAllString, full Adress is: '" + mfromRideLocation.getFullString() + "'");
+		// set the marker on the map and the text in TV
+		RideDetailsFragment.setTextInFromAutoCompView(mfromRideLocation.getFullString());
+		MapActivity.addMarker(mfromRideLocation.getLatlng(),"From");
 	}
 			
-	public void setToStr(String toStr) {
-		ToStr = toStr;
-		if ("" == toStr) {
-			ToLatLng = null;
-			MapActivity.addMarker(null, "To");
-		}
-		else {
-			ToLatLng = getLatLngFromAddress(toStr);
-			Log.d(dTag,"inside setToStr, tostr is: " + toStr + "ToLatlng is null?" + (null == ToLatLng));
-			MapActivity.addMarker(ToLatLng,"To");
-		}
+	private void setToStr(String toStr) {
+		List<String> addressArgs = new ArrayList<String>();
+		LatLng toLatLng = getLatLngFromAddress(toStr, addressArgs);
+		
+		// set the output of latlng and address args in the mtorideLocation object 
+		mtoRideLocation.setLatlng(toLatLng);
+		mtoRideLocation.setAllString(addressArgs);
+		
+		// set the marker on the map and the text in TV
+		RideDetailsFragment.setTextInToAutoCompView(mtoRideLocation.getFullString());
+		MapActivity.addMarker(mtoRideLocation.getLatlng(),"To");
 	}
 	
 	
-	// simple and more complex getters
-	private String getTextFromLatlng(LatLng loc){
+	private List<String> getTextFromLatlng(LatLng loc){
 		
 		List<Address> addresses = null;
-		String fullAddress = "";
+		List<String> addressArgs = new ArrayList<String>();
 		Double lat 	= loc.latitude;
 		Double lng 	= loc.longitude;
 		Log.d(dTag,"Loc is: " + lat + " , " + lng);
 		try {
 			addresses = mGeocoder.getFromLocation(lat, lng, 1);
 			String address = addresses.get(0).getAddressLine(0);
-			Log.d(dTag,"got adress: " + address);
-			String city = addresses.get(0).getAddressLine(1);
-			//String country = addresses.get(0).getAddressLine(2);
-			fullAddress = address +" "+ city;
-			Log.e(dTag,"current address is:"+ address +" "+ city);
 			
+			addressArgs = seperateAdressToStreetAndNo(address);
+			Log.d(dTag,"got adress: " + address);
+			addressArgs.add(2,addresses.get(0).getAddressLine(1));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			Toast.makeText(c, "Can't find your current location make sure that you GPS is enable to optimize the App functionality\n" + e.getMessage(), Toast.LENGTH_LONG).show();
-			Log.d(dTag,e.getMessage());
+			Log.d(dTag,"Exception: " + e.getMessage());
 		}
-		return fullAddress;
+		return addressArgs;
 	}
 	
-	private LatLng getLatLngFromAddress(String address) {
+	
+	/* output is LatLng, 
+	 * and the parsed address in the returnAdress array that is given as an input */
+	private LatLng getLatLngFromAddress(String address, List<String> returnAdress) {
 		List<Address> addresses;
 		LatLng 	loc_latlng = null;
 	    try {
@@ -184,26 +182,37 @@ public class LocationManager {
 		    if (addresses == null) {
 		        return null;
 		    }
-		    Address loc_address = addresses.get(0);
-		    loc_latlng  		= new LatLng(loc_address.getLatitude(), loc_address.getLongitude());
-		    Toast.makeText(c, loc_latlng.toString(), Toast.LENGTH_LONG).show();
+		    Address loc_address 	= addresses.get(0);
+		    loc_latlng  			= new LatLng(loc_address.getLatitude(), loc_address.getLongitude());
+		    List<String> outAdress 	= seperateAdressToStreetAndNo(loc_address.getAddressLine(0));
+		    returnAdress.addAll(outAdress);
+		    Log.d(dTag," after sep address: out = '" + returnAdress.get(0) + "' , '" + returnAdress.get(1) + "'");
 	    } catch (IOException e) {
 	    	Log.e(dTag,e.getMessage());
 		}
 	    return loc_latlng;
 	}
 	
-	public LatLng getToLat() {
-		return ToLatLng;
+	/* try to parse the street and house number from a given string
+	 * look for a trailing number to figure this out */
+	private List<String> seperateAdressToStreetAndNo(String address) {
+		String[] streetRes = new String[2];
+		List<String> out = new ArrayList<String>();
+		out.add(0, ""); // placeholder
+		String regex = "\\s\\d+$"; 
+		// now we got a string with no trailing numbers
+		streetRes = address.split(regex,2);
+		// if it diffs from the original string, then the diff is the number
+		if (! streetRes[0].matches(address)) {
+			// create a new regexp from the street and an optional trailing space
+			out.add(1, address.substring(streetRes[0].length()).trim());		
+		}
+		else {
+			out.add(1,"");
+		}
+		out.set(0, streetRes[0].trim());
+		Log.d(dTag,"sep address: out = '" + out.get(0) + "' , '" + out.get(1) + "'\n" + 
+				   "Original string is: '" + address + "'");
+		return out;
 	}
-	public LatLng getFromLat() {
-		return FromLatLng;
-	}
-	public String getFromStr() {
-		return FromStr;
-	}
-	public String getToStr() {
-		return ToStr;
-}
-
 }

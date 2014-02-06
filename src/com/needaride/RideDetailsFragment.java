@@ -100,7 +100,7 @@ public class RideDetailsFragment extends Fragment {
 		        LocationManager.getinstance(view.getContext()).setFromLat(null);
 		        
 		        // set new string and marker
-		        LocationManager.getinstance(view.getContext()).setFromStr(str);
+		        LocationManager.getinstance(view.getContext()).setStr(str,"From");
 		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
 		    }
 		});
@@ -129,10 +129,8 @@ public class RideDetailsFragment extends Fragment {
 		        LocationManager.getinstance(view.getContext()).setToLat(null);
 		        
 		        // set new string and marker
-		        LocationManager.getinstance(view.getContext()).setToStr(str);
+		        LocationManager.getinstance(view.getContext()).setStr(str,"To");
 		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
-		        //LatLng point = new LatLng(latitude, longitude)
-		        //MapActivity.setToPinOnMap(point);
 		    }
 		});
 //       toAutoCompView.setOnFocusChangeListener(new OnFocusChangeListener() {	
@@ -303,9 +301,11 @@ public class RideDetailsFragment extends Fragment {
 	//set text in the TV
 	public static void setTextInFromAutoCompView(String address){
 		fromAutoCompView.setText(address);
+		fromAutoCompView.requestFocus(View.FOCUS_DOWN);
 	}
 	public static void setTextInToAutoCompView(String address){
 		toAutoCompView.setText(address);
+		toAutoCompView.requestFocus(View.FOCUS_DOWN);
 	}
 	public static String getAddressFromToTV(){
 		return toAutoCompView.getText().toString();

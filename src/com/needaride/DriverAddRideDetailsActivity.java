@@ -116,7 +116,6 @@ public class DriverAddRideDetailsActivity extends Activity {
 			public boolean onTouch(View v, MotionEvent event) {
 				//when touch the imageButton
 				if (event.getAction() == MotionEvent.ACTION_DOWN){
-					
 					submitIMGBT.animate().setInterpolator(sDecelerator).scaleX(.7f).scaleY(.7f);
 				}
 				//When taking the finger away from the imageButtom
@@ -140,13 +139,13 @@ public class DriverAddRideDetailsActivity extends Activity {
 							
 							ClientAsync ca = new ClientAsync();
 							String userID = getMyPhoneNumber();
-							Toast.makeText(getApplicationContext(), "My Phone number:"+getMyPhoneNumber(), Toast.LENGTH_SHORT).show();
+							//Toast.makeText(getApplicationContext(), "My Phone number:"+getMyPhoneNumber(), Toast.LENGTH_SHORT).show();
 							String from = fromET.getText().toString();
 							String to = toET.getText().toString();
 							String date = dateTV.getText().toString();
 							ca.execute("addnewride", userID,from,to,date);
 							Toast.makeText(getApplicationContext(), "Ride inserted successfully", Toast.LENGTH_SHORT).show();
-							}
+						}
 						catch(Exception e){
 							Log.e("DriverAddRideDetailsActivity","Could not insert to DB");
 							Log.e("DriverAddRideDetailsActivity",e.toString());
@@ -156,7 +155,6 @@ public class DriverAddRideDetailsActivity extends Activity {
 				return false;
 			}
 		});
-		
 	}
 
 	@Override
@@ -184,6 +182,7 @@ public class DriverAddRideDetailsActivity extends Activity {
 	 		choosenDateTV.setText(formattedDate + " " + formattedTime);
 	}
 
+	//call the getMyPhoneNumberFromMyMobile() and getMyPhoneNumberFromWhatsApp() in order to get the phone number
 	private String getMyPhoneNumber(){
 		String phoneNumber = null;
 		phoneNumber = getMyPhoneNumberFromMyMobile();
@@ -192,31 +191,31 @@ public class DriverAddRideDetailsActivity extends Activity {
 		}
 		return phoneNumber;
 	}
-	
+	//Try to get the phone number from the phone (not always succeed)
 	private String getMyPhoneNumberFromMyMobile(){
 		TelephonyManager mTelephonyMgr;
 		getApplicationContext();
 		mTelephonyMgr = (TelephonyManager)
 				getSystemService(Context.TELEPHONY_SERVICE); 
-		Log.d(debugTag,"in getMyPhoneNumberFromMyMobile");
+		//Log.d(debugTag,"in getMyPhoneNumberFromMyMobile");
 		return mTelephonyMgr.getLine1Number();
 	}
+	//Try to get the phone number from the WhatsApp account (works only if have whatsApp account on the phone)
 	private String getMyPhoneNumberFromWhatsApp(){
 		String phoneNumber = null;
 		AccountManager am = AccountManager.get(getApplicationContext());
 		Account[] accounts = am.getAccounts();
 		for (Account ac : accounts) {
-		    String acname = ac.name;
+		    //String acname = ac.name;
 		    String actype = ac.type;
 		    // Take your time to look at all available accounts
 		    //System.out.println("Accounts : " + acname + ", " + actype);
-		    
 		    if(actype.contains("com.whatsapp")){
 		        phoneNumber = ac.name;
 		        //Toast.makeText(getApplicationContext(), "My Phone number:"+phoneNumber, Toast.LENGTH_SHORT).show();
 		    }
 		}
-		Log.d(debugTag,"in getMyPhoneNumberFromWhatsApp");
+		//Log.d(debugTag,"in getMyPhoneNumberFromWhatsApp");
 		return phoneNumber;
 	}
 }
