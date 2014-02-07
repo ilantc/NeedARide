@@ -43,7 +43,6 @@ public class DriverAddRideDetailsActivity extends Activity {
 		final EditText fromET = (EditText)findViewById(R.id.Driver_FromET); 
 		final EditText toET = (EditText)findViewById(R.id.Driver_ToET);
 		final TextView dateTV = (TextView)findViewById(R.id.Driver_DateTV);
-		final TextView DateTV = (TextView)findViewById(R.id.Driver_DateTV);
 		final Button Driver_availableSitsBT = (Button)findViewById(R.id.Driver_availableSitsBT);
 		
 		final ImageButton submitIMGBT = (ImageButton)findViewById(R.id.driverSubmitIMGBT);
@@ -91,7 +90,7 @@ public class DriverAddRideDetailsActivity extends Activity {
 					chooseDateIMGBT.animate().setInterpolator(sOvershooter).scaleX(1.5f).scaleY(1.5f);
 					chooseDateIMGBT.animate().setInterpolator(sOvershooter).scaleX(1f).scaleY(1f);
 //					Log.e("RideDetailsFragment", "chooseDateIMGBT button was clicked");
-					(new TimeDialogGetter(v.getContext())).showDialog(DateTV);
+					(new TimeDialogGetter(v.getContext())).showDialog(dateTV);
 				}
 				return false;
 			}
@@ -105,8 +104,30 @@ public class DriverAddRideDetailsActivity extends Activity {
 			}
 		});
 		
-		
-		
+		//Handling the number of available sits
+		ImageButton availableSitsPlus1IMGBT = (ImageButton)findViewById(R.id.Driver_availableSitsPlus1IMGBT);
+		ImageButton availableSitsMinus1IMGBT = (ImageButton)findViewById(R.id.Driver_availableSitsMinus1IMGBT);
+		final TextView availableSitsTV = (TextView)findViewById(R.id.Driver_availableSitsTV);
+		//Handling Plus1 button
+		//increase the available sits - max 7 
+		availableSitsPlus1IMGBT.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				int numberofAvailableSits = Integer.parseInt((String) availableSitsTV.getText());
+				if (numberofAvailableSits <= 7){
+					availableSitsTV.setText(numberofAvailableSits+1);
+				}
+			}
+		});
+		availableSitsMinus1IMGBT.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				int numberofAvailableSits = Integer.parseInt((String) availableSitsTV.getText());
+				if (numberofAvailableSits > 0){
+					availableSitsTV.setText(numberofAvailableSits-1);
+				}
+			}
+		});
 		
 		//Handling the submitIMGBT
 		//set the animation

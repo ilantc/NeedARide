@@ -45,4 +45,19 @@ public class Ride {
 			return false;
 		}
 	}
+		
+		public Boolean InsertToDB_old(){
+			try{
+				ClientAsync ca = new ClientAsync();
+				String userID = driverUserID;
+				String from = fromLocation.getFullString();
+				String to = toLocation.getFullString();
+				ca.execute("addnewride", userID,from,to,date);
+				return true;
+			}
+			catch(Exception e){
+				Log.e("Ride","could not insert to DB");
+				return false;
+			}
+	}
 }

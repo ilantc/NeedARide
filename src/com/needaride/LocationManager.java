@@ -166,7 +166,7 @@ public class LocationManager {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			Toast.makeText(c, "Can't find your current location make sure that you GPS is enable to optimize the App functionality\n" + e.getMessage(), Toast.LENGTH_LONG).show();
-			Log.d(dTag,"Exception: " + e.getMessage());
+			Log.e(dTag,"Exception: " + e.getMessage());
 		}
 		return addressArgs;
 	}
@@ -174,7 +174,7 @@ public class LocationManager {
 	
 	/* output is LatLng, 
 	 * and the parsed address in the returnAdress array that is given as an input */
-	private LatLng getLatLngFromAddress(String address, List<String> returnAdress) {
+	public LatLng getLatLngFromAddress(String address, List<String> returnAdress) {
 		List<Address> addresses;
 		LatLng 	loc_latlng = null;
 	    try {
