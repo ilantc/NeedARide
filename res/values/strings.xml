@@ -18,8 +18,8 @@
     <string name="title_activity_driver_planner">Private Car Driver Planner</string>
 
     <item name="maxNumOfSits" type="integer">9</item>
-    <item name="secsTillAutoComplete" type="integer">1</item>
-    <item name="secsForUpdateTextWhileTyping" type="integer">3</item>
+    <item name="secsTillAutoComplete" type="integer">2</item>
+    <item name="secsForUpdateTextWhileTyping" type="integer">4</item>
     <item name="secsForUpdateMarkerOnMap" type="integer">3</item>
     
 
@@ -28,7 +28,7 @@
     <string name="title_activity_splash_screen">Need A Ride</string>
     <string name="title_activity_map">Map</string>
     <string name="google_maps_api_key">AIzaSyCWLlAWum60ezNcNZhx1zOly9eYba5SVVo</string>
-    <string name="google_places_server_key">AIzaSyCSq2Ey6JGph4OCO8vve4Gj63i9heXnI6E</string>
+    <string name="google_places_server_key">AIzaSyAG4XcaQSWGTL7ML_HhFkZmKH0y1MVm9-w</string>
     <string name="title_activity_profile_details">Change Profile Details</string>
     <string name="title_activity_favorites">Favorites</string>
     <string name="title_activity_hitchhiker_ride_result">Hitchhiker Ride Results</string>

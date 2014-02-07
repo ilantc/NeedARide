@@ -68,8 +68,8 @@ public class RideLocation {
 		return mLatlng;
 	}
 
-	public void setLatlng(LatLng mLatlng) {
-		this.mLatlng = mLatlng;
+	public void setLatlng(LatLng Latlng) {
+		this.mLatlng = Latlng;
 	}
 
 	public String getCity() {
@@ -95,5 +95,4 @@ public class RideLocation {
 	public void setHouseNo(String mHouseNo) {
 		this.mHouseNo = mHouseNo;
 	}
-	
 }
