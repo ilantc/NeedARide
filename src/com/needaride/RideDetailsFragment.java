@@ -3,8 +3,11 @@ package com.needaride;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.example.needaride.R;
+import com.needaride.LocationManager.locationValues;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
@@ -26,6 +30,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Filter;
+import android.widget.Filter.FilterListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,8 +42,14 @@ public class RideDetailsFragment extends Fragment {
 	ToggleButton imHikerTB;
 	ToggleButton imDriverTB;
 	
+	// autocomp views
 	static AutoCompleteTextView fromAutoCompView;
 	static AutoCompleteTextView toAutoCompView;
+	
+	// flags for not autoCompleteting if a marker was placed
+	static boolean toMarkerWasPlaced = false;
+	static boolean fromMarkerWasPlaced = false;
+	
 	DecelerateInterpolator sDecelerator = new DecelerateInterpolator();
 	DecelerateInterpolator sOvershooter = new DecelerateInterpolator(10f);
 	TextView choosenDateTV;
@@ -90,58 +101,45 @@ public class RideDetailsFragment extends Fragment {
 		
 		fromAutoCompView = (AutoCompleteTextView) v.findViewById(R.id.fromET);
         fromAutoCompView.setAdapter(new PlacesAutoCompleteAdapter(v.getContext(), R.layout.list_item));
-        fromAutoCompView.addTextChangedListener(new autoCompManager(fromAutoCompView));
+        fromAutoCompView.addTextChangedListener(new autoCompManager(fromAutoCompView,locationValues.from));
+        fromAutoCompView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				fromMarkerWasPlaced = false;
+			}
+		});
         fromAutoCompView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 		        String str = (String) adapterView.getItemAtPosition(position);
 		        
-		        // remove old marker from map if it exists
-		        LocationManager.getinstance(view.getContext()).setFromLat(null);
-		        
 		        // set new string and marker
-		        LocationManager.getinstance(view.getContext()).setStr(str,"From");
+		        LocationManager.getinstance(view.getContext()).setStr(str,locationValues.from);
 		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
 		    }
-		});
-        
-//        fromAutoCompView.setOnFocusChangeListener(new OnFocusChangeListener() {	
-//			@Override
-//			public void onFocusChange(View v, boolean hasFocus) {
-//				if (false == hasFocus) {
-//					LocationManager.getinstance(v.getContext()).setFromStr(((AutoCompleteTextView) v).getText().toString());
-//				}
-//			}
-//		});
-        
-//        fromAutoCompView.onk
-        
+		});        
         
         toAutoCompView = (AutoCompleteTextView) v.findViewById(R.id.toET);
         toAutoCompView.setAdapter(new PlacesAutoCompleteAdapter(v.getContext(), R.layout.list_item));
-        toAutoCompView.addTextChangedListener(new autoCompManager(toAutoCompView));
+        toAutoCompView.addTextChangedListener(new autoCompManager(toAutoCompView,locationValues.to));
+        toAutoCompView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				toMarkerWasPlaced = false;
+			}
+		});
         toAutoCompView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 		        String str = (String) adapterView.getItemAtPosition(position);
 		        
-		        // remove old marker from map if it exists
-		        LocationManager.getinstance(view.getContext()).setToLat(null);
-		        
 		        // set new string and marker
-		        LocationManager.getinstance(view.getContext()).setStr(str,"To");
+		        LocationManager.getinstance(view.getContext()).setStr(str,locationValues.to);
 		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
 		    }
 		});
-//       toAutoCompView.setOnFocusChangeListener(new OnFocusChangeListener() {	
-//			@Override
-//			public void onFocusChange(View v, boolean hasFocus) {
-//				if (false == hasFocus) {
-//					LocationManager.getinstance(v.getContext()).setToStr(((AutoCompleteTextView) v).getText().toString());
-//				}
-//			}
-//		});
-//        
         
         final ImageButton chooseDateIMGBT = (ImageButton)v.findViewById(R.id.chooseDateIMGBT);
         chooseDateIMGBT.animate().setDuration(200);
@@ -220,8 +218,16 @@ public class RideDetailsFragment extends Fragment {
 //					Log.e("RideDetailsFragment", "submit button was clicked");
 					//swap fromTV and ToTv
 					String temp = getAddressFromFromTV();
-					setTextInFromAutoCompView(getAddressFromToTV());
-					setTextInToAutoCompView(temp);
+//					setTextInFromAutoCompView(getAddressFromToTV());
+//					setTextInToAutoCompView(temp);
+					
+					// switch the strings, but cancel the autocomplete 
+					// (this is not usualy done when calling setStr)
+					fromMarkerWasPlaced = true;
+					LocationManager.getinstance(getActivity()).setStr(getAddressFromToTV(), locationValues.from);
+					toMarkerWasPlaced = true;
+					LocationManager.getinstance(getActivity()).setStr(temp, locationValues.to);
+					
 				}
 				return false;
 			}
@@ -254,16 +260,21 @@ public class RideDetailsFragment extends Fragment {
 		
 		private CountDownTimer autoCompCDT;
 		private CharSequence text;
+		private locationValues type;
 		private long lastUpdateTime;
 		private long timeForUpdateTextWhileTyping;
+		private int autoCompTimeout;
 		
-		public autoCompManager(final AutoCompleteTextView autoCompView) {
-			int autoCompTimeout = getResources().getInteger(R.integer.secsTillAutoComplete);
+		public autoCompManager(final AutoCompleteTextView autoCompView, locationValues t) {
+			autoCompTimeout = getResources().getInteger(R.integer.secsTillAutoComplete);
 			lastUpdateTime = System.currentTimeMillis();
+			this.type = t;
 			
 			// count for auto completes during a typing "session" (to help him while he is typing long inputs)
 			timeForUpdateTextWhileTyping = (long) 1000 * getResources().getInteger(R.integer.secsForUpdateTextWhileTyping);
 			
+//			autoCompTimeout = 1000;
+//			timeForUpdateTextWhileTyping = 10000000;
 			autoCompCDT = new CountDownTimer((long) autoCompTimeout * 1000, (long) autoCompTimeout * 1000) {
 
 				@Override
@@ -271,27 +282,41 @@ public class RideDetailsFragment extends Fragment {
 
 				@Override
 				public void onFinish() {
-					// TODO Auto-generated method stub
-					Filter f = ((PlacesAutoCompleteAdapter) autoCompView.getAdapter()).getFilter();
-		        	Log.e("autoComp","sending req, s is: " + text);
-		        	f.filter(text);
-		        	lastUpdateTime = System.currentTimeMillis(); // remember last update
+					Log.d("locMngr","inside on finish, type is: " + type.toString() + " FmarkerwasPlaced = " + fromMarkerWasPlaced + " TmarkerwasPlaced = " + toMarkerWasPlaced);
+					//only filter if the text was changed not due to placing a marker
+					if ( 	(type.equals(locationValues.to) && toMarkerWasPlaced) || 
+							(type.equals(locationValues.from) && fromMarkerWasPlaced) ) {
+						return;
+					}
+					else {
+						Filter f = ((PlacesAutoCompleteAdapter) autoCompView.getAdapter()).getFilter();
+			        	Log.d("locMngr","sending req, s is: " + text);
+			        	f.filter(text);
+			        	lastUpdateTime = System.currentTimeMillis(); // remember last update
+					}
 				}
 			};			
 		}
 		
 		@Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-			
 			text = s;
-			
 			// cancel pending request if last update was done recently 
 			if (System.currentTimeMillis() - lastUpdateTime < timeForUpdateTextWhileTyping) {
 				autoCompCDT.cancel();
 			}
+			
+			// if  we got here from a "user click" - remove the marker
+			if ( (type.equals(locationValues.to) 		&& (! toMarkerWasPlaced)   ) || 
+				  (type.equals(locationValues.from) 	&& (! fromMarkerWasPlaced) )  )   {
+				LocationManager.getinstance(getActivity()).setLat(null, type);
+			}
+			
 			// start new timer
 			autoCompCDT.start();
         }
+
+		
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
         @Override
@@ -301,11 +326,9 @@ public class RideDetailsFragment extends Fragment {
 	//set text in the TV
 	public static void setTextInFromAutoCompView(String address){
 		fromAutoCompView.setText(address);
-		fromAutoCompView.requestFocus(View.FOCUS_DOWN);
 	}
 	public static void setTextInToAutoCompView(String address){
 		toAutoCompView.setText(address);
-		toAutoCompView.requestFocus(View.FOCUS_DOWN);
 	}
 	public static String getAddressFromToTV(){
 		return toAutoCompView.getText().toString();

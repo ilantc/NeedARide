@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.needaride.LocationManager.locationValues;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -30,7 +31,7 @@ GooglePlayServicesClient.ConnectionCallbacks,
 GooglePlayServicesClient.OnConnectionFailedListener {
 	
 LocationClient mLocationClient;
-LocationManager mLocationManager;
+//LocationManager mLocationManager;
 static Marker fromMarker;
 static Marker toMarker;
 static GoogleMap Map;
@@ -40,7 +41,7 @@ static GoogleMap Map;
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
 		mLocationClient = new LocationClient(this, this, this);
-		mLocationManager = LocationManager.getinstance(this);
+//		mLocationManager = LocationManager.getinstance(this);
 		
 		if (ConnectionResult.SUCCESS == GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext()) ){
 			Map = ((SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
@@ -49,14 +50,14 @@ static GoogleMap Map;
 			Map.setOnMapClickListener(new OnMapClickListener() {
 				@Override
 				public void onMapClick(final LatLng point) {
-					mLocationManager.onMapClick(point);				
+					LocationManager.getinstance(getBaseContext()).onMapClick(point);				
 				}
 			});
 			
 			Map.setOnMarkerClickListener(new OnMarkerClickListener() {
 				@Override
 				public boolean onMarkerClick(Marker marker) {					
-					return mLocationManager.onMarkerClick(marker);	
+					return LocationManager.getinstance(getBaseContext()).onMarkerClick(marker);	
 				}
 			});
 		}
@@ -86,7 +87,7 @@ static GoogleMap Map;
 			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 12);
 			Map.animateCamera(cameraUpdate);
 			//Set the FromTV address to the current location
-			mLocationManager.setFromLat(latLng);
+//			LocationManager.getinstance(getBaseContext()).setLat(latLng,locationValues.from);
 		}
 		catch(Exception e){
 			Toast.makeText(getApplicationContext(), "Can't find your current location", Toast.LENGTH_LONG).show();
@@ -161,25 +162,27 @@ static GoogleMap Map;
 		Log.e("MapActivity", "retrived from sheredPref: "+ destAddress);
 	}
   	
-	public static void addMarker(LatLng point, String type){
+	public static void addMarker(LatLng point, locationValues type){
 		if (null == point) {
-			if ("From" == type) {
+			Log.d("locMng","mapActivity: add marker, point = null, type = " + type.toString());
+			if (locationValues.from == type) {
 				// only remove the marker if it exists
 				if (null != fromMarker) {
 					fromMarker.remove();
 				}
 			}
-			else if ("To" == type) {
+			else if (locationValues.to == type) {
 				if (null != toMarker) {
 					toMarker.remove();
 				}
 			}
 		}
-		else if ("From" == type) {
-			fromMarker =  Map.addMarker(new MarkerOptions().position(point).title(type).icon(BitmapDescriptorFactory.fromResource(R.drawable.start_pin)));
+		else if (locationValues.from == type) {
+			Log.d("locMng","mapActivity: add marker, point = " + point.latitude + ", " + point.longitude + ", type = " + type.toString());
+			fromMarker =  Map.addMarker(new MarkerOptions().position(point).title(type.toString()).icon(BitmapDescriptorFactory.fromResource(R.drawable.start_pin)));
 		}
-		else if ("To" == type) {
-			toMarker =  Map.addMarker(new MarkerOptions().position(point).title(type).icon(BitmapDescriptorFactory.fromResource(R.drawable.finish_pin)));
+		else if (locationValues.to == type) {
+			toMarker =  Map.addMarker(new MarkerOptions().position(point).title(type.toString()).icon(BitmapDescriptorFactory.fromResource(R.drawable.finish_pin)));
 		}
 	}
 }
