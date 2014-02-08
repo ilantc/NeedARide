@@ -2,6 +2,8 @@ package com.needaride;
 
 import java.util.List;
 
+import android.util.Log;
+
 import com.google.android.gms.maps.model.LatLng;
 
 public class RideLocation {
@@ -28,13 +30,17 @@ public class RideLocation {
 	
 	public void setAllString(List<String> in) {
 		// use switch with fallthrough to make sure we don't get index out of bounds EX
+		Log.e("dddd444",in.toString());
 		switch (in.size()) {
 			case 3:
 				setCity(in.get(2));
+				Log.e("dddd22",in.get(2));
 			case 2:
 				setHouseNo(in.get(1));
+				Log.e("ddd11",in.get(1));
 			case 1:
 				setStreet(in.get(0));
+				Log.e("dddd00",in.get(0));
 			default:
 				break;
 		}
@@ -45,11 +51,13 @@ public class RideLocation {
 		// if we have a street name
 		if ("" != getStreet()) {
 			res += getStreet();
+			Log.e("1dddd",res);
 		}
 		
 		// if we have a house number, AND street
 		if ("" != getHouseNo() && "" != res) {
 			res += " " + getHouseNo();
+			Log.e("2dddd",res);
 		}
 		
 		// if we have a city
@@ -59,8 +67,9 @@ public class RideLocation {
 				res += delimiter;
 			}
 			res += getCity();
+			Log.e("3dddd",res);
 		}
-		
+		Log.e("4dddd",res);
 		return res;
 	}
 	

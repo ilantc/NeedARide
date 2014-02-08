@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:id="@+id/profileAndCommentsLL"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:orientation="horizontal"
@@ -21,21 +21,21 @@
             android:layout_height="wrap_content"
             android:layout_width="0dip"
             android:background="@null"
-            android:layout_weight="0.5"
-            android:src="@drawable/profile_pic" />
+            android:layout_weight="0.4"
+            android:src="@drawable/frog_ninja" />
 
 	    <LinearLayout
 	        android:id="@+id/Driver_commentsLL"
-	        android:layout_width="match_parent"
 	        android:layout_height="match_parent"
+	        android:layout_width="0dip"
 	        android:background="@drawable/black_mini_background"
+	        android:layout_weight="0.6"
 	        android:orientation="vertical" >
 	    
 		    <ImageView
 		        android:id="@+id/Driver_commentLogoIV"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:paddingTop="5dip"
 		        android:src="@drawable/comments" />
 
 		    <EditText
@@ -44,7 +44,6 @@
 		        android:layout_height="wrap_content"
 		        android:hint="Add Comment"
 		        android:textColor="@color/White" />
-
 	    </LinearLayout>
 	</LinearLayout>
     
@@ -128,12 +127,13 @@
 
         <TextView
             android:id="@+id/Driver_DateTV"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/Driver_DateTitleIV"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/Driver_DateTitleIV"
-            android:textColor="@color/White" />
+            android:textColor="@color/White" 
+            android:hint="Set time and date"/>
 
     </RelativeLayout>
 
@@ -164,41 +164,33 @@
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:textColor="@color/White"
-            android:src="@drawable/no_of_sits"
-            android:layout_weight="0.5"/>
-
-        <ImageButton
-            android:id="@+id/Driver_availableSitsPlus1IMGBT"
+            android:src="@drawable/num_of_sits"
+            android:textColor="@color/White" />
+		
+		<ImageButton
+            android:id="@+id/Driver_availableSitsMinus1IMGBT"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignBottom="@+id/Driver_availableSitsLogoIV"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/Driver_availableSitsLogoIV"
             android:background="@null"
-            android:src="@drawable/plus_icon" />
+            android:src="@drawable/minus_icon" />
         
         <EditText
             android:id="@+id/Driver_availableSitsET"
             android:layout_width="55dp"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/Driver_availableSitsPlus1IMGBT"
-            android:ems="10"
             android:inputType="number"
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:textColor="@color/White" />
-
-        <ImageButton
-            android:id="@+id/Driver_availableSitsMinus1IMGBT"
+		
+		<ImageButton
+            android:id="@+id/Driver_availableSitsPlus1IMGBT"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignBottom="@+id/Driver_availableSitsPlus1IMGBT"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/Driver_availableSitsTV"
             android:background="@null"
-            android:src="@drawable/minus_icon" />
+            android:src="@drawable/plus_icon" />
+        
 
     </LinearLayout>
 
@@ -209,17 +201,14 @@
         android:layout_below="@+id/Driver_availableSitsLL"
         android:layout_toLeftOf="@+id/driverSubmitIMGBT"
         android:background="@drawable/black_mini_background"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin" >
+        android:paddingRight="@dimen/activity_horizontal_margin" >
 
         <ImageView
             android:id="@+id/Driver_PriceTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:src="@drawable/from_icon"/>
+            android:src="@drawable/fee_icon"/>
 
         <EditText
             android:id="@+id/Driver_PriceET"

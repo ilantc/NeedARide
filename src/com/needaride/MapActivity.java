@@ -179,10 +179,10 @@ static GoogleMap Map;
 		}
 		else if (locationValues.from == type) {
 			Log.d("locMng","mapActivity: add marker, point = " + point.latitude + ", " + point.longitude + ", type = " + type.toString());
-			fromMarker =  Map.addMarker(new MarkerOptions().position(point).title(type.toString()).icon(BitmapDescriptorFactory.fromResource(R.drawable.start_pin)));
+			fromMarker =  Map.addMarker(new MarkerOptions().position(point).title(type.toString()).icon(BitmapDescriptorFactory.fromResource(R.drawable.start_pin_no_outline)));
 		}
 		else if (locationValues.to == type) {
-			toMarker =  Map.addMarker(new MarkerOptions().position(point).title(type.toString()).icon(BitmapDescriptorFactory.fromResource(R.drawable.finish_pin)));
+			toMarker =  Map.addMarker(new MarkerOptions().position(point).title(type.toString()).icon(BitmapDescriptorFactory.fromResource(R.drawable.finish_pin_no_outline)));
 		}
 	}
 }

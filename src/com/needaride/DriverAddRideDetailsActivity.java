@@ -112,18 +112,16 @@ public class DriverAddRideDetailsActivity extends Activity {
 		final EditText availableSitsET = (EditText)findViewById(R.id.Driver_availableSitsET);
 		availableSitsET.setText("1");
 		//Handling Plus1 button
-		//increase the available sits - max 7 
+		//increase the available sits - max 10 
 		availableSitsPlus1IMGBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String st = availableSitsET.getText().toString();
-				int numberofAvailableSits = Integer.parseInt(st);
-				Log.e("Driver","the number is:"+st);
-				Log.e("Driver","the number is:"+numberofAvailableSits);
-				Toast.makeText(getApplicationContext(), st, Toast.LENGTH_SHORT).show();
-				if (numberofAvailableSits <= 7){
-					numberofAvailableSits += numberofAvailableSits;
-					availableSitsET.setText(Integer.toString(numberofAvailableSits));
+				int numberofAvailableSits = Integer.parseInt(availableSitsET.getText().toString());
+				//Log.d("Driver","the number is:"+numberofAvailableSits);
+				//Toast.makeText(getApplicationContext(), st, Toast.LENGTH_SHORT).show();
+				if (numberofAvailableSits < 10){
+					numberofAvailableSits = Integer.parseInt(availableSitsET.getText().toString());
+					availableSitsET.setText(Integer.toString(++numberofAvailableSits));
 				}
 			}
 		});
@@ -132,9 +130,10 @@ public class DriverAddRideDetailsActivity extends Activity {
 			public void onClick(View v) {
 				String st = availableSitsET.getText().toString();
 				int numberofAvailableSits = Integer.parseInt(st);
+				//Log.d("Driver","the number is:"+numberofAvailableSits);
 				if (numberofAvailableSits > 0){
-					numberofAvailableSits -= numberofAvailableSits;
-					availableSitsET.setText(Integer.toString(numberofAvailableSits));
+					numberofAvailableSits = Integer.parseInt(availableSitsET.getText().toString());
+					availableSitsET.setText(Integer.toString(--numberofAvailableSits));
 				}
 			}
 		});

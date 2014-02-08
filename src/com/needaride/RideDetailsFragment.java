@@ -3,8 +3,10 @@ package com.needaride;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
 import com.example.needaride.R;
 import com.needaride.LocationManager.locationValues;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,8 +20,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,54 +32,40 @@ import android.widget.ToggleButton;
 
 public class RideDetailsFragment extends Fragment {
 	
-	ToggleButton imHikerTB;
-	ToggleButton imDriverTB;
-	
-	// autocomp views
+	// auto-complete views
 	static AutoCompleteTextViewWithDelay fromAutoCompView;
 	static AutoCompleteTextViewWithDelay toAutoCompView;
 	
 	DecelerateInterpolator sDecelerator = new DecelerateInterpolator();
 	DecelerateInterpolator sOvershooter = new DecelerateInterpolator(10f);
 	TextView choosenDateTV;
+	
+	//the default is that the user is a hiker
+	Boolean isDriver = false;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_ride_details_form,null);
 		
-		//Handling the kind of ride - Im the Driver or Hiker
-		//The user cannot set both toggles to off but can switch between them
-		final ToggleButton imHikerTB = (ToggleButton)v.findViewById(R.id.imHikerTB);
-		final ToggleButton imDriverTB = (ToggleButton)v.findViewById(R.id.imDriverTB);
-		//the default is that the user is a hiker
-		imHikerTB.setChecked(true);
-		imDriverTB.setChecked(false);
-		//When press on the imDriverTB set the imHikerTB to off
+		//Handling the kind of ride - if Driver or Hiker
+		//The user can switch between driver or hitchhiker
+		final ImageButton driverOrHitchhikerIMGBT = (ImageButton)v.findViewById(R.id.driverOrHitchhikerIMGBT);
+		
+		//When press on the driverOrHitchhikerIMGBT set the imHikerTB to off
 		//cannot turn off the toggle (can only choose the imHikerTB) 
-		imDriverTB.setOnClickListener(new OnClickListener() {
+		driverOrHitchhikerIMGBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (imHikerTB.isChecked()){
-					imHikerTB.setChecked(false);			
+				if (isDriver){
+					driverOrHitchhikerIMGBT.setImageResource(R.drawable.driver_off_hitchhiker_on);
+					isDriver = false;			
 				}
 				else{
-					imDriverTB.setChecked(true);
+					driverOrHitchhikerIMGBT.setImageResource(R.drawable.driver_on_hitchhiker_off);
+					isDriver = true;
 				}
 			}
 		});
-		//When press on the imHikerTB set the imDriver to off
-		//cannot turn off the toggle (can only choose the imDriverTB) 
-		imHikerTB.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (imDriverTB.isChecked()){
-					imDriverTB.setChecked(false);			
-				}
-				else{
-					imHikerTB.setChecked(true);
-				}
-			}
-		});
-		//Done handling with the choose ride toggles
+		//Done handling with the choose ride "toggles"
 		
 		choosenDateTV = (TextView)v.findViewById(R.id.choosenDateTV);
 		choosenDateTV.requestFocus();
@@ -116,7 +106,7 @@ public class RideDetailsFragment extends Fragment {
 			}
 		});
         
-        // this is the listener for thte filter list
+        // this is the listener for the filter list
         toAutoCompView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -168,7 +158,7 @@ public class RideDetailsFragment extends Fragment {
 					//if the fromAutoCompView and toAutoCompView fields are not empty
 					else {
 						//If the user chose to be the hitchHiker - look for relevant rides
-						if (imHikerTB.isChecked()){
+						if (!isDriver){
 							checkingForSimilarRidesFadeInIV.startAnimation(animationFadeIn);
 							Intent intent = new Intent();
 							intent.setClassName(getActivity(),"com.needaride.TakeARideActivity");

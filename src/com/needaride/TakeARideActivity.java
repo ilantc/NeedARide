@@ -21,7 +21,7 @@ public class TakeARideActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClassName(getApplication(),"com.example.needaride.ChooseRideResultActivity");
+				intent.setClassName(getApplication(),"com.needaride.ChooseRideResultActivity");
 				startActivity(intent);
 			}
 			

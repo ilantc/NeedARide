@@ -141,6 +141,7 @@ public class LocationManager {
 			setFromStr(str);
 		}
 		else if (locationValues.to == type) {
+			// remove old "to" marker from map if it exists
 			setLat(null,locationValues.to);
 			setToStr(str);
 		}
@@ -163,13 +164,14 @@ public class LocationManager {
 	private void setToStr(String toStr) {
 		List<String> addressArgs = new ArrayList<String>();
 		LatLng toLatLng = getLatLngFromAddress(toStr, addressArgs);
-		
+		Log.e("dTag","the address is "+toStr);
 		// set the output of latlng and address args in the mtorideLocation object 
 		mtoRideLocation.setLatlng(toLatLng);
 		mtoRideLocation.setAllString(addressArgs);
 		
 		// set the marker on the map and the text in TV
 		RideDetailsFragment.setTextInToAutoCompView(mtoRideLocation.getFullString());
+		Log.e("dTag","the address is "+mtoRideLocation.getFullString());
 		MapActivity.addMarker(mtoRideLocation.getLatlng(),locationValues.to);
 	}
 	
@@ -208,10 +210,16 @@ public class LocationManager {
 		        return null;
 		    }
 		    Address loc_address 	= addresses.get(0);
+		    Log.d(dTag,"address"+loc_address);
+		    //Log.d(dTag,"after sep address: out = '" + returnAdress.get(0) + "' , '" + returnAdress.get(1) + "'");
 		    loc_latlng  			= new LatLng(loc_address.getLatitude(), loc_address.getLongitude());
 		    List<String> outAdress 	= seperateAdressToStreetAndNo(loc_address.getAddressLine(0));
 		    returnAdress.addAll(outAdress);
-		    Log.d(dTag," after sep address: out = '" + returnAdress.get(0) + "' , '" + returnAdress.get(1) + "'");
+		    //Add the city and state 
+		    ////////////***************** suppose to add only the city without the state************////////////
+		    returnAdress.add(", "+addresses.get(1));
+		    //Log.d(dTag,"address " + returnAdress);
+		    Log.d(dTag,"after sep address: out = '" + returnAdress.get(0) + "' , '" + returnAdress.get(1) + "'");
 	    } catch (IOException e) {
 	    	Log.e(dTag,e.getMessage());
 		}
