@@ -9,6 +9,7 @@ import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -51,6 +52,9 @@ public class LocationManager {
 		mtoRideLocation 	= new RideLocation(null, "", "", "");
 		this.c = c;
 		mGeocoder = new Geocoder(c, Locale.getDefault());
+		// the next line somehow causes the geoCoder to work the first time we need it to work
+		// instead of throwing an exception
+		Geocoder.isPresent();
 	}
 	
 	public static LocationManager getinstance(Context c) {
@@ -102,11 +106,12 @@ public class LocationManager {
 		}
 		else if (locationValues.to == type) {
 			setToLat(latLng);
-		}
+		}		
 	}
 	
 	private void setToLat(LatLng toLatLng) {
 		mtoRideLocation.setLatlng(toLatLng);
+
 		if (null == mtoRideLocation.getLatlng()) {
 			// remove the marker from the map
 			MapActivity.addMarker(null, locationValues.to, c);
@@ -122,6 +127,7 @@ public class LocationManager {
 	
 	private void setFromLat(LatLng fromLatLng) {
 		mfromRideLocation.setLatlng(fromLatLng);
+
 		if (null == mfromRideLocation.getLatlng()) {
 			// remove the marker from the map
 			MapActivity.addMarker(null,locationValues.from, c);

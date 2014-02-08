@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 public class MapActivity extends FragmentActivity implements
@@ -121,6 +122,7 @@ static GoogleMap Map;
         // Connect the client.
         mLocationClient.connect();
         SetToAddressFromSharedPreferences();
+
     }
 
     //Called when the Activity is no longer visible.

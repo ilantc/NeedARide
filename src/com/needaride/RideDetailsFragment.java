@@ -7,9 +7,12 @@ import java.util.Locale;
 import com.example.needaride.R;
 import com.needaride.LocationManager.locationValues;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +22,7 @@ import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
+import android.view.inputmethod.InputMethodManager;
 import android.view.ViewGroup;
 import android.webkit.WebView.FindListener;
 import android.widget.AdapterView;
@@ -82,28 +86,52 @@ public class RideDetailsFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				((AutoCompleteTextViewWithDelay) v).setAutoComplete(true);
+				Log.d("", "onClick - autocomp is " + ((AutoCompleteTextViewWithDelay) v).isAutoCompleteOn() );
 			}
 		});
         fromAutoCompView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 		        String str = (String) adapterView.getItemAtPosition(position);
-		        
+		        // set autocomp off
+		        fromAutoCompView.setAutoComplete(false);
 		        // set new string and marker
 		        LocationManager.getinstance(view.getContext()).setStr(str,locationValues.from);
 		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
 		    }
-		});        
+		});
+        fromAutoCompView.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				Log.d("", "onTextChanged - autocomp is " + fromAutoCompView.isAutoCompleteOn() 
+						+ "text is: " + s);
+				// if autocomp is not on - hide the soft keyboard
+				if (! fromAutoCompView.isAutoCompleteOn()) {
+			        hideKeyBoard();
+				}
+				// if it is on - we need to make sure that the marker is removed
+				else {
+					LocationManager.getinstance(getActivity()).setLat(null, locationValues.from);
+				}
+			}
+			@Override
+			public void beforeTextChanged(CharSequence s, int st, int ct,int aftr) {}
+			
+			@Override
+			public void afterTextChanged(Editable s) {}
+        });
         
         toAutoCompView = (AutoCompleteTextViewWithDelay) v.findViewById(R.id.toET);
         toAutoCompView.setAdapter(new PlacesAutoCompleteAdapter(v.getContext(), R.layout.list_item));
-        toAutoCompView.setOnClickListener(new OnClickListener() {
-			
+        toAutoCompView.setOnClickListener(new OnClickListener() {	
         	// on click - allow auto complete
 			@Override
 			public void onClick(View v) {
 				((AutoCompleteTextViewWithDelay) v).setAutoComplete(true);
+				Log.d("", "onClick - autocomp is " + ((AutoCompleteTextViewWithDelay) v).isAutoCompleteOn() );
 			}
+			
 		});
         
         // this is the listener for the filter list
@@ -111,11 +139,34 @@ public class RideDetailsFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 		        String str = (String) adapterView.getItemAtPosition(position);
-		        
+		        // set autocomp off
+		        toAutoCompView.setAutoComplete(false);
 		        // set new string and marker
 		        LocationManager.getinstance(view.getContext()).setStr(str,locationValues.to);
 		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
 		    }
+		});
+        toAutoCompView.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				Log.d("", "onTextChanged - autocomp is " + toAutoCompView.isAutoCompleteOn() 
+						+ " text is: " + s);
+				// if autocomp is not on - hide the soft keyboard
+				if (! toAutoCompView.isAutoCompleteOn()) {
+					hideKeyBoard();
+				}
+				// if it is on - we need to make sure that the marker is removed
+				else {
+					LocationManager.getinstance(getActivity()).setLat(null, locationValues.to);
+				}
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int st, int ct,int aftr) {}
+			
+			@Override
+			public void afterTextChanged(Editable s) {}
 		});
         
         final ImageButton chooseDateIMGBT = (ImageButton)v.findViewById(R.id.chooseDateIMGBT);
@@ -226,6 +277,13 @@ public class RideDetailsFragment extends Fragment {
 	 		}
 	 		formattedTime = currHour + ":" + today.minute;
 	 		choosenDateTV.setText(formattedDate + " " + formattedTime);
+	}
+	
+	private void hideKeyBoard() {
+	    InputMethodManager inputManager = (InputMethodManager)            
+	    		  getActivity().getSystemService(Context.INPUT_METHOD_SERVICE); 
+	    		    inputManager.hideSoftInputFromWindow(getActivity().findViewById(android.R.id.content).getWindowToken()
+	    		    		,InputMethodManager.HIDE_NOT_ALWAYS);
 	}
 	
 	//set text in the TV
