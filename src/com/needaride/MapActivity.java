@@ -1,5 +1,7 @@
 package com.needaride;
 
+import java.util.List;
+
 import com.example.needaride.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -13,10 +15,12 @@ import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.needaride.LocationManager.locationValues;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.location.Location;
@@ -112,8 +116,7 @@ static GoogleMap Map;
 		//Focusing TelAviv
         //LatLng initLatlng = new LatLng(32.06632, 34.77782);
 		//Focusing Technion
-        LatLng initLatlng = new LatLng(32.77677, 35.02312);
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(initLatlng, 14);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(LocationManager.initLatlng, 14);
 		Map.animateCamera(cameraUpdate);
         // Connect the client.
         mLocationClient.connect();
@@ -162,7 +165,7 @@ static GoogleMap Map;
 		Log.e("MapActivity", "retrived from sheredPref: "+ destAddress);
 	}
   	
-	public static void addMarker(LatLng point, locationValues type){
+	public static void addMarker(LatLng point, locationValues type, Context c){
 		if (null == point) {
 			Log.d("locMng","mapActivity: add marker, point = null, type = " + type.toString());
 			if (locationValues.from == type) {
@@ -184,5 +187,32 @@ static GoogleMap Map;
 		else if (locationValues.to == type) {
 			toMarker =  Map.addMarker(new MarkerOptions().position(point).title(type.toString()).icon(BitmapDescriptorFactory.fromResource(R.drawable.finish_pin_no_outline)));
 		}
+		fixZoom(c);
+	}
+	
+	private static void fixZoom(Context c) {
+		
+	    List<LatLng> points = LocationManager.getinstance(c).getPointsForMapZoom();
+	    CameraUpdate cu; 
+	    
+	    // if more than one point - move the camera to contain all points
+	    if (points.size() > 1) {
+		    LatLngBounds.Builder bc = new LatLngBounds.Builder();
+
+		    for (LatLng item : points) {
+		        bc.include(item);
+		    }
+		    cu = CameraUpdateFactory.newLatLngBounds(bc.build(), 70);
+	    }
+	    // only one point - move the camera to contain this point with fixed zoom level of 14
+	    else if (points.size() == 1){
+	    	cu = CameraUpdateFactory.newLatLngZoom(points.get(0), 14);
+	    }
+	    // should never get here as there is a default point in LocationManager
+	    else {
+	    	Log.e("","no points were given to zoom");
+	    	return;
+	    }
+	    Map.animateCamera(cu);
 	}
 }

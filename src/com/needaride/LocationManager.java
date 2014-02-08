@@ -21,6 +21,8 @@ import com.google.android.gms.maps.model.Marker;
 
 public class LocationManager {
 	
+	public static LatLng initLatlng = new LatLng(32.77677, 35.02312);
+	
 	public static enum locationValues {
 		from,to;
 		
@@ -107,14 +109,14 @@ public class LocationManager {
 		mtoRideLocation.setLatlng(toLatLng);
 		if (null == mtoRideLocation.getLatlng()) {
 			// remove the marker from the map
-			MapActivity.addMarker(null, locationValues.to);
+			MapActivity.addMarker(null, locationValues.to, c);
 		}
 		else {
 			// update the text in the TV
 			List<String> toArgs = getTextFromLatlng(mtoRideLocation.getLatlng());
 			mtoRideLocation.setAllString(toArgs);
 			RideDetailsFragment.setTextInToAutoCompView(mtoRideLocation.getFullString());
-			MapActivity.addMarker(mtoRideLocation.getLatlng(),locationValues.to);
+			MapActivity.addMarker(mtoRideLocation.getLatlng(),locationValues.to, c);
 		}
 	}
 	
@@ -122,14 +124,14 @@ public class LocationManager {
 		mfromRideLocation.setLatlng(fromLatLng);
 		if (null == mfromRideLocation.getLatlng()) {
 			// remove the marker from the map
-			MapActivity.addMarker(null,locationValues.from);
+			MapActivity.addMarker(null,locationValues.from, c);
 		}
 		else {
 			// update the text in the TV
 			List<String> fromArgs = getTextFromLatlng(mfromRideLocation.getLatlng());
 			mfromRideLocation.setAllString(fromArgs);
 			RideDetailsFragment.setTextInFromAutoCompView(mfromRideLocation.getFullString());
-			MapActivity.addMarker(mfromRideLocation.getLatlng(),locationValues.from);
+			MapActivity.addMarker(mfromRideLocation.getLatlng(),locationValues.from, c);
 		}
 	}
 	
@@ -158,7 +160,7 @@ public class LocationManager {
 		Log.d(dTag," after  setAllString, full Adress is: '" + mfromRideLocation.getFullString() + "'");
 		// set the marker on the map and the text in TV
 		RideDetailsFragment.setTextInFromAutoCompView(mfromRideLocation.getFullString());
-		MapActivity.addMarker(mfromRideLocation.getLatlng(),locationValues.from);
+		MapActivity.addMarker(mfromRideLocation.getLatlng(),locationValues.from, c);
 	}
 			
 	private void setToStr(String toStr) {
@@ -172,7 +174,7 @@ public class LocationManager {
 		// set the marker on the map and the text in TV
 		RideDetailsFragment.setTextInToAutoCompView(mtoRideLocation.getFullString());
 		Log.e("dTag","the address is "+mtoRideLocation.getFullString());
-		MapActivity.addMarker(mtoRideLocation.getLatlng(),locationValues.to);
+		MapActivity.addMarker(mtoRideLocation.getLatlng(),locationValues.to, c);
 	}
 	
 	
@@ -217,7 +219,12 @@ public class LocationManager {
 		    //Add the street and number
 		    returnAdress.addAll(outAdress);
 		    //Add the city and state 
-		    returnAdress.add(loc_address.getAddressLine(1));
+		    if (null == loc_address.getAddressLine(1)) {
+		    	returnAdress.add("");
+		    }
+		    else {
+		    	returnAdress.add(loc_address.getAddressLine(1));		    	
+		    }
 		    Log.d(dTag,"after sep address: out = '" + returnAdress.get(0) + "' , '" + returnAdress.get(1) + "'");
 	    } catch (IOException e) {
 	    	Log.e(dTag,e.getMessage());
@@ -245,6 +252,21 @@ public class LocationManager {
 		out.set(0, streetRes[0].trim());
 		Log.d(dTag,"sep address: out = '" + out.get(0) + "' , '" + out.get(1) + "'\n" + 
 				   "Original string is: '" + address + "'");
+		return out;
+	}
+	
+	public List<LatLng> getPointsForMapZoom() {
+		List<LatLng> out = new ArrayList<LatLng>();
+		if (null != mfromRideLocation.getLatlng()) {
+			out.add(mfromRideLocation.getLatlng());
+		}
+		if (null != mtoRideLocation.getLatlng()) {
+			out.add(mtoRideLocation.getLatlng());
+		}
+		// default is the initLatLng
+		if (out.isEmpty()) {
+			out.add(initLatlng);
+		}
 		return out;
 	}
 }
