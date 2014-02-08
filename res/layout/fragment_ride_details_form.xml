@@ -48,7 +48,7 @@
                 android:src="@drawable/from_icon"
                 android:layout_centerVertical="true"/>
 
-            <AutoCompleteTextView
+            <com.needaride.AutoCompleteTextViewWithDelay
                 android:id="@+id/fromET"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                 android:layout_alignTop="@+id/toET"
                 android:layout_alignBottom="@+id/toET"/>
 
-            <AutoCompleteTextView
+            <com.needaride.AutoCompleteTextViewWithDelay
                 android:id="@+id/toET"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -89,8 +89,7 @@
                 android:hint="Destination"
                 android:inputType="text"
                 android:textColor="@color/White"
-                android:textColorHint="@color/hint_color" >
-            </AutoCompleteTextView>
+                android:textColorHint="@color/hint_color" />
         </RelativeLayout>
         
 		<RelativeLayout

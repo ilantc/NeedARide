@@ -63,15 +63,15 @@ public class LocationManager {
 	public void onMapClick(final LatLng point) {
 		if (null == mfromRideLocation.getLatlng()) {
 			// flag autocomp view to not auto complete
-			RideDetailsFragment.fromMarkerWasPlaced = true;
-			Log.e(dTag,"1: fromMarkerWasPlaced = " + RideDetailsFragment.fromMarkerWasPlaced);
+			RideDetailsFragment.fromAutoCompView.setAutoComplete(false);
+			Log.e(dTag,"1: fromAutoCompOn is: " + RideDetailsFragment.fromAutoCompView.isAutoCompleteOn());
 			setFromLat(point);
-			Log.e(dTag,"2: fromMarkerWasPlaced = " + RideDetailsFragment.fromMarkerWasPlaced);
+			Log.e(dTag,"2: fromAutoCompOn is: " + RideDetailsFragment.fromAutoCompView.isAutoCompleteOn());
 		}
 		else if (null == mtoRideLocation.getLatlng()) {
-			Log.e(dTag,"1: toMarkerWasPlaced = " + RideDetailsFragment.toMarkerWasPlaced);
-			RideDetailsFragment.toMarkerWasPlaced = true;
-			Log.e(dTag,"2: toMarkerWasPlaced = " + RideDetailsFragment.toMarkerWasPlaced);
+			Log.e(dTag,"1: toAutoCompOn is: " + RideDetailsFragment.toAutoCompView.isAutoCompleteOn());
+			RideDetailsFragment.toAutoCompView.setAutoComplete(false);
+			Log.e(dTag,"2: toAutoCompOn is: " + RideDetailsFragment.toAutoCompView.isAutoCompleteOn());
 			setToLat(point);
 		}	
 	}
@@ -199,7 +199,7 @@ public class LocationManager {
 	
 	/* output is LatLng, 
 	 * and the parsed address in the returnAdress array that is given as an input */
-	public LatLng getLatLngFromAddress(String address, List<String> returnAdress) {
+	private LatLng getLatLngFromAddress(String address, List<String> returnAdress) {
 		List<Address> addresses;
 		LatLng 	loc_latlng = null;
 	    try {
