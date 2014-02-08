@@ -33,6 +33,7 @@ import android.widget.Toast;
 public class DriverAddRideDetailsActivity extends Activity {
 	DecelerateInterpolator sDecelerator = new DecelerateInterpolator();
 	DecelerateInterpolator sOvershooter = new DecelerateInterpolator(10f);
+	Boolean isSuggestSimilarIMGBTchecked = false;
 	
 	private String debugTag = "DriverAddRideDetailsActivity";
 	@Override
@@ -43,7 +44,7 @@ public class DriverAddRideDetailsActivity extends Activity {
 		final EditText fromET = (EditText)findViewById(R.id.Driver_FromET); 
 		final EditText toET = (EditText)findViewById(R.id.Driver_ToET);
 		final TextView dateTV = (TextView)findViewById(R.id.Driver_DateTV);
-		final Button Driver_availableSitsBT = (Button)findViewById(R.id.Driver_availableSitsBT);
+		//
 		
 		final ImageButton submitIMGBT = (ImageButton)findViewById(R.id.driverSubmitIMGBT);
 		//Checks the from,to,date data was sent from the rideDetailsFragment
@@ -96,38 +97,64 @@ public class DriverAddRideDetailsActivity extends Activity {
 			}
 		});
         
-        
-		Driver_availableSitsBT.setOnClickListener(new OnClickListener() {
+        //Popup the dialog box to chose number
+/*		final Button Driver_availableSitsBT = (Button)findViewById(R.id.Driver_availableSitsBT);	
+ 		Driver_availableSitsBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				(new NumberPickerDialogGetter(v.getContext(), Driver_availableSitsBT)).showDialog();
 			}
 		});
-		
+	*/	
 		//Handling the number of available sits
 		ImageButton availableSitsPlus1IMGBT = (ImageButton)findViewById(R.id.Driver_availableSitsPlus1IMGBT);
 		ImageButton availableSitsMinus1IMGBT = (ImageButton)findViewById(R.id.Driver_availableSitsMinus1IMGBT);
-		final TextView availableSitsTV = (TextView)findViewById(R.id.Driver_availableSitsTV);
+		final EditText availableSitsET = (EditText)findViewById(R.id.Driver_availableSitsET);
+		availableSitsET.setText("1");
 		//Handling Plus1 button
 		//increase the available sits - max 7 
 		availableSitsPlus1IMGBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				int numberofAvailableSits = Integer.parseInt((String) availableSitsTV.getText());
+				String st = availableSitsET.getText().toString();
+				int numberofAvailableSits = Integer.parseInt(st);
+				Log.e("Driver","the number is:"+st);
+				Log.e("Driver","the number is:"+numberofAvailableSits);
+				Toast.makeText(getApplicationContext(), st, Toast.LENGTH_SHORT).show();
 				if (numberofAvailableSits <= 7){
-					availableSitsTV.setText(numberofAvailableSits+1);
+					numberofAvailableSits += numberofAvailableSits;
+					availableSitsET.setText(Integer.toString(numberofAvailableSits));
 				}
 			}
 		});
 		availableSitsMinus1IMGBT.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				int numberofAvailableSits = Integer.parseInt((String) availableSitsTV.getText());
+				String st = availableSitsET.getText().toString();
+				int numberofAvailableSits = Integer.parseInt(st);
 				if (numberofAvailableSits > 0){
-					availableSitsTV.setText(numberofAvailableSits-1);
+					numberofAvailableSits -= numberofAvailableSits;
+					availableSitsET.setText(Integer.toString(numberofAvailableSits));
 				}
 			}
 		});
+		
+		final ImageButton suggestSimilarIMGBT = (ImageButton)findViewById(R.id.Driver_SuggestSimilarIMGBT);
+		suggestSimilarIMGBT.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(isSuggestSimilarIMGBTchecked){
+					suggestSimilarIMGBT.setImageResource(R.drawable.find_similar_rides_un_checked);
+					isSuggestSimilarIMGBTchecked = false;
+				}
+				else{
+					suggestSimilarIMGBT.setImageResource(R.drawable.find_similar_rides_checked);
+					isSuggestSimilarIMGBTchecked = true;
+				}
+				
+			}
+		});
+		
 		
 		//Handling the submitIMGBT
 		//set the animation
