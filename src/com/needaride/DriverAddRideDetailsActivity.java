@@ -42,7 +42,9 @@ public class DriverAddRideDetailsActivity extends Activity {
 		setContentView(R.layout.activity_driver_add_ride_details);
 		
 		final EditText fromET = (EditText)findViewById(R.id.Driver_FromET); 
+		fromET.setText(LocationManager.getinstance(getApplicationContext()).mfromRideLocation.getFullString());
 		final EditText toET = (EditText)findViewById(R.id.Driver_ToET);
+		toET.setText(LocationManager.getinstance(getApplicationContext()).mtoRideLocation.getFullString());
 		final TextView dateTV = (TextView)findViewById(R.id.Driver_DateTV);
 		//
 		
@@ -51,8 +53,8 @@ public class DriverAddRideDetailsActivity extends Activity {
 		//and put it into their fields in the current activity
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-		    fromET.setText(extras.getString("From"));
-		    toET.setText(extras.getString("To"));
+			//fromET.setText(extras.getString("From"));
+		    //toET.setText(extras.getString("To"));
 		    dateTV.setText(extras.getString("Date"));
 		}
 		

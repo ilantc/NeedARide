@@ -37,8 +37,8 @@ public class LocationManager {
 	
 	private static LocationManager instance = null;
 	
-	private RideLocation mfromRideLocation;
-	private RideLocation mtoRideLocation;
+	public RideLocation mfromRideLocation;
+	public RideLocation mtoRideLocation;
 	private String dTag = "locMngr";
 	
 	private Geocoder mGeocoder;
@@ -214,11 +214,10 @@ public class LocationManager {
 		    //Log.d(dTag,"after sep address: out = '" + returnAdress.get(0) + "' , '" + returnAdress.get(1) + "'");
 		    loc_latlng  			= new LatLng(loc_address.getLatitude(), loc_address.getLongitude());
 		    List<String> outAdress 	= seperateAdressToStreetAndNo(loc_address.getAddressLine(0));
+		    //Add the street and number
 		    returnAdress.addAll(outAdress);
 		    //Add the city and state 
-		    ////////////***************** suppose to add only the city without the state************////////////
-		    returnAdress.add(", "+addresses.get(1));
-		    //Log.d(dTag,"address " + returnAdress);
+		    returnAdress.add(loc_address.getAddressLine(1));
 		    Log.d(dTag,"after sep address: out = '" + returnAdress.get(0) + "' , '" + returnAdress.get(1) + "'");
 	    } catch (IOException e) {
 	    	Log.e(dTag,e.getMessage());
