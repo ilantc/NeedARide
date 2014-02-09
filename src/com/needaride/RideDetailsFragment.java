@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import com.example.needaride.R;
+import com.google.android.gms.internal.ev;
 import com.needaride.LocationManager.locationValues;
 
 import android.content.Context;
@@ -19,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
@@ -34,7 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class RideDetailsFragment extends Fragment {
+public class RideDetailsFragment extends Fragment implements OnTouchListener {
 	
 	// auto-complete views
 	static AutoCompleteTextViewWithDelay fromAutoCompView;
@@ -79,26 +81,19 @@ public class RideDetailsFragment extends Fragment {
 		final Animation animationFadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fadein);
 		
 		fromAutoCompView = (AutoCompleteTextViewWithDelay) v.findViewById(R.id.fromET);
-        fromAutoCompView.setAdapter(new PlacesAutoCompleteAdapter(v.getContext(), R.layout.list_item));
-        fromAutoCompView.setOnClickListener(new OnClickListener() {
-			
-        	// on click - allow auto complete
-			@Override
-			public void onClick(View v) {
-				((AutoCompleteTextViewWithDelay) v).setAutoComplete(true);
-				Log.d("", "onClick - autocomp is " + ((AutoCompleteTextViewWithDelay) v).isAutoCompleteOn() );
-			}
-		});
+        fromAutoCompView.setAdapter(new PlacesAutoCompleteAdapter(v.getContext(), R.layout.filter_row_layout));
+        // using on touch listener as onClick listener sometimes misses callbacks (probably related to the adaptor
+        fromAutoCompView.setOnTouchListener(this);
         fromAutoCompView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-		        String str = (String) adapterView.getItemAtPosition(position);
-		        // set autocomp off
-		        fromAutoCompView.setAutoComplete(false);
-		        // set new string and marker
-		        LocationManager.getinstance(view.getContext()).setStr(str,locationValues.from);
-		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
-		    }
+        	@Override
+        	public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                String str = (String) adapterView.getItemAtPosition(position);
+                // set autocomp off
+                fromAutoCompView.setAutoComplete(false);
+                // set new string and marker
+                LocationManager.getinstance(view.getContext()).setStr(str,locationValues.from);
+                Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+            }
 		});
         fromAutoCompView.addTextChangedListener(new TextWatcher() {
 			
@@ -123,28 +118,21 @@ public class RideDetailsFragment extends Fragment {
         });
         
         toAutoCompView = (AutoCompleteTextViewWithDelay) v.findViewById(R.id.toET);
-        toAutoCompView.setAdapter(new PlacesAutoCompleteAdapter(v.getContext(), R.layout.list_item));
-        toAutoCompView.setOnClickListener(new OnClickListener() {	
-        	// on click - allow auto complete
-			@Override
-			public void onClick(View v) {
-				((AutoCompleteTextViewWithDelay) v).setAutoComplete(true);
-				Log.d("", "onClick - autocomp is " + ((AutoCompleteTextViewWithDelay) v).isAutoCompleteOn() );
-			}
-			
-		});
-        
+        toAutoCompView.setAdapter(new PlacesAutoCompleteAdapter(v.getContext(), R.layout.filter_row_layout));
+        // using on touch listener as onClick listener sometimes misses callbacks (probably related to the adaptor
+        toAutoCompView.setOnTouchListener(this);
         // this is the listener for the filter list
         toAutoCompView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-		        String str = (String) adapterView.getItemAtPosition(position);
-		        // set autocomp off
-		        toAutoCompView.setAutoComplete(false);
-		        // set new string and marker
-		        LocationManager.getinstance(view.getContext()).setStr(str,locationValues.to);
-		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
-		    }
+
+        	@Override
+        	public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                String str = (String) adapterView.getItemAtPosition(position);
+                // set autocomp off
+                toAutoCompView.setAutoComplete(false);
+                // set new string and marker
+                LocationManager.getinstance(view.getContext()).setStr(str,locationValues.to);
+                Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+            }
 		});
         toAutoCompView.addTextChangedListener(new TextWatcher() {
 			
@@ -191,7 +179,6 @@ public class RideDetailsFragment extends Fragment {
         submitIMGBT.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				// TODO Auto-generated method stub
 				if (event.getAction() == MotionEvent.ACTION_DOWN){
 					submitIMGBT.animate().setInterpolator(sDecelerator).scaleX(.7f).scaleY(.7f);
 				}
@@ -284,6 +271,15 @@ public class RideDetailsFragment extends Fragment {
 	    		  getActivity().getSystemService(Context.INPUT_METHOD_SERVICE); 
 	    		    inputManager.hideSoftInputFromWindow(getActivity().findViewById(android.R.id.content).getWindowToken()
 	    		    		,InputMethodManager.HIDE_NOT_ALWAYS);
+	}
+	
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		if (event.getAction() == MotionEvent.ACTION_UP) {
+			((AutoCompleteTextViewWithDelay) v).setAutoComplete(true);
+			Log.d("", "onTouch - autocomp is " + ((AutoCompleteTextViewWithDelay) v).isAutoCompleteOn() );
+		}
+		return false;
 	}
 	
 	//set text in the TV

@@ -40,8 +40,8 @@ public class LocationManager {
 	
 	private static LocationManager instance = null;
 	
-	public RideLocation mfromRideLocation;
-	public RideLocation mtoRideLocation;
+	private RideLocation mfromRideLocation;
+	private RideLocation mtoRideLocation;
 	private String dTag = "locMngr";
 	
 	private Geocoder mGeocoder;
@@ -54,7 +54,8 @@ public class LocationManager {
 		mGeocoder = new Geocoder(c, Locale.getDefault());
 		// the next line somehow causes the geoCoder to work the first time we need it to work
 		// instead of throwing an exception
-		Geocoder.isPresent();
+		Toast.makeText(c, "geoCoder ispresent = " + Geocoder.isPresent(), Toast.LENGTH_SHORT ).show();
+		
 	}
 	
 	public static LocationManager getinstance(Context c) {
@@ -274,5 +275,12 @@ public class LocationManager {
 			out.add(initLatlng);
 		}
 		return out;
+	}
+	
+	public RideLocation getFromRideLocation() {
+		return mfromRideLocation;
+	}
+	public RideLocation getToRideLocation() {
+		return mtoRideLocation;
 	}
 }

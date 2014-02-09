@@ -1,5 +1,9 @@
 package com.needaride;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 import com.example.needaride.R;
 
 import android.os.Bundle;
@@ -8,12 +12,14 @@ import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
 import android.telephony.TelephonyManager;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -35,21 +41,10 @@ public class DriverAddRideDetailsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_driver_add_ride_details);
 		
-<<<<<<< HEAD
-		final EditText commentET = (EditText)findViewById(R.id.Driver_commentET);
-		
-		final EditText priceET = (EditText)findViewById(R.id.Driver_PriceET);
-		
-		final TextView fromET = (TextView)findViewById(R.id.Driver_FromET); 
-		fromET.setText(LocationManager.getinstance(getApplicationContext()).mfromRideLocation.getFullString());
-		final TextView toTV = (TextView)findViewById(R.id.Driver_ToTV);
-		toTV.setText(LocationManager.getinstance(getApplicationContext()).mtoRideLocation.getFullString());
-=======
 		final EditText fromET = (EditText)findViewById(R.id.Driver_FromET); 
 		fromET.setText(LocationManager.getinstance(getApplicationContext()).getFromRideLocation().getFullString());
 		final EditText toET = (EditText)findViewById(R.id.Driver_ToET);
 		toET.setText(LocationManager.getinstance(getApplicationContext()).getToRideLocation().getFullString());
->>>>>>> a4ad3b1c5db099b3ed5097193ba1c749fc8a1962
 		final TextView dateTV = (TextView)findViewById(R.id.Driver_DateTV);
 		//
 		
@@ -59,11 +54,11 @@ public class DriverAddRideDetailsActivity extends Activity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			//fromET.setText(extras.getString("From"));
-		    //toTV.setText(extras.getString("To"));
+		    //toET.setText(extras.getString("To"));
 		    dateTV.setText(extras.getString("Date"));
 		}
 		
-		//When pressing the switch button it swaps the FromET and toTV fields
+		//When pressing the switch button it swaps the FromET and ToET fields
         final ImageButton switchIMGBT = (ImageButton)findViewById(R.id.Driver_SwitchIMGBT);
         switchIMGBT.animate().setDuration(200);
         switchIMGBT.setOnTouchListener(new View.OnTouchListener() {
@@ -77,8 +72,8 @@ public class DriverAddRideDetailsActivity extends Activity {
 //					Log.e("RideDetailsFragment", "submit button was clicked");
 					//swap fromTV and ToTv
 					String temp = fromET.getText().toString();
-					fromET.setText(toTV.getText().toString());
-					toTV.setText((temp));
+					fromET.setText(toET.getText().toString());
+					toET.setText((temp));
 				}
 				return false;
 			}
@@ -157,8 +152,10 @@ public class DriverAddRideDetailsActivity extends Activity {
 					suggestSimilarIMGBT.setImageResource(R.drawable.find_similar_rides_checked);
 					isSuggestSimilarIMGBTchecked = true;
 				}
+				
 			}
 		});
+		
 		
 		//Handling the submitIMGBT
 		//set the animation
@@ -175,14 +172,11 @@ public class DriverAddRideDetailsActivity extends Activity {
 					submitIMGBT.animate().setInterpolator(sOvershooter).scaleX(1f).scaleY(1f);
 					//Validate that the From To and Date fields were inserted
 					Log.e("DriverAddRideDetailsActivity", "submitDriverIMGBT was ACTION_UP");
-					if (priceET.getText().toString().equals("")){
-						Toast.makeText(getApplicationContext(), "נא למלא סכום השתתפות בנסיעה", Toast.LENGTH_LONG).show();
-					}
-					else if (fromET.getText().toString().equals("") ){
+					if (fromET.getText().toString().equals("") ){
 						//Toast.makeText(getApplicationContext(), "Where do you wonna go out from?", Toast.LENGTH_LONG).show();
 						Toast.makeText(getApplicationContext(), "מאיפה יוצאים?", Toast.LENGTH_LONG).show();
 					}
-					else if (toTV.getText().toString().equals("")){
+					else if (toET.getText().toString().equals("")){
 						//Toast.makeText(getApplicationContext(), "Where do you wonna go?", Toast.LENGTH_LONG).show();
 						Toast.makeText(getApplicationContext(), "לאיפה נוסעים?", Toast.LENGTH_LONG).show();
 					}
@@ -191,23 +185,14 @@ public class DriverAddRideDetailsActivity extends Activity {
 						//Insert the ride to the DB
 						Log.e("DriverAddRideDetailsActivity", "Inserting to DB");
 						try{
+							
+							ClientAsync ca = new ClientAsync();
 							String userID = getMyPhoneNumber();
-							String from = fromET.getText().toString();
-							String to = toTV.getText().toString();
-							String date = dateTV.getText().toString();
-							int availableSits = Integer.parseInt(availableSitsET.getText().toString());
-							int price = Integer.parseInt(priceET.getText().toString());
-							String comment = commentET.getText().toString();
-							
-							Ride newRide = new Ride(userID,LocationManager.getinstance(getApplicationContext()).mfromRideLocation,
-															LocationManager.getinstance(getApplicationContext()).mtoRideLocation,
-															dateTV.getText().toString(),date,availableSits,price,comment);
-							newRide.InsertToDB();								
-							//ClientAsync ca = new ClientAsync();
-							
 							//Toast.makeText(getApplicationContext(), "My Phone number:"+getMyPhoneNumber(), Toast.LENGTH_SHORT).show();
-							
-							//ca.execute("addnewride", userID,from,to,date);
+							String from = fromET.getText().toString();
+							String to = toET.getText().toString();
+							String date = dateTV.getText().toString();
+							ca.execute("addnewride", userID,from,to,date);
 							Toast.makeText(getApplicationContext(), "Ride inserted successfully", Toast.LENGTH_SHORT).show();
 						}
 						catch(Exception e){
@@ -226,6 +211,24 @@ public class DriverAddRideDetailsActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.driver_add_ride_details, menu);
 		return true;
+	}
+	private void setDate(TextView choosenDateTV){
+		Log.e("RideDetailsFregment","set date");
+	     // get date 
+	        String formattedTime;
+			String formattedDate;	
+	        Calendar c = Calendar.getInstance();
+	     	SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy",Locale.getDefault());
+	     	formattedDate = df.format(c.getTime());
+	     // get time
+	 		Time today = new Time(Time.getCurrentTimezone());
+	 		today.setToNow();
+	 		int currHour = today.hour;
+	 		if (currHour == 24){
+	 			currHour = 0;
+	 		}
+	 		formattedTime = currHour + ":" + today.minute;
+	 		choosenDateTV.setText(formattedDate + " " + formattedTime);
 	}
 
 	//call the getMyPhoneNumberFromMyMobile() and getMyPhoneNumberFromWhatsApp() in order to get the phone number
@@ -264,5 +267,4 @@ public class DriverAddRideDetailsActivity extends Activity {
 		//Log.d(debugTag,"in getMyPhoneNumberFromWhatsApp");
 		return phoneNumber;
 	}
-	
 }

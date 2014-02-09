@@ -35,7 +35,6 @@ public class DriverAddRideDetailsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_driver_add_ride_details);
 		
-<<<<<<< HEAD
 		final EditText commentET = (EditText)findViewById(R.id.Driver_commentET);
 		
 		final EditText priceET = (EditText)findViewById(R.id.Driver_PriceET);
@@ -44,12 +43,6 @@ public class DriverAddRideDetailsActivity extends Activity {
 		fromET.setText(LocationManager.getinstance(getApplicationContext()).mfromRideLocation.getFullString());
 		final TextView toTV = (TextView)findViewById(R.id.Driver_ToTV);
 		toTV.setText(LocationManager.getinstance(getApplicationContext()).mtoRideLocation.getFullString());
-=======
-		final EditText fromET = (EditText)findViewById(R.id.Driver_FromET); 
-		fromET.setText(LocationManager.getinstance(getApplicationContext()).getFromRideLocation().getFullString());
-		final EditText toET = (EditText)findViewById(R.id.Driver_ToET);
-		toET.setText(LocationManager.getinstance(getApplicationContext()).getToRideLocation().getFullString());
->>>>>>> a4ad3b1c5db099b3ed5097193ba1c749fc8a1962
 		final TextView dateTV = (TextView)findViewById(R.id.Driver_DateTV);
 		//
 		
