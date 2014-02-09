@@ -32,7 +32,8 @@
                 android:inputType="text"
                 android:textColor="@color/White"
                 android:textColorHint="@color/hint_color"
-                android:selectAllOnFocus="true" />
+                android:selectAllOnFocus="true"
+                android:popupBackground="@null"  />
 
         </RelativeLayout>
 		
@@ -65,7 +66,8 @@
                 android:inputType="text"
                 android:textColor="@color/White"
                 android:textColorHint="@color/hint_color"
-                android:selectAllOnFocus="true" />
+                android:selectAllOnFocus="true"
+                android:popupBackground="@null"  />
         </RelativeLayout>
         
 		<RelativeLayout

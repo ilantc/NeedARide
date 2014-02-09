@@ -81,7 +81,7 @@ public class RideDetailsFragment extends Fragment implements OnTouchListener {
 		final Animation animationFadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fadein);
 		
 		fromAutoCompView = (AutoCompleteTextViewWithDelay) v.findViewById(R.id.fromET);
-        fromAutoCompView.setAdapter(new PlacesAutoCompleteAdapter(v.getContext(), R.layout.list_item));
+        fromAutoCompView.setAdapter(new PlacesAutoCompleteAdapter(v.getContext(), R.layout.filter_row_layout));
         // using on touch listener as onClick listener sometimes misses callbacks (probably related to the adaptor
         fromAutoCompView.setOnTouchListener(this);
         fromAutoCompView.setOnItemClickListener(new OnItemClickListener() {
@@ -118,7 +118,7 @@ public class RideDetailsFragment extends Fragment implements OnTouchListener {
         });
         
         toAutoCompView = (AutoCompleteTextViewWithDelay) v.findViewById(R.id.toET);
-        toAutoCompView.setAdapter(new PlacesAutoCompleteAdapter(v.getContext(), R.layout.list_item));
+        toAutoCompView.setAdapter(new PlacesAutoCompleteAdapter(v.getContext(), R.layout.filter_row_layout));
         // using on touch listener as onClick listener sometimes misses callbacks (probably related to the adaptor
         toAutoCompView.setOnTouchListener(this);
         // this is the listener for the filter list
