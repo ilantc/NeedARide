@@ -42,9 +42,9 @@ public class DriverAddRideDetailsActivity extends Activity {
 		setContentView(R.layout.activity_driver_add_ride_details);
 		
 		final EditText fromET = (EditText)findViewById(R.id.Driver_FromET); 
-		fromET.setText(LocationManager.getinstance(getApplicationContext()).mfromRideLocation.getFullString());
+		fromET.setText(LocationManager.getinstance(getApplicationContext()).getFromRideLocation().getFullString());
 		final EditText toET = (EditText)findViewById(R.id.Driver_ToET);
-		toET.setText(LocationManager.getinstance(getApplicationContext()).mtoRideLocation.getFullString());
+		toET.setText(LocationManager.getinstance(getApplicationContext()).getToRideLocation().getFullString());
 		final TextView dateTV = (TextView)findViewById(R.id.Driver_DateTV);
 		//
 		

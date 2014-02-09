@@ -2,6 +2,8 @@ package com.needaride;
 
 import java.util.List;
 
+import org.w3c.dom.ls.LSException;
+
 import com.example.needaride.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -81,24 +83,34 @@ static GoogleMap Map;
 		//Toast.makeText(getApplicationContext(), "onConnectionFailed", Toast.LENGTH_SHORT).show();
 	}
 	
-	//Launch when map is connected to the fragment
+	//Launch when the location client is connected
 	@Override
 	public void onConnected(Bundle arg0) {
-		//Toast.makeText(getApplicationContext(), "onConnected", Toast.LENGTH_SHORT).show();
-		//set the current location in the FromTV
-		Location myLoc = mLocationClient.getLastLocation();
-		try{
-			LatLng latLng = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
-			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 12);
-			Map.animateCamera(cameraUpdate);
-			//Set the FromTV address to the current location
-//			LocationManager.getinstance(getBaseContext()).setLat(latLng,locationValues.from);
+		//set the current location in the FromTV if no marker is on and the edit text are empty
+		// (meaning that no user interaction has begun)
+		LocationManager lm = LocationManager.getinstance(getBaseContext());
+		Log.d("","loc client onConnected:\nfromTv = '" + RideDetailsFragment.getAddressFromFromTV() + 
+				"'\ntoTv = '" + RideDetailsFragment.getAddressFromFromTV() + "'");
+		if ( 	(null == lm.getFromRideLocation().getLatlng() ) 	 	&&
+				(null == lm.getToRideLocation().getLatlng() ) 		 	&& 
+				(RideDetailsFragment.getAddressFromFromTV().equals("")) && 
+				(RideDetailsFragment.getAddressFromToTV().equals(""))	) {
+			Log.d("","loc client - entered if");
+			Location myLoc = mLocationClient.getLastLocation();
+			Log.d("","loc client - found last loc: " + myLoc.getLatitude() + ", " + myLoc.getLongitude());
+			try{
+				LatLng latLng = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
+				//Set the FromTV address to the current location
+				lm.onMapClick(latLng);
+			}
+			catch(Exception e){
+				Toast.makeText(getApplicationContext(), "Can't find your current location", Toast.LENGTH_LONG).show();
+				Log.e("MapActivity","Cant operate the camera animation to the current location");
+				Log.e("MapActivity",e.toString());
+			}
 		}
-		catch(Exception e){
-			Toast.makeText(getApplicationContext(), "Can't find your current location", Toast.LENGTH_LONG).show();
-			Log.e("MapActivity","Cant operate the camera animation to the current location");
-			Log.e("MapActivity",e.toString());
-		}
+		// since this is the only use of the location client - we can disconnect it now
+		mLocationClient.disconnect();
 	}
 
 	//Launch when map is disconnected from the fragment
@@ -117,8 +129,7 @@ static GoogleMap Map;
 		//Focusing TelAviv
         //LatLng initLatlng = new LatLng(32.06632, 34.77782);
 		//Focusing Technion
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(LocationManager.initLatlng, 14);
-		Map.animateCamera(cameraUpdate);
+        fixZoom(this);
         // Connect the client.
         mLocationClient.connect();
         SetToAddressFromSharedPreferences();
