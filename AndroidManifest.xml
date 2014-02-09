@@ -96,7 +96,8 @@
         </activity>
         <activity
             android:name="com.needaride.MapActivity"
-            android:label="@string/title_activity_map" >
+            android:label="@string/title_activity_map"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

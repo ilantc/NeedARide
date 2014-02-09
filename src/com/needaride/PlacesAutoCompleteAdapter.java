@@ -11,6 +11,7 @@ import android.widget.Filterable;
 public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements Filterable {
     private ArrayList<String> resultList;
     private LocationAutoCompleteManager mLACM;
+    private Filter filter;
 
     public PlacesAutoCompleteAdapter(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
@@ -29,31 +30,33 @@ public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements F
 
     @Override
     public Filter getFilter() {
-        Filter filter = new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults filterResults = new FilterResults();
-                if (constraint != null) {
-                    // Retrieve the autocomplete results.
-                    resultList = mLACM.autocomplete(constraint.toString());
-
-                    // Assign the data to the FilterResults
-                    filterResults.values = resultList;
-                    filterResults.count = resultList.size();
-                }
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                Log.e("autoComp","inside publish results, res count is " + results.count);
-            	if (results != null && results.count > 0) {
-                    notifyDataSetChanged();
-                }
-                else {
-                    notifyDataSetInvalidated();
-                }
-            }};
-        return filter;
+    	if (null == filter) {
+	        filter = new Filter() {
+	            @Override
+	            protected FilterResults performFiltering(CharSequence constraint) {
+	                FilterResults filterResults = new FilterResults();
+	                if (constraint != null) {
+	                    // Retrieve the autocomplete results.
+	                    resultList = mLACM.autocomplete(constraint.toString());
+	
+	                    // Assign the data to the FilterResults
+	                    filterResults.values = resultList;
+	                    filterResults.count = resultList.size();
+	                }
+	                return filterResults;
+	            }
+	
+	            @Override
+	            protected void publishResults(CharSequence constraint, FilterResults results) {
+	                Log.e("autoComp","inside publish results, res count is " + results.count);
+	            	if (results != null && results.count > 0) {
+	                    notifyDataSetChanged();
+	                }
+	                else {
+	                    notifyDataSetInvalidated();
+	                }
+	            }};
+    	}
+    	return filter;
     }
 }
