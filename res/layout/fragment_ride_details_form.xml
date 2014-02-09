@@ -31,7 +31,8 @@
                 android:hint="Starting Point"
                 android:inputType="text"
                 android:textColor="@color/White"
-                android:textColorHint="@color/hint_color" />
+                android:textColorHint="@color/hint_color"
+                android:selectAllOnFocus="true" />
 
         </RelativeLayout>
 		
@@ -63,7 +64,8 @@
                 android:hint="Destination"
                 android:inputType="text"
                 android:textColor="@color/White"
-                android:textColorHint="@color/hint_color" />
+                android:textColorHint="@color/hint_color"
+                android:selectAllOnFocus="true" />
         </RelativeLayout>
         
 		<RelativeLayout

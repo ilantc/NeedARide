@@ -85,15 +85,15 @@ public class RideDetailsFragment extends Fragment implements OnTouchListener {
         // using on touch listener as onClick listener sometimes misses callbacks (probably related to the adaptor
         fromAutoCompView.setOnTouchListener(this);
         fromAutoCompView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-		        String str = (String) adapterView.getItemAtPosition(position);
-		        // set autocomp off
-		        fromAutoCompView.setAutoComplete(false);
-		        // set new string and marker
-		        LocationManager.getinstance(view.getContext()).setStr(str,locationValues.from);
-		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
-		    }
+        	@Override
+        	public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                String str = (String) adapterView.getItemAtPosition(position);
+                // set autocomp off
+                fromAutoCompView.setAutoComplete(false);
+                // set new string and marker
+                LocationManager.getinstance(view.getContext()).setStr(str,locationValues.from);
+                Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+            }
 		});
         fromAutoCompView.addTextChangedListener(new TextWatcher() {
 			
@@ -123,15 +123,16 @@ public class RideDetailsFragment extends Fragment implements OnTouchListener {
         toAutoCompView.setOnTouchListener(this);
         // this is the listener for the filter list
         toAutoCompView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-		        String str = (String) adapterView.getItemAtPosition(position);
-		        // set autocomp off
-		        toAutoCompView.setAutoComplete(false);
-		        // set new string and marker
-		        LocationManager.getinstance(view.getContext()).setStr(str,locationValues.to);
-		        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
-		    }
+
+        	@Override
+        	public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                String str = (String) adapterView.getItemAtPosition(position);
+                // set autocomp off
+                toAutoCompView.setAutoComplete(false);
+                // set new string and marker
+                LocationManager.getinstance(view.getContext()).setStr(str,locationValues.to);
+                Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+            }
 		});
         toAutoCompView.addTextChangedListener(new TextWatcher() {
 			
