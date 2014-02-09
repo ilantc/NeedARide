@@ -35,21 +35,17 @@ public class DriverAddRideDetailsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_driver_add_ride_details);
 		
-<<<<<<< HEAD
+		final TextView fromET = (TextView)findViewById(R.id.Driver_FromTV); 
+		fromET.setText(LocationManager.getinstance(getApplicationContext()).getFromRideLocation().getFullString());
+		final TextView toTV = (TextView)findViewById(R.id.Driver_ToTV);
+		toTV.setText(LocationManager.getinstance(getApplicationContext()).getToRideLocation().getFullString());
+		
 		final EditText commentET = (EditText)findViewById(R.id.Driver_commentET);
 		
 		final EditText priceET = (EditText)findViewById(R.id.Driver_PriceET);
 		
-		final TextView fromET = (TextView)findViewById(R.id.Driver_FromET); 
-		fromET.setText(LocationManager.getinstance(getApplicationContext()).mfromRideLocation.getFullString());
-		final TextView toTV = (TextView)findViewById(R.id.Driver_ToTV);
-		toTV.setText(LocationManager.getinstance(getApplicationContext()).mtoRideLocation.getFullString());
-=======
-		final EditText fromET = (EditText)findViewById(R.id.Driver_FromET); 
-		fromET.setText(LocationManager.getinstance(getApplicationContext()).getFromRideLocation().getFullString());
-		final EditText toET = (EditText)findViewById(R.id.Driver_ToET);
-		toET.setText(LocationManager.getinstance(getApplicationContext()).getToRideLocation().getFullString());
->>>>>>> a4ad3b1c5db099b3ed5097193ba1c749fc8a1962
+		
+		
 		final TextView dateTV = (TextView)findViewById(R.id.Driver_DateTV);
 		//
 		
@@ -199,9 +195,9 @@ public class DriverAddRideDetailsActivity extends Activity {
 							int price = Integer.parseInt(priceET.getText().toString());
 							String comment = commentET.getText().toString();
 							
-							Ride newRide = new Ride(userID,LocationManager.getinstance(getApplicationContext()).mfromRideLocation,
-															LocationManager.getinstance(getApplicationContext()).mtoRideLocation,
-															dateTV.getText().toString(),date,availableSits,price,comment);
+							Ride newRide = new Ride(userID,LocationManager.getinstance(getApplicationContext()).getFromRideLocation(),
+													LocationManager.getinstance(getApplicationContext()).getToRideLocation(),
+													dateTV.getText().toString(),date,availableSits,price,comment);
 							newRide.InsertToDB();								
 							//ClientAsync ca = new ClientAsync();
 							
@@ -211,8 +207,8 @@ public class DriverAddRideDetailsActivity extends Activity {
 							Toast.makeText(getApplicationContext(), "Ride inserted successfully", Toast.LENGTH_SHORT).show();
 						}
 						catch(Exception e){
-							Log.e("DriverAddRideDetailsActivity","Could not insert to DB");
-							Log.e("DriverAddRideDetailsActivity",e.toString());
+							Log.e(debugTag,"Could not insert to DB");
+							Log.e(debugTag,e.toString());
 						}
 					}
 				}

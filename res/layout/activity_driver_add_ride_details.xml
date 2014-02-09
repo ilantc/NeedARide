@@ -143,7 +143,7 @@
             android:src="@drawable/from_icon" />
 
         <TextView
-            android:id="@+id/Driver_FromET"
+            android:id="@+id/Driver_FromTV"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/Driver_FromTitleIV"
