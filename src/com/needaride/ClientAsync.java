@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 public class ClientAsync extends AsyncTask<String, Void, String>{
 
+	private String debugTag = "ClientAsync";
 	@Override
 	protected String doInBackground(String... strs) {
 		String response ="";
@@ -23,12 +24,15 @@ public class ClientAsync extends AsyncTask<String, Void, String>{
 			//the url of the server
 			URL url = new URL("https://fifth-sunup-454.appspot.com/" + strs[0]);
 			
-			//encoding the parameters
+			//encoding the parameters    old
 			/*String param = "userID=" + URLEncoder.encode(strs[1], "UTF-8") + "&" + 
 			"from="	+ URLEncoder.encode(strs[2], "UTF-8") + "&" + 
 			"to=" + URLEncoder.encode(strs[3], "UTF-8") + "&" +
 			"date="	+ URLEncoder.encode(strs[4], "UTF-8");
-			*/
+			
+			  end of this old shit*/ 
+			
+			
 			//encoding the parameters
 			String param = "userID=" + URLEncoder.encode(strs[1], "UTF-8") + "&" + 
 					"fromCity="	+ URLEncoder.encode(strs[2], "UTF-8") + "&" +
@@ -63,6 +67,7 @@ public class ClientAsync extends AsyncTask<String, Void, String>{
 					
 			//send the POST out
 			PrintWriter out = new PrintWriter(con.getOutputStream());
+			//Log.e("ClientAsyc", "here:     "+param);
 			out.print(param);
 			out.close();
 			
@@ -75,10 +80,10 @@ public class ClientAsync extends AsyncTask<String, Void, String>{
 		}catch (IOException e){
 			e.printStackTrace();
 		}
-		Log.e("ClientAsyc", "doInBackground:"+response);
+		Log.e(debugTag, "doInBackground:"+response);
 		return response;
 	}
 	protected void onPostExecute(String res){
-		Log.e("ClientAsyc", "onPostExecute:"+res);
+		Log.e(debugTag, "onPostExecute:"+res);
 	}
 }

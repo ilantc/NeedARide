@@ -59,7 +59,7 @@ public class Ride {
 				String from = fromLocation.getFullString();
 				String to = toLocation.getFullString();
 				ca.execute("addnewride", userID,from,to,date);
-				Log.e(debugTag,"Ride was inserted successfuly to DB");
+				//Log.e(debugTag,"Ride was inserted successfuly to DB");
 				return true;
 			}
 			catch(Exception e){
