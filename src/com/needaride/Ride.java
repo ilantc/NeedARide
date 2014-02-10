@@ -13,6 +13,8 @@ public class Ride {
 	int rideFee = 0;
 	String driversComment = null;
 	
+	private String debugTag = "Ride";
+	
 	public Ride(String mDriverID,RideLocation mFromLocation,RideLocation mToLocation,String mTime,
 						String mDate,int mAvailableSits,int mRideFee,String mDriversComment){
 		driverUserID = mDriverID;
@@ -28,20 +30,28 @@ public class Ride {
 		try{
 			ClientAsync ca = new ClientAsync();
 			String userID = driverUserID;
+			
 			String fromCity = fromLocation.getCity();
 			String fromStreet = fromLocation.getStreet();
 			String fromHouseNo = fromLocation.getHouseNo();
+			String fromLat = String.valueOf(fromLocation.getLatlng().latitude);
+			String fromLng = String.valueOf(fromLocation.getLatlng().longitude);
 			
 			String toCity = toLocation.getCity();
 			String toStreet = toLocation.getStreet();
 			String toHouseNo = toLocation.getHouseNo();
+			String toLat = String.valueOf(toLocation.getLatlng().latitude);
+			String toLng = String.valueOf(toLocation.getLatlng().longitude);
 			
-			//ca.execute("addnewrideservlet", userID,fromCity,fromStreet,fromHouseNo,toCity,toStreet,toHouseNo,date,time,availableSits,rideFee,driversComment);
+			String availableSitsString = String.valueOf(availableSits);
+			String feeString = String.valueOf(rideFee);
+			
+			ca.execute("addnewride", userID,fromCity,fromStreet,fromHouseNo,fromLat,fromLng,toCity,toStreet,toHouseNo,toLat,toLng,date,availableSitsString,feeString,driversComment);
 			
 			return true;
 		}
 		catch(Exception e){
-			Log.e("Ride","could not insert to DB");
+			Log.e(debugTag,"could not insert to DB");
 			return false;
 		}
 	}
@@ -53,10 +63,11 @@ public class Ride {
 				String from = fromLocation.getFullString();
 				String to = toLocation.getFullString();
 				ca.execute("addnewride", userID,from,to,date);
+				//Log.e(debugTag,"Ride was inserted successfuly to DB");
 				return true;
 			}
 			catch(Exception e){
-				Log.e("Ride","could not insert to DB");
+				Log.e(debugTag,"could not insert to DB");
 				return false;
 			}
 	}
