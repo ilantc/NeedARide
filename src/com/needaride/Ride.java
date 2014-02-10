@@ -34,15 +34,19 @@ public class Ride {
 			String fromCity = fromLocation.getCity();
 			String fromStreet = fromLocation.getStreet();
 			String fromHouseNo = fromLocation.getHouseNo();
+			String fromLat = String.valueOf(fromLocation.getLatlng().latitude);
+			String fromLng = String.valueOf(fromLocation.getLatlng().longitude);
 			
 			String toCity = toLocation.getCity();
 			String toStreet = toLocation.getStreet();
 			String toHouseNo = toLocation.getHouseNo();
+			String toLat = String.valueOf(toLocation.getLatlng().latitude);
+			String toLng = String.valueOf(toLocation.getLatlng().longitude);
 			
 			String availableSitsString = String.valueOf(availableSits);
 			String feeString = String.valueOf(rideFee);
 			
-			ca.execute("addnewride", userID,fromCity,fromStreet,fromHouseNo,toCity,toStreet,toHouseNo,date,time,availableSitsString,feeString,driversComment);
+			ca.execute("addnewride", userID,fromCity,fromStreet,fromHouseNo,fromLat,fromLng,toCity,toStreet,toHouseNo,toLat,toLng,date,availableSitsString,feeString,driversComment);
 			
 			return true;
 		}

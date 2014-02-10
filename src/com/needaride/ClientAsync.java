@@ -35,20 +35,22 @@ public class ClientAsync extends AsyncTask<String, Void, String>{
 			
 			//encoding the parameters
 			String param = "userID=" + URLEncoder.encode(strs[1], "UTF-8") + "&" + 
-					"fromCity="	+ URLEncoder.encode(strs[2], "UTF-8") + "&" +
-					"fromStreet="	+ URLEncoder.encode(strs[3], "UTF-8") + "&" +
-					"fromHouseNo="	+ URLEncoder.encode(strs[4], "UTF-8") + "&" +
-					
-					"toCity=" + URLEncoder.encode(strs[5], "UTF-8") + "&" +
-					"toStreet=" + URLEncoder.encode(strs[6], "UTF-8") + "&" +
-					"toHouseNo=" + URLEncoder.encode(strs[7], "UTF-8") + "&" +
-					
-					"date="	+ URLEncoder.encode(strs[8], "UTF-8")+ "&" + 
-					"time="	+ URLEncoder.encode(strs[9], "UTF-8")+ "&" +
-					
-					"availableSits="	+ URLEncoder.encode(strs[10], "UTF-8")+ "&" +
-					"rideFee="	+ URLEncoder.encode(strs[11], "UTF-8")+ "&" +
-					"driversComment="	+ URLEncoder.encode(strs[12], "UTF-8");
+							"fromCity="	+ URLEncoder.encode(strs[2], "UTF-8") + "&" +
+							"fromStreet="	+ URLEncoder.encode(strs[3], "UTF-8") + "&" +
+							"fromHouseNo="	+ URLEncoder.encode(strs[4], "UTF-8") + "&" +
+							"fromLat="	+ URLEncoder.encode(strs[5], "UTF-8") + "&" +
+							"fromLng="	+ URLEncoder.encode(strs[6], "UTF-8") + "&" +
+							
+							"toCity=" + URLEncoder.encode(strs[7], "UTF-8") + "&" +
+							"toStreet=" + URLEncoder.encode(strs[8], "UTF-8") + "&" +
+							"toHouseNo=" + URLEncoder.encode(strs[9], "UTF-8") + "&" +
+							"toLat="	+ URLEncoder.encode(strs[10], "UTF-8") + "&" +
+							"toLng="	+ URLEncoder.encode(strs[11], "UTF-8") + "&" +
+							
+							"date="	+ URLEncoder.encode(strs[12], "UTF-8")+ "&" + 
+							"availableSits="	+ URLEncoder.encode(strs[13], "UTF-8")+ "&" +
+							"rideFee="	+ URLEncoder.encode(strs[14], "UTF-8")+ "&" +
+							"driversComment="	+ URLEncoder.encode(strs[15], "UTF-8");
 			
 			//opening a connection
 			HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
