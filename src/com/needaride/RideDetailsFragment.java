@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
@@ -76,9 +77,6 @@ public class RideDetailsFragment extends Fragment implements OnTouchListener {
 		choosenDateTV = (TextView)v.findViewById(R.id.choosenDateTV);
 		choosenDateTV.requestFocus();
 		setDate(choosenDateTV);
-		
-		final ImageView checkingForSimilarRidesFadeInIV = (ImageView) v.findViewById(R.id.checkingForSimilarRidesFadeInIV);
-		final Animation animationFadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fadein);
 		
 		fromAutoCompView = (AutoCompleteTextViewWithDelay) v.findViewById(R.id.fromET);
         fromAutoCompView.setAdapter(new PlacesAutoCompleteAdapter(v.getContext(), R.layout.filter_row_layout));
@@ -197,10 +195,22 @@ public class RideDetailsFragment extends Fragment implements OnTouchListener {
 					else {
 						//If the user chose to be the hitchHiker - look for relevant rides
 						if (!isDriver){
+							ImageView checkingForSimilarRidesFadeInIV = (ImageView) getActivity().findViewById(R.id.checkingForSimilarRidesFadeInIV);
+							Animation animationFadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fadein);
+							animationFadeIn.setAnimationListener(new AnimationListener() {
+								
+								@Override
+								public void onAnimationStart(Animation animation) {}
+								
+								@Override
+								public void onAnimationRepeat(Animation animation) {}
+								
+								@Override
+								public void onAnimationEnd(Animation animation) {
+									startTakeARideActivity();
+								}
+							});
 							checkingForSimilarRidesFadeInIV.startAnimation(animationFadeIn);
-							Intent intent = new Intent();
-							intent.setClassName(getActivity(),"com.needaride.TakeARideActivity");
-							startActivity(intent);
 						}
 						//If the user chose to be the Driver - send to DriverAddRideDetailsActivity
 						else{
@@ -280,6 +290,12 @@ public class RideDetailsFragment extends Fragment implements OnTouchListener {
 			Log.d("", "onTouch - autocomp is " + ((AutoCompleteTextViewWithDelay) v).isAutoCompleteOn() );
 		}
 		return false;
+	}
+	
+	private void startTakeARideActivity() {
+		Intent intent = new Intent();
+		intent.setClassName(getActivity(),"com.needaride.TakeARideActivity");
+		startActivity(intent);
 	}
 	
 	//set text in the TV

@@ -97,15 +97,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 android:textColor="@color/White"/>
         </RelativeLayout>
-		
-        <ImageView
-            android:id="@+id/checkingForSimilarRidesFadeInIV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/fromRL"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/checking_for_similar_ride"
-            android:visibility="invisible" />
+
 
         <ImageButton
             android:id="@+id/switchIMGBT"
