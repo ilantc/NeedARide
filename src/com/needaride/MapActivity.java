@@ -94,7 +94,7 @@ static GoogleMap Map;
 		if ( 	(null == lm.getFromRideLocation().getLatlng() ) 	 	&&
 				(null == lm.getToRideLocation().getLatlng() ) 		 	&& 
 				(RideDetailsFragment.getAddressFromFromTV().equals("")) && 
-				(RideDetailsFragment.getAddressFromToTV().equals(""))	) {
+				( (RideDetailsFragment.getAddressFromToTV().equals(GetToAddressFromSharedPreferences())) || (RideDetailsFragment.getAddressFromToTV().equals(""))  )	) {
 			Log.d("","loc client - entered if");
 			Location myLoc = mLocationClient.getLastLocation();
 			Log.d("","loc client - found last loc: " + myLoc.getLatitude() + ", " + myLoc.getLongitude());
@@ -172,11 +172,15 @@ static GoogleMap Map;
   //set the destination address from Shared Preferences
   	//in use when the user connect to the map Activity - onStart
   	public void SetToAddressFromSharedPreferences(){
-		SharedPreferences addressDetails = this.getSharedPreferences("addressDetails", MODE_PRIVATE);
-		String destAddress = addressDetails.getString("destAddress", null);
+		String destAddress = GetToAddressFromSharedPreferences();
 		RideDetailsFragment.setTextInToAutoCompView(destAddress);
 		Log.e("MapActivity", "retrived from sheredPref: "+ destAddress);
 	}
+  	
+  	private String GetToAddressFromSharedPreferences() {
+  		return this.getSharedPreferences("addressDetails", MODE_PRIVATE).getString("destAddress", null);
+
+  	}
   	
 	public static void addMarker(LatLng point, locationValues type, Context c){
 		if (null == point) {
