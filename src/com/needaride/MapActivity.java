@@ -135,6 +135,7 @@ static GoogleMap Map;
         fixZoom(this);
         // Connect the client.
         mLocationClient.connect();
+        //////////////////////////////////////////////////////////////////////
         SetToAddressFromSharedPreferences();
 
     }
@@ -187,7 +188,7 @@ static GoogleMap Map;
 	}
   	
   	private String GetToAddressFromSharedPreferences() {
-  		return this.getSharedPreferences("addressDetails", MODE_PRIVATE).getString("destAddress", null);
+  		return this.getSharedPreferences("addressDetails", MODE_PRIVATE).getString("destAddress", "");
 
   	}
   	
