@@ -91,22 +91,25 @@ static GoogleMap Map;
 		LocationManager lm = LocationManager.getinstance(getBaseContext());
 		Log.d("","loc client onConnected:\nfromTv = '" + RideDetailsFragment.getAddressFromFromTV() + 
 				"'\ntoTv = '" + RideDetailsFragment.getAddressFromFromTV() + "'");
-		if ( 	(null == lm.getFromRideLocation().getLatlng() ) 	 	&&
-				(null == lm.getToRideLocation().getLatlng() ) 		 	&& 
-				(RideDetailsFragment.getAddressFromFromTV().equals("")) && 
+		if ( 	(RideDetailsFragment.getAddressFromFromTV().equals("")) && 
 				( (RideDetailsFragment.getAddressFromToTV().equals(GetToAddressFromSharedPreferences())) || (RideDetailsFragment.getAddressFromToTV().equals(""))  )	) {
 			Log.d("","loc client - entered if");
 			Location myLoc = mLocationClient.getLastLocation();
-			Log.d("","loc client - found last loc: " + myLoc.getLatitude() + ", " + myLoc.getLongitude());
-			try{
-				LatLng latLng = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
-				//Set the FromTV address to the current location
-				lm.onMapClick(latLng);
+			if (null != myLoc) {
+				Log.d("","loc client - found last loc: " + myLoc.getLatitude() + ", " + myLoc.getLongitude());
+				try{
+					LatLng latLng = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
+					//Set the FromTV address to the current location
+					lm.onMapClick(latLng);
+				}
+				catch(Exception e){
+					Toast.makeText(getApplicationContext(), "Can't find your current location", Toast.LENGTH_LONG).show();
+					Log.e("MapActivity","Cant operate the camera animation to the current location");
+					Log.e("MapActivity",e.toString());
+				}
 			}
-			catch(Exception e){
-				Toast.makeText(getApplicationContext(), "Can't find your current location", Toast.LENGTH_LONG).show();
-				Log.e("MapActivity","Cant operate the camera animation to the current location");
-				Log.e("MapActivity",e.toString());
+			else {
+				Log.d("","loc client - found last loc: null");
 			}
 		}
 		// since this is the only use of the location client - we can disconnect it now
@@ -173,8 +176,14 @@ static GoogleMap Map;
   	//in use when the user connect to the map Activity - onStart
   	public void SetToAddressFromSharedPreferences(){
 		String destAddress = GetToAddressFromSharedPreferences();
-		RideDetailsFragment.setTextInToAutoCompView(destAddress);
-		Log.e("MapActivity", "retrived from sheredPref: "+ destAddress);
+		if (! destAddress.equals("")) {
+			RideDetailsFragment.toAutoCompView.setAutoComplete(false);
+			LocationManager.getinstance(getBaseContext()).setStr(destAddress,locationValues.to);
+			Log.e("MapActivity", "retrived from sheredPref: "+ destAddress);	
+		}
+		else {
+			Log.e("MapActivity", "retrived from sheredPref an empty address");
+		}
 	}
   	
   	private String GetToAddressFromSharedPreferences() {

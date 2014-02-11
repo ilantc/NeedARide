@@ -173,14 +173,15 @@ public class LocationManager {
 	private void setToStr(String toStr) {
 		List<String> addressArgs = new ArrayList<String>();
 		LatLng toLatLng = getLatLngFromAddress(toStr, addressArgs);
-		Log.e("dTag","the address is "+toStr);
+		Log.d("dTag","the address is: " + toStr + "\nthe Latlng is: " + toLatLng.latitude + ", " + toLatLng.longitude);
 		// set the output of latlng and address args in the mtorideLocation object 
 		mtoRideLocation.setLatlng(toLatLng);
 		mtoRideLocation.setAllString(addressArgs);
 		
 		// set the marker on the map and the text in TV
 		RideDetailsFragment.setTextInToAutoCompView(mtoRideLocation.getFullString());
-		Log.e("dTag","the address is "+mtoRideLocation.getFullString());
+		Log.d("dTag","the address is "+mtoRideLocation.getFullString() + 
+				"\nthe Latlng is: " + mtoRideLocation.getLatlng().latitude + ", " + mtoRideLocation.getLatlng().longitude);
 		MapActivity.addMarker(mtoRideLocation.getLatlng(),locationValues.to, c);
 	}
 	
@@ -219,7 +220,7 @@ public class LocationManager {
 		        return null;
 		    }
 		    Address loc_address 	= addresses.get(0);
-		    Log.d(dTag,"address"+loc_address);
+		    Log.d(dTag,"address = "+loc_address);
 		    //Log.d(dTag,"after sep address: out = '" + returnAdress.get(0) + "' , '" + returnAdress.get(1) + "'");
 		    loc_latlng  			= new LatLng(loc_address.getLatitude(), loc_address.getLongitude());
 		    List<String> outAdress 	= seperateAdressToStreetAndNo(loc_address.getAddressLine(0));
