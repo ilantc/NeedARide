@@ -246,7 +246,7 @@ public class LocationManager {
 		String[] streetRes = new String[2];
 		List<String> out = new ArrayList<String>();
 		out.add(0, ""); // placeholder
-		String regex = "\\s\\d+$"; 
+		String regex = "\\s\\d+(-\\d+)?$"; 
 		// now we got a string with no trailing numbers
 		streetRes = address.split(regex,2);
 		// if it diffs from the original string, then the diff is the number

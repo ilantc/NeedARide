@@ -46,6 +46,16 @@ public class Ride {
 			String availableSitsString = String.valueOf(availableSits);
 			String feeString = String.valueOf(rideFee);
 			
+			// building the string for debug
+			StringBuilder sb = new StringBuilder();
+			sb.append("adding a new ride: '");
+			for (String field: new String[] {userID,fromCity,fromStreet,fromHouseNo,fromLat,fromLng,toCity,toStreet,toHouseNo,toLat,toLng,date,availableSitsString,feeString}) { 
+				sb.append(field + "', '");
+			}
+			sb.append(driversComment + "'");
+			
+			Log.d(debugTag,sb.toString());
+			
 			ca.execute("addnewride", userID,fromCity,fromStreet,fromHouseNo,fromLat,fromLng,toCity,toStreet,toHouseNo,toLat,toLng,date,availableSitsString,feeString,driversComment);
 			
 			return true;
