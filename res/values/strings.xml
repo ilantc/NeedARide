@@ -2,7 +2,8 @@
 <resources>
 
     <string name="app_name">Need A Ride App</string>
-    <string name="app_facebook_id">1424257617813779</string>
+    <string name="app_facebook_id_tom">1424257617813779</string>
+    <string name="app_facebook_id">587415981346858</string>
     
     <string name="wait_while_logging_in">Please Wait While Trying To LogIn Trough Facebook</string>
     

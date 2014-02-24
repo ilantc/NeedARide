@@ -1,8 +1,5 @@
-<<<<<<< HEAD:src/com/needaride/MainActivity.java
 package com.needaride;
-=======
-package com.example.needaride;
->>>>>>> e18c5cfb81c016921cd154e5016310763dc9d67c:src/com/example/needaride/MainActivity.java
+
 
 import android.os.Bundle;
 import android.app.Activity;
