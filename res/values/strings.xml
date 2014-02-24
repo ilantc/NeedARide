@@ -2,8 +2,9 @@
 <resources>
 
     <string name="app_name">Need A Ride App</string>
+    <string name="app_facebook_id">1424257617813779</string>
     
-    <string name="app_facebook_id">587415981346858</string>
+    <string name="wait_while_logging_in">Please Wait While Trying To LogIn Trough Facebook</string>
     
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
@@ -24,7 +25,6 @@
     <item name="secsTillAutoComplete" type="integer">2</item>
     <item name="secsForUpdateTextWhileTyping" type="integer">4</item>
     <item name="secsForUpdateMarkerOnMap" type="integer">3</item>
-    
 
     <string name="from">From:</string>
     <string name="title_activity_no_similar_rides">No Similar Rides</string>
@@ -50,5 +50,6 @@
     <string name="title_activity_choose_ride_result">ChooseRideResultActivity</string>
     <string name="title_activity_hitchhicker_results">HitchhickerResultsActivity</string>
     <string name="title_activity_driver_add_ride_details">DriverAddRideDetailsActivity</string>
+    <string name="title_activity_main">MainActivity</string>
 
 </resources>

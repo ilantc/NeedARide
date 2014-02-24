@@ -1,4 +1,8 @@
+<<<<<<< HEAD:src/com/needaride/MainActivity.java
 package com.needaride;
+=======
+package com.example.needaride;
+>>>>>>> e18c5cfb81c016921cd154e5016310763dc9d67c:src/com/example/needaride/MainActivity.java
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -10,8 +14,9 @@ import android.util.Log;
 import android.widget.TextView;
 import android.content.Intent;
 
-public class MainActivity extends Activity {
 
+public class MainActivity extends Activity {
+	public static GraphUser mUser;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,9 +36,20 @@ public class MainActivity extends Activity {
 		    			// callback after Graph API response with user object
 		    			@Override
 		    			public void onCompleted(GraphUser user, Response response) {
+		    				mUser = user;
 		    				if (user != null) {
 		    					TextView welcome = (TextView) findViewById(R.id.welcome);
 		    					welcome.setText("Hello " + user.getName() + "!");
+		    					
+		    					try {
+									Thread.sleep(3000);
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+		    					Intent intent = new Intent();
+								intent.setClassName(getApplicationContext(),"com.needaride.MapActivity");
+								startActivity(intent);
 		    				}
 		    			}
 		    		}).executeAsync();;
@@ -41,10 +57,14 @@ public class MainActivity extends Activity {
 		    }
 		});
 	}
+
+	
+	
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 	  super.onActivityResult(requestCode, resultCode, data);
 	  Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
 	}
+
 }

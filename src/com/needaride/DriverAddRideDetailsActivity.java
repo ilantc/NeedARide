@@ -42,7 +42,9 @@ public class DriverAddRideDetailsActivity extends Activity {
 		
 		final EditText priceET = (EditText)findViewById(R.id.Driver_PriceET);
 		
-		
+		final TextView FBProfileName = (TextView)findViewById(R.id.Driver_FBProfileName);
+		String userName = com.example.needaride.MainActivity.mUser.getName();
+		FBProfileName.setText(userName);
 		
 		final TextView dateTV = (TextView)findViewById(R.id.Driver_DateTV);
 		//
