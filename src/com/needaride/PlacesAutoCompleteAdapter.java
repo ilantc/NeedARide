@@ -2,16 +2,11 @@ package com.needaride;
 
 import java.util.ArrayList;
 
-import android.R;
 import android.content.Context;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.TextView;
 
 public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements Filterable {
     private ArrayList<String> resultList;
@@ -21,7 +16,7 @@ public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements F
     public PlacesAutoCompleteAdapter(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
         mLACM = new LocationAutoCompleteManager(context);
-        super.setDropDownViewResource(com.example.needaride.R.id.filterRow);
+        super.setDropDownViewResource(R.id.filterRow);
         
     }
 

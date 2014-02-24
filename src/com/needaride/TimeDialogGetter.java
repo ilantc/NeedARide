@@ -2,9 +2,6 @@ package com.needaride;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import com.example.needaride.R;
-
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;

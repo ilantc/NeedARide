@@ -1,13 +1,10 @@
 package com.needaride;
 
-import com.example.needaride.MainActivity;
-import com.example.needaride.R;
-
-import android.os.Bundle;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
@@ -46,7 +43,7 @@ public class DriverAddRideDetailsActivity extends Activity {
 		final EditText priceET = (EditText)findViewById(R.id.Driver_PriceET);
 		
 		final TextView FBProfileName = (TextView)findViewById(R.id.Driver_FBProfileName);
-		String userName = com.example.needaride.MainActivity.mUser.getName();
+		String userName = MainActivity.mUser.getName();
 		FBProfileName.setText(userName);
 		
 		final TextView dateTV = (TextView)findViewById(R.id.Driver_DateTV);
@@ -191,8 +188,9 @@ public class DriverAddRideDetailsActivity extends Activity {
 						Log.e("DriverAddRideDetailsActivity", "Inserting to DB");
 						try{
 							String userID = getMyPhoneNumber();
-							String from = fromET.getText().toString();
-							String to = toTV.getText().toString();
+							// TODO - commented out, are they needed?
+//							String from = fromET.getText().toString();
+//							String to = toTV.getText().toString();
 							String date = dateTV.getText().toString();
 							int availableSits = Integer.parseInt(availableSitsET.getText().toString());
 							int price = Integer.parseInt(priceET.getText().toString());

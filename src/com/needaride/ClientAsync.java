@@ -12,7 +12,6 @@ import javax.net.ssl.HttpsURLConnection;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 public class ClientAsync extends AsyncTask<String, Void, String>{
 

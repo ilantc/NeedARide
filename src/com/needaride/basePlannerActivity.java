@@ -4,8 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import com.example.needaride.R;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.text.format.Time;

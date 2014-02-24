@@ -1,4 +1,5 @@
-package com.example.needaride;
+package com.needaride;
+
 
 import android.os.Bundle;
 import android.app.Activity;
