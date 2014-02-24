@@ -1,90 +1,19 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical"
-    android:background="@drawable/background">
-    
-    <RelativeLayout 
-        android:layout_width="fill_parent"
-	    android:layout_height="0dp"
-	    android:paddingBottom="@dimen/activity_vertical_margin"
-	    android:paddingLeft="@dimen/activity_horizontal_margin"
-	    android:paddingRight="@dimen/activity_horizontal_margin"
-	    android:paddingTop="@dimen/activity_vertical_margin"
-	    tools:context=".MainActivity"
-	    android:layout_weight="20"
-	    android:id="@+id/topLayout" >
-	        
-	    <ImageButton
-	        android:id="@+id/profileIMGBT"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:background="@drawable/profile_pic"/>
-	</RelativeLayout>
-     
-    <RelativeLayout 
-        android:id="@+id/offerOrTakeARide" 
-        android:layout_width="fill_parent"
-	    android:layout_height="0dp"
-	    android:paddingBottom="@dimen/activity_vertical_margin"
-	    android:paddingLeft="@dimen/activity_horizontal_margin"
-	    android:paddingRight="@dimen/activity_horizontal_margin"
-	    android:paddingTop="@dimen/activity_vertical_margin"
-	    tools:context=".MainActivity"
-	    android:layout_weight="80" >
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
 
-		<TextView
-		    android:id="@+id/centerTV"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_centerInParent="true"
-		    android:text="" 
-		    android:paddingBottom="@dimen/activity_vertical_margin_small"
-		    android:paddingLeft="@dimen/activity_horizontal_margin_small"
-		    android:paddingRight="@dimen/activity_horizontal_margin_small"
-		    android:paddingTop="@dimen/activity_vertical_margin_small"/>
-		
-		<ImageButton
-		    android:contentDescription="@+id/favoritesIMGBT"
-	        android:id="@+id/favoritesIMGBT"
-	        android:background="@drawable/favorite_icon"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_centerHorizontal="true"
-	        android:layout_above="@+id/centerTV"
-	        android:text="" />
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/hello_world" />
 
-		<ImageButton
-		    android:contentDescription="@+id/getARideIMGBT"
-		    android:id="@+id/getARideIMGBT"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_centerVertical="true"
-		    android:paddingLeft="@dimen/activity_horizontal_margin_small"
-		    android:layout_alignRight="@+id/centerTV"
-		    android:background="@drawable/need_a_ride_icon" />
-
-		<ImageButton
-		    android:contentDescription="@string/offerRideIMGBTdesc"
-		    android:id="@+id/offerRideIMGBT"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignLeft="@+id/centerTV"
-		    android:paddingRight="@dimen/activity_horizontal_margin_small"
-		    android:layout_centerVertical="true"
-		    android:background="@drawable/open_a_ride_icon"/>
-		
-		<ImageButton   
-		    android:contentDescription="@+id/mapIMGBT"  
-	        android:id="@+id/mapIMGBT"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_centerInParent="true"
-	        android:layout_below="@+id/centerTV"
-	        android:background="@drawable/map_icon" />
-	        
-	</RelativeLayout>
-    
-</LinearLayout>
+</RelativeLayout>

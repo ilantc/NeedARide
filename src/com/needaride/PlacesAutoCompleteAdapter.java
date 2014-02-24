@@ -2,8 +2,6 @@ package com.needaride;
 
 import java.util.ArrayList;
 
-import com.needaride.old.MainActivity;
-
 import android.R;
 import android.content.Context;
 import android.util.Log;
