@@ -1,12 +1,10 @@
 package com.needaride;
 
-import com.example.needaride.R;
-
-import android.os.Bundle;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
@@ -188,8 +186,9 @@ public class DriverAddRideDetailsActivity extends Activity {
 						Log.e("DriverAddRideDetailsActivity", "Inserting to DB");
 						try{
 							String userID = getMyPhoneNumber();
-							String from = fromET.getText().toString();
-							String to = toTV.getText().toString();
+							// TODO - commented out, are they needed?
+//							String from = fromET.getText().toString();
+//							String to = toTV.getText().toString();
 							String date = dateTV.getText().toString();
 							int availableSits = Integer.parseInt(availableSitsET.getText().toString());
 							int price = Integer.parseInt(priceET.getText().toString());

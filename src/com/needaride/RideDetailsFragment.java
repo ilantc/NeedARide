@@ -4,10 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import com.example.needaride.R;
-import com.google.android.gms.internal.ev;
-import com.needaride.LocationManager.locationValues;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,21 +17,20 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
-import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
+
+import com.needaride.LocationManager.locationValues;
 
 public class RideDetailsFragment extends Fragment implements OnTouchListener {
 	

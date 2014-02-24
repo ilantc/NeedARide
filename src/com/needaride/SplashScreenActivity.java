@@ -3,15 +3,10 @@ package com.needaride;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.example.needaride.R;
-import com.example.needaride.R.layout;
-import com.example.needaride.R.menu;
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
-import android.widget.Toast;
 
 public class SplashScreenActivity extends Activity {
 

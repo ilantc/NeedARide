@@ -2,9 +2,16 @@ package com.needaride;
 
 import java.util.List;
 
-import org.w3c.dom.ls.LSException;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.location.Location;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.widget.Toast;
 
-import com.example.needaride.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -21,17 +28,6 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.needaride.LocationManager.locationValues;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.location.Location;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.view.Menu;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
 public class MapActivity extends FragmentActivity implements
 GooglePlayServicesClient.ConnectionCallbacks,

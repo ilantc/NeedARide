@@ -1,6 +1,5 @@
 package com.needaride;
 
-import com.example.needaride.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;

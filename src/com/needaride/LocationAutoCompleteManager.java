@@ -11,9 +11,6 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.example.needaride.R;
-
 import android.content.Context;
 import android.util.Log;
 
