@@ -69,10 +69,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-		<activity
-            android:name="com.needaride.MapFragment"
-            android:label="@string/title_activity_map_fragment" >
-        </activity>
+
         <activity
             android:name="com.needaride.RideDetailsFragment"
             android:label="@string/title_activity_ride_details_fragment" >

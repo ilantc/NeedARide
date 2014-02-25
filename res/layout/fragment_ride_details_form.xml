@@ -12,7 +12,6 @@
 		    android:id="@+id/fromRL"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_below="@+id/rideChooserLL"
 			android:background="@drawable/black_mini_background">		    
 			<!--android:background="@layout/basic_form_rl_bg"-->
             <ImageView
