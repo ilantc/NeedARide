@@ -159,29 +159,33 @@ public class LocationManager {
 		
 		List<String> addressArgs = new ArrayList<String>();
 		LatLng FromLatLng = getLatLngFromAddress(fromStr, addressArgs);
-		Log.d(dTag," after  getLatLngFromAddress: out = '" + addressArgs.get(0) + "' , '" + addressArgs.get(1) + "'");
-		// set the output of latlng and address args in the mfromrideLocation object 
-		mfromRideLocation.setLatlng(FromLatLng);
-		mfromRideLocation.setAllString(addressArgs);
-		Log.d(dTag," after  setAllString, full Adress is: '" + mfromRideLocation.getFullString() + "'");
-		// set the marker on the map and the text in TV
-		RideDetailsFragment.setTextInFromAutoCompView(mfromRideLocation.getFullString());
-		MapActivity.addMarker(mfromRideLocation.getLatlng(),locationValues.from, c);
+		if (null != FromLatLng) {
+			Log.d(dTag," after  getLatLngFromAdress: out = '" + addressArgs.get(0) + "' , '" + addressArgs.get(1) + "'");
+			// set the output of latlng and address args in the mfromrideLocation object 
+			mfromRideLocation.setLatlng(FromLatLng);
+			mfromRideLocation.setAllString(addressArgs);
+			Log.d(dTag," after  setAllString, full Adress is: '" + mfromRideLocation.getFullString() + "'");
+			// set the marker on the map and the text in TV
+			RideDetailsFragment.setTextInFromAutoCompView(mfromRideLocation.getFullString());
+			MapActivity.addMarker(mfromRideLocation.getLatlng(),locationValues.from, c);
+		}
 	}
 			
 	private void setToStr(String toStr) {
 		List<String> addressArgs = new ArrayList<String>();
 		LatLng toLatLng = getLatLngFromAddress(toStr, addressArgs);
-		Log.d("dTag","the address is: " + toStr + "\nthe Latlng is: " + toLatLng.latitude + ", " + toLatLng.longitude);
-		// set the output of latlng and address args in the mtorideLocation object 
-		mtoRideLocation.setLatlng(toLatLng);
-		mtoRideLocation.setAllString(addressArgs);
-		
-		// set the marker on the map and the text in TV
-		RideDetailsFragment.setTextInToAutoCompView(mtoRideLocation.getFullString());
-		Log.d("dTag","the address is "+mtoRideLocation.getFullString() + 
-				"\nthe Latlng is: " + mtoRideLocation.getLatlng().latitude + ", " + mtoRideLocation.getLatlng().longitude);
-		MapActivity.addMarker(mtoRideLocation.getLatlng(),locationValues.to, c);
+		if (null != toLatLng) {
+			Log.d("dTag","the address is: " + toStr + "\nthe Latlng is: " + toLatLng.latitude + ", " + toLatLng.longitude);
+			// set the output of latlng and address args in the mtorideLocation object 
+			mtoRideLocation.setLatlng(toLatLng);
+			mtoRideLocation.setAllString(addressArgs);
+			
+			// set the marker on the map and the text in TV
+			RideDetailsFragment.setTextInToAutoCompView(mtoRideLocation.getFullString());
+			Log.d("dTag","the address is "+mtoRideLocation.getFullString() + 
+					"\nthe Latlng is: " + mtoRideLocation.getLatlng().latitude + ", " + mtoRideLocation.getLatlng().longitude);
+			MapActivity.addMarker(mtoRideLocation.getLatlng(),locationValues.to, c);
+		}
 	}
 	
 	
@@ -209,34 +213,42 @@ public class LocationManager {
 	
 	
 	/* output is LatLng, 
-	 * and the parsed address in the returnAdress array that is given as an input */
+	 * and the parsed address in the returnAdress array that is given as an input
+	 * it attempts to get the location 3 times, finally returning null on failure */
 	private LatLng getLatLngFromAddress(String address, List<String> returnAdress) {
 		List<Address> addresses;
 		LatLng 	loc_latlng = null;
-	    try {
-			addresses = mGeocoder.getFromLocationName(address,1);
-		    if (addresses == null) {
-		        return null;
-		    }
-		    Address loc_address 	= addresses.get(0);
-		    Log.d(dTag,"address = "+loc_address);
-		    //Log.d(dTag,"after sep address: out = '" + returnAdress.get(0) + "' , '" + returnAdress.get(1) + "'");
-		    loc_latlng  			= new LatLng(loc_address.getLatitude(), loc_address.getLongitude());
-		    List<String> outAdress 	= seperateAdressToStreetAndNo(loc_address.getAddressLine(0));
-		    //Add the street and number
-		    returnAdress.addAll(outAdress);
-		    //Add the city and state 
-		    if (null == loc_address.getAddressLine(1)) {
-		    	returnAdress.add("");
-		    }
-		    else {
-		    	returnAdress.add(loc_address.getAddressLine(1));		    	
-		    }
-		    Log.d(dTag,"after sep address: out = '" + returnAdress.get(0) + "' , '" + returnAdress.get(1) + "'");
-	    } catch (IOException e) {
-	    	Log.e(dTag,e.getMessage());
+		// attempt to recover from communication error
+		
+		int maxTries = 3;
+		for (int retryCounter = 1; retryCounter< maxTries; retryCounter++) {
+		    try {
+				addresses = mGeocoder.getFromLocationName(address,1);
+			    if (addresses == null) {
+			        return null;
+			    }
+			    Address loc_address 	= addresses.get(0);
+			    Log.d(dTag,"address = "+loc_address);
+			    //Log.d(dTag,"after sep address: out = '" + returnAdress.get(0) + "' , '" + returnAdress.get(1) + "'");
+			    loc_latlng  			= new LatLng(loc_address.getLatitude(), loc_address.getLongitude());
+			    List<String> outAdress 	= seperateAdressToStreetAndNo(loc_address.getAddressLine(0));
+			    //Add the street and number
+			    returnAdress.addAll(outAdress);
+			    //Add the city and state 
+			    if (null == loc_address.getAddressLine(1)) {
+			    	returnAdress.add("");
+			    }
+			    else {
+			    	returnAdress.add(loc_address.getAddressLine(1));		    	
+			    }
+			    Log.d(dTag,"after sep address: out = '" + returnAdress.get(0) + "' , '" + returnAdress.get(1) + "'");
+		    } catch (IOException e) {
+		    	Log.e(dTag,e.getMessage());
+		    	continue;
+			}
+		    return loc_latlng;
 		}
-	    return loc_latlng;
+		return null;
 	}
 	
 	/* try to parse the street and house number from a given string

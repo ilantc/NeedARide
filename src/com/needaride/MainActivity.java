@@ -1,15 +1,17 @@
 package com.needaride;
 
 
-import android.os.Bundle;
 import android.app.Activity;
-
-import com.facebook.*;
-import com.facebook.model.*;
-
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-import android.content.Intent;
+
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.model.GraphUser;
 
 
 public class MainActivity extends Activity {
@@ -51,12 +53,20 @@ public class MainActivity extends Activity {
 		    			}
 		    		}).executeAsync();;
 		    	}
+		    	// session is not open
+		    	else {
+		    		String msg = "";
+		    		if (null != exception) {
+		    			msg += "ex is: '" + exception.getMessage() + "'\n";
+		    		}
+		    		if (null != state) {
+		    			msg += "state is: '" + state.toString() + "'";
+		    		}
+		    		Log.i("FB",msg);
+		    	}
 		    }
 		});
 	}
-
-	
-	
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
