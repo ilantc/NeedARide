@@ -1,5 +1,7 @@
 package com.needaride;
 
+import com.facebook.widget.ProfilePictureView;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
@@ -42,9 +44,20 @@ public class DriverAddRideDetailsActivity extends Activity {
 		
 		final EditText priceET = (EditText)findViewById(R.id.Driver_PriceET);
 		
-		final TextView FBProfileName = (TextView)findViewById(R.id.Driver_FBProfileName);
-		String userName = MainActivity.mUser.getName();
-		FBProfileName.setText(userName);
+		//final TextView FBProfileName = (TextView)findViewById(R.id.Driver_FBProfileName);
+		//String userName = MainActivity.mUser.getName();
+		//FBProfileName.setText(userName);
+		
+		final ProfilePictureView profilePic = (ProfilePictureView)findViewById(R.id.profilepic);
+		try{
+			profilePic.setProfileId(MainActivity.mUser.getId());
+		}
+		catch(Exception e){
+			profilePic.setBackgroundResource(R.drawable.frog_ninja);
+			Log.e(debugTag, "Could not download profile picture: ");
+			Log.e(debugTag, e.toString());
+			
+		}
 		
 		final TextView dateTV = (TextView)findViewById(R.id.Driver_DateTV);
 		//
